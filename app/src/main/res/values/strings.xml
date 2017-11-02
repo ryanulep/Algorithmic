@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Algorithmic</string>
+    <string name="button_to_graphics">Graphics</string>
+    <string name="bubble_sort">com.example.Algorithmic.BubbleSort</string>
 </resources>
