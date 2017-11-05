@@ -22,9 +22,10 @@ public class MainActivity extends AppCompatActivity{
                 R.drawable.example1,
                 R.drawable.example,
                 R.drawable.example1};
-        String key = getString(R.string.bubble_sort);
+        String algoKey = getString(R.string.bubble_sort);
+        String drawKey = getString(R.string.drawables);
         Intent intent = new Intent(this, AlgorithmActivity.class);
-        intent.putExtra(key, drawables);
+        intent.putExtra(drawKey, drawables);
         startActivity(intent);
     }
 }
