@@ -6,14 +6,13 @@ import android.support.constraint.ConstraintSet;
  * Created by Guthrie on 11/4/2017.
  */
 
-public abstract class ArrayAlgorithm implements Algorithm {
-    int[] imageIds;
-
-    public ConstraintSet initialize(ConstraintSet baseSet, int[] imageIds) {
+public abstract class ArrayAlgorithm extends Algorithm {
+    int[] ordering;
+    public ConstraintSet initialize(ConstraintSet baseSet, int[] imageIds, int[] ordering) {
         this.imageIds = imageIds;
+        this.ordering = ordering;
 
         for (int i = 0; i < this.imageIds.length; i++) {
-            this.imageIds[i] = i+100;
             baseSet.constrainWidth(imageIds[i], 100);
             baseSet.constrainHeight(imageIds[i], 100);
         }
@@ -30,6 +29,6 @@ public abstract class ArrayAlgorithm implements Algorithm {
 
         return baseSet;
     }
-    public abstract ConstraintSet next();
-
+    public abstract ConstraintSet next(ConstraintSet currentSet);
+    public abstract boolean hasNext();
 }

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 public class AlgorithmActivity extends AppCompatActivity {
     private int[] imageIds;
+    private Algorithm algorithm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,11 @@ public class AlgorithmActivity extends AppCompatActivity {
         //Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
+        String orderKey = getString(R.string.ordering);
         Intent callingIntent = getIntent();
-        Algorithm algorithm = callingIntent.getParcelableExtra(algoKey);
+        this.algorithm = callingIntent.getParcelableExtra(algoKey);
         int[] drawableIds = callingIntent.getIntArrayExtra(drawKey);
+        int[] ordering = callingIntent.getIntArrayExtra(orderKey);
 
         //Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
         ConstraintLayout baseLayout = findViewById(R.id.graphics_layout);
@@ -34,7 +37,7 @@ public class AlgorithmActivity extends AppCompatActivity {
         this.imageIds = new int[drawableIds.length];
 
         for (int i = 0; i < this.imageIds.length; i++) {
-            this.imageIds[i] = i+100;
+            this.imageIds[i] = 100+i;
             ImageView image = new ImageView(this);
             image.setId(this.imageIds[i]);
             image.setImageResource(drawableIds[i]);
@@ -43,7 +46,7 @@ public class AlgorithmActivity extends AppCompatActivity {
 
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
-        ConstraintSet initSet = algorithm.initialize(set, imageIds);
+        ConstraintSet initSet = this.algorithm.initialize(set, imageIds, ordering);
         initSet.applyTo(baseLayout);
     }
 
@@ -52,21 +55,10 @@ public class AlgorithmActivity extends AppCompatActivity {
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
 
-        int temp = this.imageIds[0];
-        this.imageIds[0] = this.imageIds[1];
-        this.imageIds[1] = temp;
-
+        if (this.algorithm.hasNext()) {
+            set = this.algorithm.next(set);
+        }
         TransitionManager.beginDelayedTransition(baseLayout);
-        set.createHorizontalChain(
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.LEFT,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.RIGHT,
-                this.imageIds,
-                null,
-                ConstraintSet.CHAIN_SPREAD
-        );
-
         set.applyTo(baseLayout);
     }
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Algorithmic</string>
-    <string name="button_to_graphics">com.example.Algorithmic.Graphics</string>
+    <string name="button_to_graphics">Graphics</string>
     <string name="drawables">com.example.Algorithmic.Drawables</string>
     <string name="algo_key">com.example.Algorithmic.Algorithm</string>
+    <string name="ordering">com.example.Algorithmic.Ordering</string>
 </resources>
