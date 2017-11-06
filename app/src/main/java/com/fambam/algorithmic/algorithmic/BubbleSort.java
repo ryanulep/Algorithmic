@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
 
-public class BubbleSort extends ArrayAlgorithm implements Parcelable{
+public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private int size;
     private int i_index;
     private int j_index;
