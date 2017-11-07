@@ -8,6 +8,9 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private int size;
     private int i_index;
     private int j_index;
+    private int i_image;
+    private int j_image;
+    private int k_image;
     private int optimizer;
     private boolean is_sorted;
 
@@ -18,6 +21,12 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     @Override
     public ConstraintSet initialize(ConstraintSet baseSet, int[] imageIds, int[] ordering) {
         ConstraintSet initSet = super.initialize(baseSet, imageIds, ordering);
+        i_image = imageIds[ordering.length];
+        j_image = imageIds[ordering.length + 1];
+        k_image = imageIds[ordering.length + 2];
+        initSet = this.updateIndex(initSet, i_image, imageIds[0]);
+        initSet = this.updateIndex(initSet, j_image, i_image);
+        initSet = this.updateIndex(initSet, k_image, imageIds[1]);
         size = this.ordering.length;
         i_index = 0;
         j_index = 0;
@@ -29,10 +38,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         is_sorted = true;
         boolean swapped = false;
         //if (i_index == ordering.length) { return; }
-        if (j_index == ordering.length-1) {
-            i_index++;
-            j_index = 0;
-        }
+
         // Swap conditions
         if (ordering[j_index] > ordering[j_index+1]) {
             int temp = ordering[j_index];
@@ -51,22 +57,40 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         optimizer++;
         j_index++;
 
-        if (swapped) {
-            set.createHorizontalChain(
-                    ConstraintSet.PARENT_ID,
-                    ConstraintSet.LEFT,
-                    ConstraintSet.PARENT_ID,
-                    ConstraintSet.RIGHT,
-                    this.imageIds,
-                    null,
-                    ConstraintSet.CHAIN_SPREAD
-            );
+        if (j_index == ordering.length-1) {
+            i_index++;
+            j_index = 0;
         }
+
+        if (swapped) {
+            this.buildChain(set);
+        }
+        set = this.updateIndices(set);
         return set;
     }
     
     public boolean hasNext() {
         return !(i_index == ordering.length || (optimizer == ordering.length-1 && is_sorted));
+    }
+
+    private ConstraintSet updateIndices(ConstraintSet set) {
+        int target;
+        this.updateIndex(set, i_image, imageIds[i_index]);
+        if (j_index == i_index) {
+            target = i_image;
+        }
+        else {
+            target = imageIds[j_index];
+        }
+        set = this.updateIndex(set, j_image, target);
+        if (j_index + 1 == i_index) {
+            target = i_image;
+        }
+        else {
+            target = imageIds[j_index + 1];
+        }
+        set = this.updateIndex(set, k_image, target);
+        return set;
     }
 
     public int describeContents() {

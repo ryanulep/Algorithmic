@@ -22,9 +22,16 @@ public class MainActivity extends AppCompatActivity{
                 R.drawable.example1,
                 R.drawable.example,
                 R.drawable.example1,
-                R.drawable.example};
+                R.drawable.example,
+                R.drawable.example1,
+                R.drawable.example,
+                R.drawable.example1,
+                R.drawable.example,
+                R.drawable.examplei,
+                R.drawable.examplej,
+                R.drawable.examplek};
         Algorithm algorithm = new BubbleSort();
-        int[] ordering = new int[] {2, 1, 2, 1};
+        int[] ordering = new int[] {2, 1, 2, 1, 2, 1, 2, 1};
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
         String orderKey = getString(R.string.ordering);

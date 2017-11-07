@@ -43,7 +43,6 @@ public class AlgorithmActivity extends AppCompatActivity {
             image.setImageResource(drawableIds[i]);
             baseLayout.addView(image);
         }
-
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
         ConstraintSet initSet = this.algorithm.initialize(set, imageIds, ordering);
