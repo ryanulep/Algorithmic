@@ -41,4 +41,9 @@ public class MainActivity extends AppCompatActivity{
         intent.putExtra(orderKey, ordering);
         startActivity(intent);
     }
+
+    public void toNewGraphics(View view) {
+        Intent intent = new Intent(this, NewAlgorithmActivity.class);
+        startActivity(intent);
+    }
 }

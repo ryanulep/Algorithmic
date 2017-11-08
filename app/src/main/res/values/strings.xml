@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Algorithmic</string>
     <string name="button_to_graphics">Graphics</string>
+    <string name="button_to_new_graphics">NewGraphics</string>
     <string name="drawables">com.example.Algorithmic.Drawables</string>
     <string name="algo_key">com.example.Algorithmic.Algorithm</string>
     <string name="ordering">com.example.Algorithmic.Ordering</string>
+    <string name="title_activity_new_algorithm">NewAlgorithmActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
