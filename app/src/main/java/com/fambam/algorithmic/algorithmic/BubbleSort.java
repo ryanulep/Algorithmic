@@ -11,8 +11,9 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private int i_image;
     private int j_image;
     private int k_image;
-    private int optimizer;
-    private boolean is_sorted;
+    private boolean is_sorted = false;
+    private boolean has_swapped = false;
+    private boolean is_swap_phase = true;
 
     public BubbleSort() {
         super();
@@ -24,72 +25,63 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         i_image = imageIds[ordering.length];
         j_image = imageIds[ordering.length + 1];
         k_image = imageIds[ordering.length + 2];
-        initSet = this.updateIndex(initSet, i_image, imageIds[0]);
-        initSet = this.updateIndex(initSet, j_image, i_image);
-        initSet = this.updateIndex(initSet, k_image, imageIds[1]);
-        size = this.ordering.length;
         i_index = 0;
         j_index = 0;
-        optimizer = 0;
+        this.updateIndices(initSet);
+        size = this.ordering.length;
+
         return initSet;
     }
     
     public ConstraintSet next(ConstraintSet set) {
-        is_sorted = true;
-        boolean swapped = false;
-        //if (i_index == ordering.length) { return; }
-
         // Swap conditions
-        if (ordering[j_index] > ordering[j_index+1]) {
-            int temp = ordering[j_index];
-            ordering[j_index] = ordering[j_index+1];
-            ordering[j_index+1] = temp;
-            temp = imageIds[j_index];
-            imageIds[j_index] = imageIds[j_index+1];
-            imageIds[j_index+1] = temp;
-            is_sorted = false;
-            swapped = true;
-            optimizer = 0;
+        if (is_swap_phase) {
+            if (ordering[j_index] > ordering[j_index+1]) {
+                int temp = ordering[j_index];
+                ordering[j_index] = ordering[j_index + 1];
+                ordering[j_index + 1] = temp;
+                temp = imageIds[j_index];
+                imageIds[j_index] = imageIds[j_index + 1];
+                imageIds[j_index + 1] = temp;
+                has_swapped = true;
+                this.buildChain(set);
+            }
         }
-        // If BubbleSort has not swapped anything in length-1 attempts,
-        // then it is has finished.
-        //if (optimizer == ordering.length-1 && is_sorted) { return; }
-        optimizer++;
-        j_index++;
-
-        if (j_index == ordering.length-1) {
-            i_index++;
-            j_index = 0;
+        else {
+            j_index++;
+            int i_actual = this.size - i_index - 1;
+            if (j_index == i_actual) {
+                if (!has_swapped) {
+                    is_sorted = true;
+                    return set;
+                } else {
+                    i_index++;
+                    j_index = 0;
+                    has_swapped = false;
+                }
+            }
         }
-
-        if (swapped) {
-            this.buildChain(set);
-        }
-        set = this.updateIndices(set);
+        this.updateIndices(set);
+        is_swap_phase = !is_swap_phase;
         return set;
     }
     
     public boolean hasNext() {
-        return !(i_index == ordering.length || (optimizer == ordering.length-1 && is_sorted));
+        return !(is_sorted);
     }
 
     private ConstraintSet updateIndices(ConstraintSet set) {
         int target;
-        this.updateIndex(set, i_image, imageIds[i_index]);
-        if (j_index == i_index) {
-            target = i_image;
+        int i_actual = imageIds.length - i_index - 1;
+        this.updateIndex(set, j_image, imageIds[j_index]);
+        this.updateIndex(set, k_image, imageIds[j_index + 1]);
+        if (j_index + 1 == i_actual) {
+            target = k_image;
         }
         else {
-            target = imageIds[j_index];
+            target = imageIds[i_actual];
         }
-        set = this.updateIndex(set, j_image, target);
-        if (j_index + 1 == i_index) {
-            target = i_image;
-        }
-        else {
-            target = imageIds[j_index + 1];
-        }
-        set = this.updateIndex(set, k_image, target);
+        set = this.updateIndex(set, i_image, target);
         return set;
     }
 
@@ -103,7 +95,6 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         out.writeInt(size);
         out.writeInt(i_index);
         out.writeInt(j_index);
-        out.writeInt(optimizer);
         out.writeInt((is_sorted ? 1 : 0));
     }
 
@@ -124,7 +115,6 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         size = in.readInt();
         i_index = in.readInt();
         j_index = in.readInt();
-        optimizer = in.readInt();
         is_sorted = (in.readInt() == 1);
     }
 
