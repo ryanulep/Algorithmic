@@ -25,9 +25,10 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                android:scaleType="fitXY"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/bg_logo" />
+                app:srcCompat="@drawable/logo_one" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

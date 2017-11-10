@@ -10,11 +10,10 @@
         android:id="@+id/backgroundFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg"
+        android:background="@drawable/logo_two_crop"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"></FrameLayout>
@@ -56,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="108dp"
         android:layout_marginTop="25dp"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/login_button"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,6 +68,7 @@
         android:id="@+id/buttonNewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/new_user_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

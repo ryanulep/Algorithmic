@@ -32,7 +32,7 @@
             <Button
                 android:id="@+id/bubbleSummary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Summary"
                 android:textAlignment="viewStart" />
@@ -40,7 +40,7 @@
             <Button
                 android:id="@+id/bubbleExplanation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Explanation"
                 android:textAlignment="viewStart" />
@@ -48,7 +48,7 @@
             <Button
                 android:id="@+id/bubbleSimulate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Simulate"
                 android:textAlignment="viewStart" />
@@ -56,7 +56,7 @@
             <Button
                 android:id="@+id/bubbleQuiz"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Quiz"
                 android:textAlignment="viewStart" />
@@ -82,7 +82,7 @@
             <Button
                 android:id="@+id/b21"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Summary"
                 android:textAlignment="viewStart" />
@@ -90,7 +90,7 @@
             <Button
                 android:id="@+id/b22"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Explanation"
                 android:textAlignment="viewStart" />
@@ -98,7 +98,7 @@
             <Button
                 android:id="@+id/b23"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Simulate"
                 android:textAlignment="viewStart" />
@@ -106,7 +106,7 @@
             <Button
                 android:id="@+id/b24"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Quiz"
                 android:textAlignment="viewStart" />
@@ -132,7 +132,7 @@
             <Button
                 android:id="@+id/b31"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Summary"
                 android:textAlignment="viewStart" />
@@ -140,7 +140,7 @@
             <Button
                 android:id="@+id/b32"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Explanation"
                 android:textAlignment="viewStart" />
@@ -148,7 +148,7 @@
             <Button
                 android:id="@+id/b33"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Simulate"
                 android:textAlignment="viewStart" />
@@ -156,7 +156,7 @@
             <Button
                 android:id="@+id/b34"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Quiz"
                 android:textAlignment="viewStart" />
@@ -182,7 +182,7 @@
             <Button
                 android:id="@+id/b41"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Summary"
                 android:textAlignment="viewStart" />
@@ -190,7 +190,7 @@
             <Button
                 android:id="@+id/b42"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Explanation"
                 android:textAlignment="viewStart" />
@@ -198,7 +198,7 @@
             <Button
                 android:id="@+id/b43"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Simulate"
                 android:textAlignment="viewStart" />
@@ -206,7 +206,7 @@
             <Button
                 android:id="@+id/b44"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
                 android:text="Quiz"
                 android:textAlignment="viewStart" />
