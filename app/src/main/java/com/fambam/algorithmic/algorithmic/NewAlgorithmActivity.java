@@ -17,8 +17,6 @@ import android.widget.ImageView;
 // SET WEIGHTTT
 
 public class NewAlgorithmActivity extends AppCompatActivity {
-
-    private int[] imageIds;
     private Algorithm algorithm;
 
     @Override
@@ -30,42 +28,20 @@ public class NewAlgorithmActivity extends AppCompatActivity {
         //Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
-        // String orderKey = getString(R.string.ordering);
+        String dataKey = getString(R.string.data);
         Intent callingIntent = getIntent();
         this.algorithm = callingIntent.getParcelableExtra(algoKey);
         int[] drawableIds = callingIntent.getIntArrayExtra(drawKey);
-        // int[] ordering = callingIntent.getIntArrayExtra(orderKey);
+        int[] data = callingIntent.getIntArrayExtra(dataKey);
 
 
         // Passing data to fragment through the Bundle() class
         Bundle bundle = new Bundle();
         bundle.putParcelable(algoKey, (Parcelable) this.algorithm);
         bundle.putIntArray(drawKey, drawableIds);
-        // bundle.putIntArray(orderKey, ordering);
+        bundle.putIntArray(dataKey, data);
         AlgorithmFragment algorithmFragment = new AlgorithmFragment();
         algorithmFragment.setArguments(bundle);
-
-
-
-    /*
-        //Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
-        ConstraintLayout baseLayout = findViewById(R.id.graphics_layout);
-
-        this.imageIds = new int[drawableIds.length];
-
-        for (int i = 0; i < this.imageIds.length; i++) {
-            this.imageIds[i] = 100+i;
-            ImageView image = new ImageView(this);
-            image.setId(this.imageIds[i]);
-            image.setImageResource(drawableIds[i]);
-            baseLayout.addView(image);
-        }
-        ConstraintSet set = new ConstraintSet();
-        set.clone(baseLayout);
-        ConstraintSet initSet = this.algorithm.initialize(set, imageIds, ordering);
-        initSet.applyTo(baseLayout);
-        */
-
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

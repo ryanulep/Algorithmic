@@ -50,31 +50,36 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void toNewGraphics(View view) {
-        /*
-        Intent intent = new Intent(this, NewAlgorithmActivity.class);
-        startActivity(intent); */
 
         int[] drawables = new int[] {
-//                R.drawable.example1,
-//                R.drawable.example,
-//                R.drawable.example1,
-//                R.drawable.example,
-//                R.drawable.example1,
-//                R.drawable.example,
-//                R.drawable.example1,
-//                R.drawable.example,
                 R.drawable.examplei,
                 R.drawable.examplej,
                 R.drawable.examplek};
+        int[] data = new int[] {3, 4, 6, 7, 1, 2, 1};
         Algorithm algorithm = new BubbleSort();
-        int[] ordering = new int[] {2, 1, 2, 1, 2, 1, 2, 1};
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
-        // String orderKey = getString(R.string.ordering);
+        String dataKey = getString(R.string.data);
         Intent intent = new Intent(this, NewAlgorithmActivity.class);
         intent.putExtra(drawKey, drawables);
         intent.putExtra(algoKey, (Parcelable) algorithm);
-        // intent.putExtra(orderKey, ordering);
+        intent.putExtra(dataKey, data);
         startActivity(intent);
+
+
+//        int[] drawables = new int[] {
+//                R.drawable.examplei,
+//                R.drawable.examplej,
+//                R.drawable.examplek};
+//        Algorithm algorithm = new BubbleSort();
+//        int[] ordering = new int[] {2, 1, 2, 1, 2, 1, 2, 1};
+//        String algoKey = getString(R.string.algo_key);
+//        String drawKey = getString(R.string.drawables);
+//        // String orderKey = getString(R.string.ordering);
+//        Intent intent = new Intent(this, NewAlgorithmActivity.class);
+//        intent.putExtra(drawKey, drawables);
+//        intent.putExtra(algoKey, (Parcelable) algorithm);
+//        // intent.putExtra(orderKey, ordering);
+//        startActivity(intent);
     }
 }
