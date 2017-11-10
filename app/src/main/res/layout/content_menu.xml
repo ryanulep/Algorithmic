@@ -163,6 +163,56 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/linearSTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Linear Search"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/InnerList4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:paddingRight="25dp">
+
+            <Button
+                android:id="@+id/b41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Summary"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Explanation"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Simulate"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Quiz"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

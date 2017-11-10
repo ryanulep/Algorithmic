@@ -45,6 +45,8 @@
         app:fabSize="normal"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="right|top"
-        app:srcCompat="@drawable/blank_headshot" />
+        app:srcCompat="@drawable/blank_headshot"/>
+
+
 
 </android.support.design.widget.CoordinatorLayout>
