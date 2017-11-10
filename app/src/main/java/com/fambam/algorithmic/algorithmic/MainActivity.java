@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity{
         Algorithm algorithm = new SelectionSort();
         startAlgorithm(algorithm, data, drawables);
     }
-    public void toNewGraphics(View view) {
-        Intent intent = new Intent(this, NewAlgorithmActivity.class);
-        startActivity(intent);
-    }
 
     public void startAlgorithm(Algorithm algorithm, int[] data, int[] drawables) {
         String algoKey = getString(R.string.algo_key);
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, AlgorithmActivity.class);
         intent.putExtra(drawKey, drawables);
         intent.putExtra(algoKey, (Parcelable) algorithm);
-        intent.putExtra(orderKey, ordering);
+        intent.putExtra(dataKey, data);
         startActivity(intent);
     }
 
@@ -59,14 +55,14 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent); */
 
         int[] drawables = new int[] {
-                R.drawable.example1,
-                R.drawable.example,
-                R.drawable.example1,
-                R.drawable.example,
-                R.drawable.example1,
-                R.drawable.example,
-                R.drawable.example1,
-                R.drawable.example,
+//                R.drawable.example1,
+//                R.drawable.example,
+//                R.drawable.example1,
+//                R.drawable.example,
+//                R.drawable.example1,
+//                R.drawable.example,
+//                R.drawable.example1,
+//                R.drawable.example,
                 R.drawable.examplei,
                 R.drawable.examplej,
                 R.drawable.examplek};
@@ -74,11 +70,11 @@ public class MainActivity extends AppCompatActivity{
         int[] ordering = new int[] {2, 1, 2, 1, 2, 1, 2, 1};
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
-        String orderKey = getString(R.string.ordering);
+        // String orderKey = getString(R.string.ordering);
         Intent intent = new Intent(this, NewAlgorithmActivity.class);
         intent.putExtra(drawKey, drawables);
         intent.putExtra(algoKey, (Parcelable) algorithm);
-        intent.putExtra(orderKey, ordering);
+        // intent.putExtra(orderKey, ordering);
         startActivity(intent);
     }
 }

@@ -39,7 +39,7 @@ public class AlgorithmFragment extends Fragment {
         // Keys to retrieve values
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
-        String orderKey = getString(R.string.ordering);
+        // String orderKey = getString(R.string.ordering);
         text = (TextView)v.findViewById(R.id.txtxt);        // Used for debugging
         int[] drawableIds = null;
         int[] ordering = null;
@@ -50,8 +50,10 @@ public class AlgorithmFragment extends Fragment {
             str = "asdf";
             algorithm = bundle.getParcelable(algoKey);
             drawableIds = bundle.getIntArray(drawKey);
-            ordering = bundle.getIntArray(orderKey);
+            // ordering = bundle.getIntArray(orderKey);
         }
+
+        /*
 
         //Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
         ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment);
@@ -69,6 +71,8 @@ public class AlgorithmFragment extends Fragment {
         set.clone(baseLayout);
         ConstraintSet initSet = this.algorithm.initialize(set, imageIds, ordering);
         initSet.applyTo(baseLayout);
+
+        */
 
         return v;
     }

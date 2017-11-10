@@ -30,18 +30,18 @@ public class NewAlgorithmActivity extends AppCompatActivity {
         //Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
-        String orderKey = getString(R.string.ordering);
+        // String orderKey = getString(R.string.ordering);
         Intent callingIntent = getIntent();
         this.algorithm = callingIntent.getParcelableExtra(algoKey);
         int[] drawableIds = callingIntent.getIntArrayExtra(drawKey);
-        int[] ordering = callingIntent.getIntArrayExtra(orderKey);
+        // int[] ordering = callingIntent.getIntArrayExtra(orderKey);
 
 
         // Passing data to fragment through the Bundle() class
         Bundle bundle = new Bundle();
         bundle.putParcelable(algoKey, (Parcelable) this.algorithm);
         bundle.putIntArray(drawKey, drawableIds);
-        bundle.putIntArray(orderKey, ordering);
+        // bundle.putIntArray(orderKey, ordering);
         AlgorithmFragment algorithmFragment = new AlgorithmFragment();
         algorithmFragment.setArguments(bundle);
 
