@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.fambam.algorithmic.algorithmic.Menu"
+    tools:showIn="@layout/activity_menu">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bubbleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Bubble Sort"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/InnerList1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:paddingRight="25dp">
+
+            <Button
+                android:id="@+id/bubbleSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Summary"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/bubbleExplanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Explanation"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/bubbleSimulate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Simulate"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/bubbleQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Quiz"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/selectonTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Selection Sort"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/InnerList2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:paddingRight="25dp">
+
+            <Button
+                android:id="@+id/b21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Summary"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Explanation"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Simulate"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Quiz"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/insertionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Insertion Sort"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/InnerList3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:paddingRight="25dp">
+
+            <Button
+                android:id="@+id/b31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Summary"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Explanation"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Simulate"
+                android:textAlignment="viewStart" />
+
+            <Button
+                android:id="@+id/b34"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Quiz"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class UserLogin extends AppCompatActivity {
                     // If CurrentUser is not null, user must be logged in
                     // Change to new activity here because they are logged in
                     //startActivity(new Intent(UserLogin.this, /*next activity.class*/));
+                    startActivity(new Intent(UserLogin.this, Menu.class));
                 }
             }
         };
@@ -107,6 +109,7 @@ public class UserLogin extends AppCompatActivity {
                                 // Do something after success? Change Activity
                                 Toast.makeText(UserLogin.this, "Authentication SUCCESS",
                                         Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(UserLogin.this, Menu.class));
                             } else {
                                 // If sign in fails, display a message to the user.
                                 ///Log.w(TAG, "createUserWithEmail:failure", task.getException());
