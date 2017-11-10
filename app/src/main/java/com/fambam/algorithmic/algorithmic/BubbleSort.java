@@ -11,86 +11,74 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private int i_image;
     private int j_image;
     private int k_image;
-    private int optimizer;
-    private boolean is_sorted;
+    private boolean is_sorted = false;
+    private boolean has_swapped = false;
+    private boolean is_swap_phase = true;
 
     public BubbleSort() {
         super();
     }
 
     @Override
-    public ConstraintSet initialize(ConstraintSet baseSet, int[] imageIds, int[] ordering) {
-        ConstraintSet initSet = super.initialize(baseSet, imageIds, ordering);
-        i_image = imageIds[ordering.length];
-        j_image = imageIds[ordering.length + 1];
-        k_image = imageIds[ordering.length + 2];
-        initSet = this.updateIndex(initSet, i_image, imageIds[0]);
-        initSet = this.updateIndex(initSet, j_image, i_image);
-        initSet = this.updateIndex(initSet, k_image, imageIds[1]);
-        size = this.ordering.length;
+    public void initialize(ConstraintSet baseSet, int[] imageIds, int[] dataIds, int[] data) {
+        super.initialize(baseSet, imageIds, dataIds, data);
+        i_image = imageIds[0];
+        j_image = imageIds[1];
+        k_image = imageIds[2];
         i_index = 0;
         j_index = 0;
-        optimizer = 0;
-        return initSet;
+        size = this.data.length;
+        this.updateIndices(baseSet);
     }
     
-    public ConstraintSet next(ConstraintSet set) {
-        is_sorted = true;
-        boolean swapped = false;
-        //if (i_index == ordering.length) { return; }
-
+    public void next(ConstraintSet set) {
         // Swap conditions
-        if (ordering[j_index] > ordering[j_index+1]) {
-            int temp = ordering[j_index];
-            ordering[j_index] = ordering[j_index+1];
-            ordering[j_index+1] = temp;
-            temp = imageIds[j_index];
-            imageIds[j_index] = imageIds[j_index+1];
-            imageIds[j_index+1] = temp;
-            is_sorted = false;
-            swapped = true;
-            optimizer = 0;
+        if (is_swap_phase) {
+            if (data[j_index] > data[j_index+1]) {
+                int temp = data[j_index];
+                data[j_index] = data[j_index + 1];
+                data[j_index + 1] = temp;
+                temp = dataIds[j_index];
+                dataIds[j_index] = dataIds[j_index + 1];
+                dataIds[j_index + 1] = temp;
+                has_swapped = true;
+                this.buildChain(set);
+            }
         }
-        // If BubbleSort has not swapped anything in length-1 attempts,
-        // then it is has finished.
-        //if (optimizer == ordering.length-1 && is_sorted) { return; }
-        optimizer++;
-        j_index++;
-
-        if (j_index == ordering.length-1) {
-            i_index++;
-            j_index = 0;
+        else {
+            j_index++;
+            int i_actual = this.size - i_index - 1;
+            if (j_index == i_actual) {
+                if (!has_swapped) {
+                    is_sorted = true;
+                    return;
+                } else {
+                    i_index++;
+                    j_index = 0;
+                    has_swapped = false;
+                }
+            }
         }
-
-        if (swapped) {
-            this.buildChain(set);
-        }
-        set = this.updateIndices(set);
-        return set;
+        this.updateIndices(set);
+        is_swap_phase = !is_swap_phase;
     }
     
     public boolean hasNext() {
-        return !(i_index == ordering.length || (optimizer == ordering.length-1 && is_sorted));
+        return !(is_sorted);
     }
 
-    private ConstraintSet updateIndices(ConstraintSet set) {
+    private void updateIndices(ConstraintSet set) {
         int target;
-        this.updateIndex(set, i_image, imageIds[i_index]);
-        if (j_index == i_index) {
-            target = i_image;
+        int i_actual = dataIds.length - i_index - 1;
+        this.updateIndex(set, j_image, dataIds[j_index]);
+        this.updateIndex(set, k_image, dataIds[j_index + 1]);
+        if (j_index + 1 == i_actual) {
+            target = k_image;
         }
         else {
-            target = imageIds[j_index];
+            target = dataIds[i_actual];
         }
-        set = this.updateIndex(set, j_image, target);
-        if (j_index + 1 == i_index) {
-            target = i_image;
-        }
-        else {
-            target = imageIds[j_index + 1];
-        }
-        set = this.updateIndex(set, k_image, target);
-        return set;
+        this.updateIndex(set, i_image, target);
     }
 
     public int describeContents() {
@@ -99,12 +87,10 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
 
     public void writeToParcel(Parcel out, int flags) {
         out.writeIntArray(imageIds);
-        out.writeIntArray(ordering);
-        out.writeInt(size);
-        out.writeInt(i_index);
-        out.writeInt(j_index);
-        out.writeInt(optimizer);
-        out.writeInt((is_sorted ? 1 : 0));
+        out.writeIntArray(dataIds);
+        out.writeIntArray(data);
+        out.writeIntArray(new int[] {size, i_index, j_index, i_image, j_image, k_image,
+        (is_sorted ? 1 : 0), (has_swapped ? 1 : 0), (is_swap_phase ? 1 : 0)});
     }
 
     public static final Parcelable.Creator<BubbleSort> CREATOR =
@@ -120,12 +106,18 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
 
     private BubbleSort(Parcel in) {
         imageIds = in.createIntArray();
-        ordering = in.createIntArray();
-        size = in.readInt();
-        i_index = in.readInt();
-        j_index = in.readInt();
-        optimizer = in.readInt();
-        is_sorted = (in.readInt() == 1);
+        dataIds = in.createIntArray();
+        data = in.createIntArray();
+        int[] other = in.createIntArray();
+        size = other[0];
+        i_index = other[1];
+        j_index = other[2];
+        i_image = other[3];
+        j_image = other[4];
+        k_image = other[5];
+        is_sorted = (other[6] == 1);
+        has_swapped = (other[7] == 1);
+        is_swap_phase = (other[8] == 1);
     }
 
 }

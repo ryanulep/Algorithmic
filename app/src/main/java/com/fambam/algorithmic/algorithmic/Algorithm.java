@@ -10,7 +10,9 @@ import android.support.constraint.ConstraintSet;
 
 public abstract class Algorithm {
     int[] imageIds;
-    abstract ConstraintSet initialize(ConstraintSet baseSet, int[] imageIds, int[] ordering);
-    abstract ConstraintSet next(ConstraintSet currentSet);
+    int[] dataIds;
+    int[] data;
+    abstract void initialize(ConstraintSet baseSet, int[] imageIds, int[] dataIds, int[] data);
+    abstract void next(ConstraintSet currentSet);
     abstract boolean hasNext();
 }
