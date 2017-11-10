@@ -3,6 +3,7 @@ package com.fambam.algorithmic.algorithmic;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
+import android.support.v7.app.AppCompatActivity;
 
 public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     private int size;
@@ -18,8 +19,9 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     public SelectionSort() { super(); }
 
     @Override
-    public void initialize(ConstraintSet baseSet, int[] imageIds, int[] dataIds, int[] data) {
-        super.initialize(baseSet, imageIds, dataIds, data);
+    public void initialize(AppCompatActivity parent, ConstraintSet baseSet,
+                           int[] imageIds, int[] dataIds, int[] data) {
+        super.initialize(parent, baseSet, imageIds, dataIds, data);
         i_image = imageIds[0];
         j_image = imageIds[1];
         i_index = 0;
@@ -36,13 +38,8 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         // Swap at the end of each inner loop once the smallest value's
         // index is found.
         if (is_swap_phase) {
-            int temp = data[i_index];
-            data[i_index] = data[min_index];
-            data[min_index] = temp;
-
-            temp = dataIds[i_index];
-            dataIds[i_index] = dataIds[min_index];
-            dataIds[min_index] = temp;
+            swapData(i_index, min_index);
+            swapDataIds(i_index, min_index);
             is_swap_phase = false;
             swapped = true;
             set.createHorizontalChain(
@@ -66,7 +63,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         }
 
         else {
-            if (data[j_index] < data[min_index]) {
+            if (getDataAt(j_index) < getDataAt(min_index)) {
                 min_index = j_index;
             }
             is_swap_phase = j_index == dataIds.length - 1;
@@ -82,12 +79,12 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     }
 
     private void updateIndicies(ConstraintSet currentSet) {
-        updateIndex(currentSet, i_image, dataIds[i_index]);
+        updateIndex(currentSet, i_image, getDataIdAt(i_index));
         if (is_sorted) {
             updateIndex(currentSet, j_image, i_image);
         }
         else {
-            updateIndex(currentSet, j_image, dataIds[j_index]);
+            updateIndex(currentSet, j_image, getDataIdAt(j_index));
         }
     }
 
@@ -125,40 +122,4 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         min_index = in.readInt();
         is_sorted = (in.readInt() == 1);
     }
-
-    /*
-    public void Next2() {
-        // Condition for outer loop to end if encased in loop.
-        if (i_index == imageIds.length || isSorted()) { return; }        
-
-        // Swap at the end of each inner loop once the smallest value's
-        // index is found.
-        if (j_index == imageIds.length) { 
-            int temp = imageIds[i_index];
-            imageIds[i_index] = imageIds[min_index];
-            imageIds[min_index] = temp;
-
-            // Simulating terminating inner loop conditions.
-            j_index = i_index+1;
-            i_index++;
-            min_index = i_index;
-        }
-
-        else if (imageIds[j_index] < imageIds[min_index]) {
-            min_index = j_index;
-        }
-
-        j_index++;
-    }
-
-    private boolean isSorted() {
-        is_sorted = true;
-        for (int i = 0; i < size-1; i++) {
-            if (imageIds[i] > imageIds[i+1]) {
-                is_sorted = false;
-            }
-        }
-        return is_sorted;
-    }
-    */
 }

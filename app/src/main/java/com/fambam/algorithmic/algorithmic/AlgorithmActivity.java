@@ -60,7 +60,7 @@ public class AlgorithmActivity extends AppCompatActivity {
 
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
-        this.algorithm.initialize(set, imageIds, dataIds, data);
+        this.algorithm.initialize(this, set, imageIds, dataIds, data);
         set.applyTo(baseLayout);
     }
 

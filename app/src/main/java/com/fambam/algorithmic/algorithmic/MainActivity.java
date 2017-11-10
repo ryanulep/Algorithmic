@@ -65,21 +65,5 @@ public class MainActivity extends AppCompatActivity{
         intent.putExtra(algoKey, (Parcelable) algorithm);
         intent.putExtra(dataKey, data);
         startActivity(intent);
-
-
-//        int[] drawables = new int[] {
-//                R.drawable.examplei,
-//                R.drawable.examplej,
-//                R.drawable.examplek};
-//        Algorithm algorithm = new BubbleSort();
-//        int[] ordering = new int[] {2, 1, 2, 1, 2, 1, 2, 1};
-//        String algoKey = getString(R.string.algo_key);
-//        String drawKey = getString(R.string.drawables);
-//        // String orderKey = getString(R.string.ordering);
-//        Intent intent = new Intent(this, NewAlgorithmActivity.class);
-//        intent.putExtra(drawKey, drawables);
-//        intent.putExtra(algoKey, (Parcelable) algorithm);
-//        // intent.putExtra(orderKey, ordering);
-//        startActivity(intent);
     }
 }

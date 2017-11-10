@@ -3,6 +3,7 @@ package com.fambam.algorithmic.algorithmic;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
+import android.support.v7.app.AppCompatActivity;
 
 public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private int size;
@@ -20,34 +21,32 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     }
 
     @Override
-    public void initialize(ConstraintSet baseSet, int[] imageIds, int[] dataIds, int[] data) {
-        super.initialize(baseSet, imageIds, dataIds, data);
-        i_image = imageIds[0];
-        j_image = imageIds[1];
-        k_image = imageIds[2];
+    public void initialize(AppCompatActivity parent, ConstraintSet baseSet,
+                           int[] imageIds, int[] dataIds, int[] data) {
+        super.initialize(parent, baseSet, imageIds, dataIds, data);
+        i_image = getImageIdAt(0);
+        j_image = getImageIdAt(1);
+        k_image = getImageIdAt(2);
         i_index = 0;
         j_index = 0;
-        size = this.data.length;
-        this.updateIndices(baseSet);
+        size = data.length;
+        updateIndices(baseSet);
     }
     
     public void next(ConstraintSet set) {
         // Swap conditions
         if (is_swap_phase) {
-            if (data[j_index] > data[j_index+1]) {
-                int temp = data[j_index];
-                data[j_index] = data[j_index + 1];
-                data[j_index + 1] = temp;
-                temp = dataIds[j_index];
-                dataIds[j_index] = dataIds[j_index + 1];
-                dataIds[j_index + 1] = temp;
+            int k_index = j_index + 1;
+            if (getDataAt(j_index) > getDataAt(k_index)) {
+                swapData(j_index, k_index);
+                swapDataIds(j_index, k_index);
                 has_swapped = true;
-                this.buildChain(set);
+                buildChain(set);
             }
         }
         else {
             j_index++;
-            int i_actual = this.size - i_index - 1;
+            int i_actual = size - i_index - 1;
             if (j_index == i_actual) {
                 if (!has_swapped) {
                     is_sorted = true;
@@ -59,7 +58,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
                 }
             }
         }
-        this.updateIndices(set);
+        updateIndices(set);
         is_swap_phase = !is_swap_phase;
     }
     
@@ -70,15 +69,16 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private void updateIndices(ConstraintSet set) {
         int target;
         int i_actual = dataIds.length - i_index - 1;
-        this.updateIndex(set, j_image, dataIds[j_index]);
-        this.updateIndex(set, k_image, dataIds[j_index + 1]);
-        if (j_index + 1 == i_actual) {
+        int k_index = j_index + 1;
+        updateIndex(set, j_image, getDataIdAt(j_index));
+        updateIndex(set, k_image, getDataIdAt(k_index));
+        if (k_index == i_actual) {
             target = k_image;
         }
         else {
-            target = dataIds[i_actual];
+            target = getDataIdAt(i_actual);
         }
-        this.updateIndex(set, i_image, target);
+        updateIndex(set, i_image, target);
     }
 
     public int describeContents() {
