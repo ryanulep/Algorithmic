@@ -1,14 +1,16 @@
 package com.fambam.algorithmic.algorithmic;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 /**
  * Created by Guthrie on 11/4/2017.
  */
 
 public abstract class ArrayAlgorithm extends Algorithm {
-    public void initialize(AppCompatActivity parent, ConstraintSet baseSet,
+    public void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         this.parent = parent;
         this.imageIds = imageIds;
@@ -16,6 +18,7 @@ public abstract class ArrayAlgorithm extends Algorithm {
         this.data = data;
         this.setSizeConstaints(baseSet, imageIds, 100, 100);
         this.setSizeConstaints(baseSet, dataIds, 100, 100);
+        this.initializeDataViews();
         this.buildChain(baseSet);
 
     }
@@ -79,5 +82,28 @@ public abstract class ArrayAlgorithm extends Algorithm {
 
     final int getDataIdAt(int dataIdLoc) {
         return this.dataIds[dataIdLoc];
+    }
+
+    final void select(int dataIdLoc) {
+        TextView tView = parent.findViewById(dataIdLoc);
+        tView.getBackground();
+        updates.addFirst(new UpdateTextViewBackground(Color.WHITE, Color.CYAN, tView));
+    }
+
+    final void deselect(int dataIdLoc) {
+        TextView tView = parent.findViewById(dataIdLoc);
+        updates.addFirst(new UpdateTextViewBackground(Color.CYAN, Color.WHITE, tView));
+    }
+
+    private final void initializeDataViews() {
+        for (int dataId : dataIds) {
+            TextView tView = parent.findViewById(dataId);
+            tView.setTextColor(Color.BLACK);
+            GradientDrawable gd = new GradientDrawable();
+            gd.setColor(Color.WHITE);
+            gd.setStroke(5, Color.BLACK);
+            gd.setCornerRadius(4);
+            tView.setBackground(gd);
+        }
     }
 }

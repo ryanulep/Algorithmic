@@ -3,7 +3,6 @@ package com.fambam.algorithmic.algorithmic;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
 
 public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private int size;
@@ -21,7 +20,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     }
 
     @Override
-    public void initialize(AppCompatActivity parent, ConstraintSet baseSet,
+    public void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
         i_image = getImageIdAt(0);
@@ -31,6 +30,9 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         j_index = 0;
         size = data.length;
         updateIndices(baseSet);
+        select(getDataIdAt(j_index));
+        select(getDataIdAt(j_index + 1));
+        applyUpdates();
     }
     
     public void next(ConstraintSet set) {
@@ -45,18 +47,23 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
             }
         }
         else {
+            deselect(getDataIdAt(j_index));
             j_index++;
             int i_actual = size - i_index - 1;
             if (j_index == i_actual) {
+                deselect(getDataIdAt(j_index));
                 if (!has_swapped) {
                     is_sorted = true;
                     return;
-                } else {
+                }
+                else {
                     i_index++;
                     j_index = 0;
+                    select(getDataIdAt(j_index));
                     has_swapped = false;
                 }
             }
+            select(getDataIdAt(j_index + 1));
         }
         updateIndices(set);
         is_swap_phase = !is_swap_phase;

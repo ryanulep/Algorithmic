@@ -1,7 +1,6 @@
 package com.fambam.algorithmic.algorithmic;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -46,7 +45,6 @@ public class AlgorithmActivity extends AppCompatActivity {
             tView.setText(Integer.toString(data[i]));
             tView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
             tView.setGravity(Gravity.CENTER);
-            tView.setBackgroundColor(Color.WHITE);
             baseLayout.addView(tView);
         }
 
@@ -74,5 +72,6 @@ public class AlgorithmActivity extends AppCompatActivity {
         }
         TransitionManager.beginDelayedTransition(baseLayout);
         set.applyTo(baseLayout);
+        algorithm.applyUpdates();
     }
 }

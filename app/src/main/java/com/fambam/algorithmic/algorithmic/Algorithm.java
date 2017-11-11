@@ -1,19 +1,27 @@
 package com.fambam.algorithmic.algorithmic;
 
 import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
+import java.util.LinkedList;
 
 /**
  * Created by Guthrie on 11/4/2017.
  */
 
 public abstract class Algorithm {
-    AppCompatActivity parent;
+    AlgorithmActivity parent;
     int[] imageIds;
     int[] dataIds;
     int[] data;
-    abstract void initialize(AppCompatActivity parent, ConstraintSet baseSet,
+    LinkedList<UIUpdate> updates = new LinkedList<>();
+    abstract void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
                              int[] imageIds, int[] dataIds, int[] data);
     abstract void next(ConstraintSet currentSet);
     abstract boolean hasNext();
+
+    final void applyUpdates() {
+        while(!updates.isEmpty()) {
+            updates.getLast().apply();
+            updates.removeLast();
+        }
+    }
 }

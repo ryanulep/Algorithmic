@@ -19,7 +19,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     public SelectionSort() { super(); }
 
     @Override
-    public void initialize(AppCompatActivity parent, ConstraintSet baseSet,
+    public void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
         i_image = imageIds[0];
