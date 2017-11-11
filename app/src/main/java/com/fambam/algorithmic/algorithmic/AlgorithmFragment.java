@@ -33,7 +33,7 @@ public class AlgorithmFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // A default view must be instantiated on creation of a Fragment
-        View v = inflater.inflate(R.layout.fragment_algorithm, container, false);
+        View view = inflater.inflate(R.layout.fragment_algorithm, container, false);
 
         // Keys to retrieve values
         String algoKey = getString(R.string.algo_key);
@@ -51,7 +51,7 @@ public class AlgorithmFragment extends Fragment {
         }
 
         // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
-        ConstraintLayout baseLayout = v.findViewById(R.id.fragment_layout);
+        ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
 
         int[] imageIds = new int[drawableIds.length];
         int[] dataIds = new int[data.length];
@@ -80,11 +80,11 @@ public class AlgorithmFragment extends Fragment {
         this.algorithm.initialize(algorithm.parent, set, imageIds, dataIds, data);
         set.applyTo(baseLayout);
 
-        return v;
+        return view;
     }
 
     public void swap() {
-        ConstraintLayout baseLayout = getActivity().findViewById(R.id.fragment_layout);
+        ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment_layout);
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
 

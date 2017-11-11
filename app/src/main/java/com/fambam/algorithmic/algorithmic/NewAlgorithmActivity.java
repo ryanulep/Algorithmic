@@ -31,12 +31,14 @@ public class NewAlgorithmActivity extends AppCompatActivity {
         bundle.putIntArray(drawKey, drawableIds);
         bundle.putIntArray(dataKey, data);
         AlgorithmFragment algorithmFragment = new AlgorithmFragment();
+        ExplanationFragment explanationFragment = new ExplanationFragment();
         algorithmFragment.setArguments(bundle);
 
         // Adding fragment to activity
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.algorithm_fragment, algorithmFragment);
+        ft.add(R.id.explanation_fragment, explanationFragment);
         ft.commit();
     }
 
@@ -45,5 +47,8 @@ public class NewAlgorithmActivity extends AppCompatActivity {
         FragmentManager fm = getFragmentManager();
         AlgorithmFragment af = (AlgorithmFragment)fm.findFragmentById(R.id.algorithm_fragment);
         af.swap();
+
+        ExplanationFragment ef = (ExplanationFragment)fm.findFragmentById(R.id.explanation_fragment);
+        ef.explain();
     }
 }
