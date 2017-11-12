@@ -6,6 +6,7 @@
     <string name="drawables">com.example.Algorithmic.Drawables</string>
     <string name="algo_key">com.example.Algorithmic.Algorithm</string>
     <string name="data">com.example.Algorithmic.Data</string>
+    <string name="ordering">com.example.Algorithmic.Ordering</string>
     <string name="title_activity_new_algorithm">NewAlgorithmActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->

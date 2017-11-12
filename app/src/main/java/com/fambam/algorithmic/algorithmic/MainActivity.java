@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity{
                 R.drawable.examplek};
         int[] data = new int[] {3, 4, 6, 7, 1, 2, 1};
         Algorithm algorithm = new BubbleSort();
-        startAlgorithm(algorithm, data, drawables);
+        UpdateOrdering ordering = new UpdateOrdering(new int[] {0,0,1});
+        startAlgorithm(algorithm, data, drawables, ordering);
     }
 
     public void toSelectionSort(View view) {
@@ -34,17 +35,21 @@ public class MainActivity extends AppCompatActivity{
         };
         int[] data = new int[] {5,8,9,44,5,6,3,5};
         Algorithm algorithm = new SelectionSort();
-        startAlgorithm(algorithm, data, drawables);
+        UpdateOrdering ordering = new UpdateOrdering(new int[] {1});
+        startAlgorithm(algorithm, data, drawables, ordering);
     }
 
-    public void startAlgorithm(Algorithm algorithm, int[] data, int[] drawables) {
+    public void startAlgorithm(Algorithm algorithm, int[] data, int[] drawables,
+                               UpdateOrdering ordering) {
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
         String dataKey = getString(R.string.data);
+        String orderKey = getString(R.string.ordering);
         Intent intent = new Intent(this, AlgorithmActivity.class);
         intent.putExtra(drawKey, drawables);
         intent.putExtra(algoKey, (Parcelable) algorithm);
         intent.putExtra(dataKey, data);
+        intent.putExtra(orderKey, ordering);
         startActivity(intent);
     }
 }

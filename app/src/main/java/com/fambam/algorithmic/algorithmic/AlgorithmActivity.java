@@ -10,6 +10,11 @@ import android.view.View;
 
 public class AlgorithmActivity extends AppCompatActivity {
     private Algorithm algorithm;
+    private AlgorithmFragment algoFragment;
+    private ExplanationFragment explainFragment;
+    private UpdateOrdering updateOrdering;
+    private static final int ALGO = 0;
+    private static final int EXPLAIN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,35 +25,37 @@ public class AlgorithmActivity extends AppCompatActivity {
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
         String dataKey = getString(R.string.data);
+        String orderKey = getString(R.string.ordering);
         Intent callingIntent = getIntent();
         this.algorithm = callingIntent.getParcelableExtra(algoKey);
         int[] drawableIds = callingIntent.getIntArrayExtra(drawKey);
         int[] data = callingIntent.getIntArrayExtra(dataKey);
+        this.updateOrdering = callingIntent.getParcelableExtra(orderKey);
 
         // Passing data to fragment through the Bundle() class
         Bundle bundle = new Bundle();
         bundle.putParcelable(algoKey, (Parcelable) this.algorithm);
         bundle.putIntArray(drawKey, drawableIds);
         bundle.putIntArray(dataKey, data);
-        AlgorithmFragment algorithmFragment = new AlgorithmFragment();
-        ExplanationFragment explanationFragment = new ExplanationFragment();
-        algorithmFragment.setArguments(bundle);
+        algoFragment = new AlgorithmFragment();
+        explainFragment = new ExplanationFragment();
+        algoFragment.setArguments(bundle);
 
         // Adding fragment to activity
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.algorithm_fragment, algorithmFragment);
-        ft.add(R.id.explanation_fragment, explanationFragment);
+        ft.add(R.id.algorithm_fragment, algoFragment);
+        ft.add(R.id.explanation_fragment, explainFragment);
         ft.commit();
     }
 
     public void swap(View view) {
-        // Getting reference to fragment in order to call its method
-        FragmentManager fm = getFragmentManager();
-        AlgorithmFragment af = (AlgorithmFragment)fm.findFragmentById(R.id.algorithm_fragment);
-        af.swap();
-
-        ExplanationFragment ef = (ExplanationFragment)fm.findFragmentById(R.id.explanation_fragment);
-        ef.explain();
+        int option = updateOrdering.next();
+        if (option == ALGO) {
+            algoFragment.swap();
+        }
+        else if (option == EXPLAIN) {
+            explainFragment.explain();
+        }
     }
 }
