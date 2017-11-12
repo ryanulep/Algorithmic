@@ -1,6 +1,9 @@
 package com.fambam.algorithmic.algorithmic;
 
+import android.app.Activity;
 import android.support.constraint.ConstraintSet;
+import android.view.View;
+
 import java.util.LinkedList;
 
 /**
@@ -8,12 +11,12 @@ import java.util.LinkedList;
  */
 
 public abstract class Algorithm {
-    AlgorithmActivity parent;
+    View parent;
     int[] imageIds;
     int[] dataIds;
     int[] data;
     LinkedList<UIUpdate> updates = new LinkedList<>();
-    abstract void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
+    abstract void initialize(View parent, ConstraintSet baseSet,
                              int[] imageIds, int[] dataIds, int[] data);
     abstract void next(ConstraintSet currentSet);
     abstract boolean hasNext();

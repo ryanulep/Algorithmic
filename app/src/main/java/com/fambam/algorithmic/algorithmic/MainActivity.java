@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity{
         int[] data = new int[] {3, 4, 6, 7, 1, 2, 1};
         Algorithm algorithm = new BubbleSort();
         startAlgorithm(algorithm, data, drawables);
-
     }
 
     public void toSelectionSort(View view) {
@@ -43,24 +42,6 @@ public class MainActivity extends AppCompatActivity{
         String drawKey = getString(R.string.drawables);
         String dataKey = getString(R.string.data);
         Intent intent = new Intent(this, AlgorithmActivity.class);
-        intent.putExtra(drawKey, drawables);
-        intent.putExtra(algoKey, (Parcelable) algorithm);
-        intent.putExtra(dataKey, data);
-        startActivity(intent);
-    }
-
-    public void toNewGraphics(View view) {
-
-        int[] drawables = new int[] {
-                R.drawable.examplei,
-                R.drawable.examplej,
-                R.drawable.examplek};
-        int[] data = new int[] {3, 4, 6, 7, 1, 2, 1};
-        Algorithm algorithm = new BubbleSort();
-        String algoKey = getString(R.string.algo_key);
-        String drawKey = getString(R.string.drawables);
-        String dataKey = getString(R.string.data);
-        Intent intent = new Intent(this, NewAlgorithmActivity.class);
         intent.putExtra(drawKey, drawables);
         intent.putExtra(algoKey, (Parcelable) algorithm);
         intent.putExtra(dataKey, data);

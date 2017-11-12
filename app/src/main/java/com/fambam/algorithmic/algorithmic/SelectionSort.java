@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     private int size;
@@ -19,7 +20,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     public SelectionSort() { super(); }
 
     @Override
-    public void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
+    public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
         i_image = imageIds[0];

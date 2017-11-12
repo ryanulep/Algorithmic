@@ -3,6 +3,7 @@ package com.fambam.algorithmic.algorithmic;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
+import android.view.View;
 
 public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     private int size;
@@ -20,7 +21,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
     }
 
     @Override
-    public void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
+    public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
         i_image = getImageIdAt(0);

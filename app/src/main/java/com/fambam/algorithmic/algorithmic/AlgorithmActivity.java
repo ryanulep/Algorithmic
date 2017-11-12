@@ -8,13 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class NewAlgorithmActivity extends AppCompatActivity {
+public class AlgorithmActivity extends AppCompatActivity {
     private Algorithm algorithm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_graphics);
+        setContentView(R.layout.activity_graphics);
 
         //Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);

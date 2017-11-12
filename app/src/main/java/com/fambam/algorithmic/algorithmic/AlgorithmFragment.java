@@ -77,7 +77,7 @@ public class AlgorithmFragment extends Fragment {
 
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
-        this.algorithm.initialize(algorithm.parent, set, imageIds, dataIds, data);
+        this.algorithm.initialize(view, set, imageIds, dataIds, data);
         set.applyTo(baseLayout);
 
         return view;
@@ -93,5 +93,6 @@ public class AlgorithmFragment extends Fragment {
         }
         TransitionManager.beginDelayedTransition(baseLayout);
         set.applyTo(baseLayout);
+        algorithm.applyUpdates();
     }
 }

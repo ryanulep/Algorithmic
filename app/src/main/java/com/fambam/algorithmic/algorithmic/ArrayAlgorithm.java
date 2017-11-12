@@ -3,6 +3,7 @@ package com.fambam.algorithmic.algorithmic;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.constraint.ConstraintSet;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -10,7 +11,7 @@ import android.widget.TextView;
  */
 
 public abstract class ArrayAlgorithm extends Algorithm {
-    public void initialize(AlgorithmActivity parent, ConstraintSet baseSet,
+    public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         this.parent = parent;
         this.imageIds = imageIds;
