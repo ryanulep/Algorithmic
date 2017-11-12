@@ -24,4 +24,13 @@
         android:text="@string/button_to_selection"
         android:onClick="toSelectionSort" />
 
+    <Button
+        android:id="@+id/button_to_insertion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/button_to_bubble"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:text="InsertionSort"
+        android:onClick="toInsertionSort" />
+
 </android.support.constraint.ConstraintLayout>

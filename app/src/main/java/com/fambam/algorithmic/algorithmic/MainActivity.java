@@ -39,6 +39,18 @@ public class MainActivity extends AppCompatActivity{
         startAlgorithm(algorithm, data, drawables, ordering);
     }
 
+    public void toInsertionSort(View view) {
+        int[] drawables = new int[] {
+                R.drawable.examplei,
+                R.drawable.examplej,
+                R.drawable.examplek
+        };
+        int[] data = new int[] {1,2,6,5,7,8,4,4};
+        Algorithm algorithm = new InsertionSort();
+        UpdateOrdering ordering = new UpdateOrdering(new int[] {0});
+        startAlgorithm(algorithm, data, drawables, ordering);
+    }
+
     public void startAlgorithm(Algorithm algorithm, int[] data, int[] drawables,
                                UpdateOrdering ordering) {
         String algoKey = getString(R.string.algo_key);
