@@ -37,7 +37,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
             subject = "extras were NULL";
         }
         if (subject.equals("bubble")){
-            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+            questionText.setText(getResources().getString(R.string.B_Q1_qText));
         }
 
         tButton1 = findViewById(R.id.tButton1);
