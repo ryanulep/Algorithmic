@@ -3,7 +3,6 @@ package com.fambam.algorithmic.algorithmic;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class SelectionSort extends ArrayAlgorithm implements Parcelable {
@@ -16,6 +15,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     private boolean is_sorted = false;
     private boolean is_swap_phase = false;
     private boolean swapped = false;
+    private boolean has_min_changed = false;
 
     public SelectionSort() { super(); }
 
@@ -29,48 +29,54 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         j_index = 1;
         min_index = 0;
         size = this.data.length;
-        this.updateIndicies(baseSet);
+        updateIndicies(baseSet);
+        select(getDataIdAt(i_index));
+        select(getDataIdAt(j_index));
+        applyUpdates();
     }
 
     public void next(ConstraintSet set) {
-        // Condition for outer loop to end if encased in loop.
-        // if (i_index == imageIds.length) { return; }
-
-        // Swap at the end of each inner loop once the smallest value's
-        // index is found.
         if (is_swap_phase) {
             swapData(i_index, min_index);
             swapDataIds(i_index, min_index);
             is_swap_phase = false;
             swapped = true;
-            set.createHorizontalChain(
-                    ConstraintSet.PARENT_ID,
-                    ConstraintSet.LEFT,
-                    ConstraintSet.PARENT_ID,
-                    ConstraintSet.RIGHT,
-                    this.dataIds,
-                    null,
-                    ConstraintSet.CHAIN_SPREAD
-            );
+            buildChain(set);
         }
         else if (swapped) {
+            deselect(getDataIdAt(i_index));
             i_index++;
             is_sorted = i_index == dataIds.length - 1;
             if (hasNext()) {
+                deselect(getDataIdAt(j_index));
                 j_index = i_index + 1;
+                select(getDataIdAt(j_index));
                 min_index = i_index;
+                select(getDataIdAt(min_index));
+            }
+            if (is_sorted) {
+                deselect(getDataIdAt(i_index));
             }
             swapped = false;
         }
 
         else {
             if (getDataAt(j_index) < getDataAt(min_index)) {
+                deselect(getDataIdAt(min_index));
                 min_index = j_index;
+                select(getDataIdAt(min_index));
+                has_min_changed = true;
             }
             is_swap_phase = j_index == dataIds.length - 1;
+
             if (!is_swap_phase) {
+                if (!has_min_changed) {
+                    deselect(getDataIdAt(j_index));
+                }
                 j_index++;
+                select(getDataIdAt(j_index));
             }
+            has_min_changed = false;
         }
         updateIndicies(set);
     }

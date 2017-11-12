@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity{
                 R.drawable.examplei,
                 R.drawable.examplej,
                 R.drawable.examplek};
-        int[] data = new int[] {3, 4, 6, 7, 1, 2, 1};
+        int[] data = new int[] {3,4,6,7,1,2,1};
         Algorithm algorithm = new BubbleSort();
         startAlgorithm(algorithm, data, drawables);
     }
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
                 R.drawable.examplei,
                 R.drawable.examplej
         };
-        int[] data = new int[] {5,8,9,44,5,6,3,5};
+        int[] data = new int[] {3,5,1,6,2,4,7,8};
         Algorithm algorithm = new SelectionSort();
         startAlgorithm(algorithm, data, drawables);
     }
