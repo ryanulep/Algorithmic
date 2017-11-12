@@ -15,9 +15,22 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
-    private Button a1SummaryButton;
-    private Button a1QuizButton;
-    private Button a1Simulate;
+    private Button bubbleSummary;
+    private Button bubbleExplain;
+    private Button bubbleSimulate;
+    private Button bubbleQuiz;
+    private Button selectionSummary;
+    private Button selectionExplain;
+    private Button selectionSimulate;
+    private Button selectionQuiz;
+    private Button insertionSummary;
+    private Button insertionExplain;
+    private Button insertionSimulate;
+    private Button insertionQuiz;
+    private Button lsSummary;
+    private Button lsExplain;
+    private Button lsSimulate;
+    private Button lsQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +39,22 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        a1SummaryButton = findViewById(R.id.bubbleSummary);
-        a1QuizButton = findViewById(R.id.bubbleQuiz);
+        bubbleSummary = findViewById(R.id.bubbleSummaryB);
+        bubbleExplain = findViewById(R.id.bubbleExplanationB);
+        bubbleSimulate = findViewById(R.id.bubbleSimulateB);
+        bubbleQuiz = findViewById(R.id.bubbleQuizB);
+        selectionSummary = findViewById(R.id.selectionSummaryB);
+        selectionExplain = findViewById(R.id.selectionExplanationB);
+        selectionSimulate = findViewById(R.id.selectionSimulateB);
+        selectionQuiz = findViewById(R.id.selectionQuizB);
+        insertionSummary = findViewById(R.id.insertionSummaryB);
+        insertionExplain = findViewById(R.id.insertionExplanationB);
+        insertionSimulate = findViewById(R.id.insertionSimulateB);
+        insertionQuiz = findViewById(R.id.insertionQuizB);
+        lsSummary = findViewById(R.id.lsSummaryB);
+        lsExplain = findViewById(R.id.lsExplanationB);
+        lsSimulate = findViewById(R.id.lsSimulateB);
+        lsQuiz = findViewById(R.id.lsQuizB);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,50 +87,49 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-        Button a1Simulate = (Button) findViewById(R.id.bubbleSimulate);
-        a1Simulate.setOnClickListener(this); // calling onClick() method
+        bubbleSummary.setOnClickListener(this);
+        bubbleExplain.setOnClickListener(this);
+        bubbleSimulate.setOnClickListener(this);
+        bubbleQuiz.setOnClickListener(this);
+        selectionSummary.setOnClickListener(this);
+        selectionExplain.setOnClickListener(this);
+        selectionSimulate.setOnClickListener(this);
+        selectionQuiz.setOnClickListener(this);
+        insertionSummary.setOnClickListener(this);
+        insertionExplain.setOnClickListener(this);
+        insertionSimulate.setOnClickListener(this);
+        insertionQuiz.setOnClickListener(this);
+        lsSummary.setOnClickListener(this);
+        lsExplain.setOnClickListener(this);
+        lsSimulate.setOnClickListener(this);
+        lsQuiz.setOnClickListener(this);
 
-        a1SummaryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                a1SummaryButtonPressed();
-            }
-        });
-        a1QuizButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                a1QuizButtonPressed();
-            }
-        });
     }
 
     @Override
     public void onClick(View v) {
-        // default method for handling onClick Events..
+        Intent i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
         switch (v.getId()) {
-
-            //Intent i = new Intent(getApplicationContext(), NewActivity.class);
-            //i.putExtra("key","value");
-            //startActivity(i);
-
-            case R.id.bubbleSimulate:
-                Intent i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
+            case R.id.bubbleQuizB:
                 i.putExtra("subject", "bubble");
                 startActivity(i);
-                //startActivity(new Intent(MainMenu.this, AlgorithmQuiz.class));
                 break;
-
+            case R.id.selectionQuizB:
+                i.putExtra("subject", "selection");
+                startActivity(i);
+                break;
+            case R.id.insertionQuizB:
+                i.putExtra("subject", "insertion");
+                startActivity(i);
+                break;
+            case R.id.lsQuizB:
+                i.putExtra("subject", "ls");
+                startActivity(i);
+                break;
             default:
                 break;
         }
     }
 
-
-    private void a1SummaryButtonPressed() {
-        startActivity(new Intent(MainMenu.this, AlgorithmSummary.class));
-    }
-    private void a1QuizButtonPressed() {
-        startActivity(new Intent(MainMenu.this, AlgorithmQuiz.class));
-    }
 }
 

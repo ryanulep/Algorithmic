@@ -15,28 +15,37 @@ public class AlgorithmQuiz extends AppCompatActivity {
     private Button tButton3;
     private Button tButton4;
 
+    private TextView questionText;
     //FirebaseDatabase database = FirebaseDatabase.getInstance();
     //String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //DatabaseReference dRef = database.getReference(userUID);
 
-    String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algorithm_quiz);
 
-        TextView questionText = (TextView) findViewById(R.id.questionTextView);
+        questionText = findViewById(R.id.questionTextView);
         String subject;
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            subject = extras.getString("subject");
+            subject = extras.getString("subject" );
         }
         else {
             subject = "extras were NULL";
         }
         if (subject.equals("bubble")){
+            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+        }
+        else if (subject.equals("selection")){
+            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+        }
+        else if (subject.equals("insertion")){
+            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+        }
+        else if (subject.equals("ls")){
             questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
         }
 
@@ -69,7 +78,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tButton2.setBackgroundColor(0xFFFF0000);
                 tButton3.setBackgroundColor(0xFFFFAAAA);
                 tButton4.setBackgroundColor(0xFFFFAAAA);
-                ans2ButtonPressed();
             }
         });
         tButton3.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +87,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tButton2.setBackgroundColor(0xFFFFAAAA);
                 tButton3.setBackgroundColor(0xFFFF0000);
                 tButton4.setBackgroundColor(0xFFFFAAAA);
-                ans2ButtonPressed();
             }
         });
         tButton4.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +96,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tButton2.setBackgroundColor(0xFFFFAAAA);
                 tButton3.setBackgroundColor(0xFFFFAAAA);
                 tButton4.setBackgroundColor(0xFFFF0000);
-                ans2ButtonPressed();
             }
         });
     }
@@ -97,8 +103,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
     void ans1ButtonPressed(){
         //dRef.child("child1").setValue("Muh Vahlyews");
     }
-    void ans2ButtonPressed(){
-        //dRef.child("child1").setValue("Muh Vahlyews");
-    }
+
 
 }

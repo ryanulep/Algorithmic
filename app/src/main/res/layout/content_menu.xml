@@ -22,7 +22,7 @@
             android:textSize="30sp" />
 
         <LinearLayout
-            android:id="@+id/InnerList1"
+            android:id="@+id/bubbleLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="right"
@@ -30,35 +30,35 @@
             android:paddingRight="25dp">
 
             <Button
-                android:id="@+id/bubbleSummary"
+                android:id="@+id/bubbleSummaryB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Summary"
+                android:text="@string/summary"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/bubbleExplanation"
+                android:id="@+id/bubbleExplanationB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Explanation"
+                android:text="@string/explanation"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/bubbleSimulate"
+                android:id="@+id/bubbleSimulateB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Simulate"
+                android:text="@string/simulate"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/bubbleQuiz"
+                android:id="@+id/bubbleQuizB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Quiz"
+                android:text="@string/quiz"
                 android:textAlignment="viewStart" />
 
         </LinearLayout>
@@ -72,7 +72,7 @@
             android:textSize="30sp" />
 
         <LinearLayout
-            android:id="@+id/InnerList2"
+            android:id="@+id/selectionLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="right"
@@ -80,35 +80,35 @@
             android:paddingRight="25dp">
 
             <Button
-                android:id="@+id/b21"
+                android:id="@+id/selectionSummaryB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Summary"
+                android:text="@string/summary"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b22"
+                android:id="@+id/selectionExplanationB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Explanation"
+                android:text="@string/explanation"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b23"
+                android:id="@+id/selectionSimulateB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Simulate"
+                android:text="@string/simulate"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b24"
+                android:id="@+id/selectionQuizB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Quiz"
+                android:text="@string/quiz"
                 android:textAlignment="viewStart" />
 
         </LinearLayout>
@@ -122,7 +122,7 @@
             android:textSize="30sp" />
 
         <LinearLayout
-            android:id="@+id/InnerList3"
+            android:id="@+id/insertionLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -130,35 +130,35 @@
             android:paddingRight="25dp">
 
             <Button
-                android:id="@+id/b31"
+                android:id="@+id/insertionSummaryB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Summary"
+                android:text="@string/summary"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b32"
+                android:id="@+id/insertionExplanationB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Explanation"
+                android:text="@string/explanation"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b33"
+                android:id="@+id/insertionSimulateB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Simulate"
+                android:text="@string/simulate"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b34"
+                android:id="@+id/insertionQuizB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Quiz"
+                android:text="@string/quiz"
                 android:textAlignment="viewStart" />
 
         </LinearLayout>
@@ -172,7 +172,7 @@
             android:textSize="30sp" />
 
         <LinearLayout
-            android:id="@+id/InnerList4"
+            android:id="@+id/linearSLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -180,35 +180,35 @@
             android:paddingRight="25dp">
 
             <Button
-                android:id="@+id/b41"
+                android:id="@+id/lsSummaryB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Summary"
+                android:text="@string/summary"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b42"
+                android:id="@+id/lsExplanationB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Explanation"
+                android:text="@string/explanation"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b43"
+                android:id="@+id/lsSimulateB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Simulate"
+                android:text="@string/simulate"
                 android:textAlignment="viewStart" />
 
             <Button
-                android:id="@+id/b44"
+                android:id="@+id/lsQuizB"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:text="Quiz"
+                android:text="@string/quiz"
                 android:textAlignment="viewStart" />
 
         </LinearLayout>
