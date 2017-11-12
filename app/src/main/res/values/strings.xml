@@ -12,6 +12,81 @@
     <string name="large_text">
         "Fuckin straight up text right here"
     </string>
+    <!-- Bubble Sort Questions-->
     <string name="action_settings">Settings</string>
     <string name="bubble_sort_question_1">What is the worst case runtime for Bubble Sort?</string>
+    <string name="B_Q1_qText">"What is the worst case runtime for Bubble Sort?</string>
+    <string name="B_Q1_Ans">"O(n^2)</string>
+    <string name="B_Q1_Wrong1">"O(n)</string>
+    <string name="B_Q1_Wrong2">"O(nlogn)</string>
+    <string name="B_Q1_Wrong3">"O(n^3)</string>
+    <!-- Bubble Sort Questions-->
+    <string name="B_Q2_qText">"What is the best case runtime for Bubble Sort?</string>
+    <string name="B_Q2_Ans">"O(n)</string>
+    <string name="B_Q2_Wrong1">"O(n^2)</string>
+    <string name="B_Q2_Wrong2">"O(nlogn)</string>
+    <string name="B_Q2_Wrong3">"O(n^3)</string>
+    <!-- Bubble Sort Questions-->
+    <string name="B_Q3_qText">"What is the space complexity for Bubble Sort?</string>
+    <string name="B_Q3_Ans">"O(1)</string>
+    <string name="B_Q3_Wrong1">"O(n^2)</string>
+    <string name="B_Q3_Wrong2">"O(n)</string>
+    <string name="B_Q3_Wrong3">"O(n^3)</string>
+
+    <!-- Insertion Sort Questions-->
+    <string name="I_Q1_qText">What is the runtime for Insertion Sort?</string>
+    <string name="I_Q1_Ans">O(n^2)</string>
+    <string name="I_Q1_Wrong1">O(n)</string>
+    <string name="I_Q1_Wrong2">O(nlogn)</string>
+    <string name="I_Q1_Wrong3">O(n^3)</string>
+    <!-- Insertion Sort Questions-->
+    <string name="I_Q2_qText">What is the space complexity for Insertion Sort?</string>
+    <string name="I_Q2_Ans">O(1)</string>
+    <string name="I_Q2_Wrong1">O(n^2)</string>
+    <string name="I_Q2_Wrong2">O(n)</string>
+    <string name="I_Q2_Wrong3">O(n^3)</string>
+    <!-- Insertion Sort Questions-->
+    <string name="I_Q3_qText">Consider the following lists of partially sorted numbers. The double bars represent the sort marker. How many comparisons and swaps are needed to sort the next number. [1 3 4 5 8 9 || 2]</string>
+    <string name="I_Q3_Ans">6 comparisons, 5 swaps</string>
+    <string name="I_Q3_Wrong1">5 comparisons, 4 swaps</string>
+    <string name="I_Q3_Wrong2">4 comparisons, 5 swaps</string>
+    <string name="I_Q3_Wrong3">5 comparisons, 6 swaps</string>
+
+    <!-- Selection Sort Questions-->
+    <string name="S_Q1_qText">What is the runtime for Selection Sort?</string>
+    <string name="S_Q1_Ans">O(n^2)</string>
+    <string name="S_Q1_Wrong1">O(n)</string>
+    <string name="S_Q1_Wrong2">O(nlogn)</string>
+    <string name="S_Q1_Wrong3">O(n^3)</string>
+    <!-- Selection Sort Questions-->
+    <string name="S_Q2_qText">"What is the space complexity for Selection Sort?</string>
+    <string name="S_Q2_Ans">O(1)</string>
+    <string name="S_Q2_Wrong1">O(n)</string>
+    <string name="S_Q2_Wrong2">O(n^2)</string>
+    <string name="S_Q2_Wrong3">O(n^3)</string>
+    <!-- Selection Sort Questions-->
+    <string name="S_Q3_qText">"What are the correct intermediate steps of the following data set when it is being sorted with the Selection sort? 15,20,10,18</string>
+    <string name="S_Q3_Ans">10, 20,15,18  10,15,20,18  10,15,18,20</string>
+    <string name="S_Q3_Wrong1">15,20,10,18 15,10,20,18  10,15,20,18  10,15,18,20</string>
+    <string name="S_Q3_Wrong2">15,18,10,20  10,18,15,20  10,15,18,20  10,15,18,20</string>
+    <string name="S_Q3_Wrong3">15,10,20,18  15,10,18,20  10,15,18,20</string>
+
+    <!-- Linear Search Questions-->
+    <string name="LS_Q1_qText">What is the worst case runtime for Linear Search?</string>
+    <string name="LS_Q1_Ans">O(n)</string>
+    <string name="LS_Q1_Wrong1">O(n^2)</string>
+    <string name="LS_Q1_Wrong2">O(nlogn)</string>
+    <string name="LS_Q1_Wrong3">O(n^3)</string>
+    <!-- Linear Search Questions-->
+    <string name="LS_Q2_qText">Which of these would be considered the worst case scenario for a linear search?</string>
+    <string name="LS_Q2_Ans">The target value is not found in the list.</string>
+    <string name="LS_Q2_Wrong1">The target value is found at the beginning of the list.</string>
+    <string name="LS_Q2_Wrong2">The target value is found at the end of the list.</string>
+    <string name="LS_Q2_Wrong3">The target value is found somewhere in the middle of the list.</string>
+    <!-- Linear Search Questions-->
+    <string name="LS_Q3_qText">Consider the following list: { 9, 2, 6, 8, -3, 7, 2, 15, 0, -1, 14, 99, -1 }If a linear search for the value -1 is performed, what will be returned?</string>
+    <string name="LS_Q3_Ans">9(n)</string>
+    <string name="LS_Q3_Wrong1">10(n^2)</string>
+    <string name="LS_Q3_Wrong2">12(nlogn)</string>
+    <string name="LS_Q3_Wrong3">-1(n^3)</string>
 </resources>

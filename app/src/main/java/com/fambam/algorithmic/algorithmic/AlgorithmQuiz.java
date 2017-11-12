@@ -8,6 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
+
 public class AlgorithmQuiz extends AppCompatActivity {
 
     private Button tButton1;
@@ -36,17 +42,37 @@ public class AlgorithmQuiz extends AppCompatActivity {
         else {
             subject = "extras were NULL";
         }
+
+        int randIndex = new Random().nextInt(3);
         if (subject.equals("bubble")){
-            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+            int[] qList = {R.string.B_Q1_qText, R.string.B_Q2_qText, R.string.B_Q3_qText};
+            int randQuestion = qList[randIndex];
+            questionText.setText(getResources().getString(randQuestion));
+            int[] aList = {R.string.B_Q1_Ans, R.string.B_Q2_Wrong1, R.string.B_Q2_Wrong2, R.string.B_Q2_Wrong3};
+            //Vector<Integer> = new ArrayList<Integer>(3);
+
+            randIndex = new Random().nextInt(3);
+            tButton1.setText(aList[randIndex]);
+            randIndex = new Random().nextInt(2);
+            tButton1.setText(aList[randIndex]);
+            randIndex = new Random().nextInt(1);
+            tButton1.setText(aList[randIndex]);
+
         }
         else if (subject.equals("selection")){
-            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+            int[] qList = {R.string.S_Q1_qText, R.string.S_Q2_qText, R.string.S_Q3_qText};
+            int randQuestion = qList[randIndex];
+            questionText.setText(getResources().getString(randQuestion));
         }
         else if (subject.equals("insertion")){
-            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+            int[] qList = {R.string.I_Q1_qText, R.string.I_Q2_qText, R.string.I_Q3_qText};
+            int randQuestion = qList[randIndex];
+            questionText.setText(getResources().getString(randQuestion));
         }
         else if (subject.equals("ls")){
-            questionText.setText(getResources().getString(R.string.bubble_sort_question_1));
+            int[] qList = {R.string.LS_Q1_qText, R.string.LS_Q2_qText, R.string.LS_Q3_qText};
+            int randQuestion = qList[randIndex];
+            questionText.setText(getResources().getString(randQuestion));
         }
 
         tButton1 = findViewById(R.id.tButton1);
@@ -68,7 +94,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tButton2.setBackgroundColor(0xFFFFAAAA);
                 tButton3.setBackgroundColor(0xFFFFAAAA);
                 tButton4.setBackgroundColor(0xFFFFAAAA);
-                ans1ButtonPressed();
+                tB1Pressed();
             }
         });
         tButton2.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +104,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tButton2.setBackgroundColor(0xFFFF0000);
                 tButton3.setBackgroundColor(0xFFFFAAAA);
                 tButton4.setBackgroundColor(0xFFFFAAAA);
+                tB2Pressed();
             }
         });
         tButton3.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +114,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tButton2.setBackgroundColor(0xFFFFAAAA);
                 tButton3.setBackgroundColor(0xFFFF0000);
                 tButton4.setBackgroundColor(0xFFFFAAAA);
+                tB3Pressed();
             }
         });
         tButton4.setOnClickListener(new View.OnClickListener() {
@@ -96,12 +124,24 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tButton2.setBackgroundColor(0xFFFFAAAA);
                 tButton3.setBackgroundColor(0xFFFFAAAA);
                 tButton4.setBackgroundColor(0xFFFF0000);
+                tB4Pressed();
             }
         });
     }
 
-    void ans1ButtonPressed(){
+    private void tB1Pressed() {
+
+
         //dRef.child("child1").setValue("Muh Vahlyews");
+    }
+    private void tB2Pressed() {
+
+    }
+    private void tB3Pressed() {
+
+    }
+    private void tB4Pressed() {
+
     }
 
 
