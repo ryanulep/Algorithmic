@@ -5,9 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class UserLogin extends AppCompatActivity {
 
@@ -36,6 +36,7 @@ public class UserLogin extends AppCompatActivity {
         password = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.buttonLogin);
         newUserButton = findViewById(R.id.buttonNewUser);
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -46,7 +47,7 @@ public class UserLogin extends AppCompatActivity {
                     // If CurrentUser is not null, user must be logged in
                     // Change to new activity here because they are logged in
                     //startActivity(new Intent(UserLogin.this, /*next activity.class*/));
-                    startActivity(new Intent(UserLogin.this, Menu.class));
+                    startActivity(new Intent(UserLogin.this, MainMenu.class));
                 }
             }
         };
@@ -105,11 +106,21 @@ public class UserLogin extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                FirebaseUser user = mAuth.getCurrentUser();
+
                                 // Do something after success? Change Activity
                                 Toast.makeText(UserLogin.this, "Authentication SUCCESS",
                                         Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(UserLogin.this, Menu.class));
+
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                final DatabaseReference dRef = database.getReference(userUID);
+
+                                dRef.child("bubble").child("explain").setValue("0");
+                                dRef.child("bubble").child("quiz").setValue("0");
+                                dRef.child("selection").child("explain").setValue("0");
+                                dRef.child("selection").child("quiz").setValue("0");
+
+                                startActivity(new Intent(UserLogin.this, MainMenu.class));
                             } else {
                                 // If sign in fails, display a message to the user.
                                 ///Log.w(TAG, "createUserWithEmail:failure", task.getException());

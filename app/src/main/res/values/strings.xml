@@ -7,4 +7,5 @@
         "Fuckin straight up text right here"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="bubble_sort_question_1">"What is the worst case runtime for Bubble Sort?</string>
 </resources>
