@@ -27,17 +27,26 @@ public class ExplanationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String assetKey = getString(R.string.asset);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_explanation, container, false);
         txtExplanation = view.findViewById(R.id.tv_explanation);
+
+        // Retrieve values from bundle and check if successfully delivered
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            assets = bundle.getParcelable(assetKey);
+        }
         read();
+
         return view;
     }
 
     private void read() {
         txt = "";
         try {
-            InputStream is = getActivity().getAssets().open("BubbleSort.txt");
+            InputStream is = getActivity().getAssets().open(assets.getExplanationFilename());
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
