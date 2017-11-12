@@ -26,22 +26,30 @@ public class AlgorithmActivity extends AppCompatActivity {
         String drawKey = getString(R.string.drawables);
         String dataKey = getString(R.string.data);
         String orderKey = getString(R.string.ordering);
+        String assetKey = getString(R.string.asset);
+
         Intent callingIntent = getIntent();
         this.algorithm = callingIntent.getParcelableExtra(algoKey);
         int[] drawableIds = callingIntent.getIntArrayExtra(drawKey);
         int[] data = callingIntent.getIntArrayExtra(dataKey);
         this.updateOrdering = callingIntent.getParcelableExtra(orderKey);
+        AlgorithmAssets asset = callingIntent.getParcelableExtra(assetKey);
 
-        // Passing data to fragment through the Bundle() class
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(algoKey, (Parcelable) this.algorithm);
-        bundle.putIntArray(drawKey, drawableIds);
-        bundle.putIntArray(dataKey, data);
+        // Passing data to algorithm fragment through the Bundle() class
+        Bundle algorithmBundle = new Bundle();
+        algorithmBundle.putParcelable(algoKey, (Parcelable) this.algorithm);
+        algorithmBundle.putIntArray(drawKey, drawableIds);
+        algorithmBundle.putIntArray(dataKey, data);
         algoFragment = new AlgorithmFragment();
-        explainFragment = new ExplanationFragment();
-        algoFragment.setArguments(bundle);
+        algoFragment.setArguments(algorithmBundle);
 
-        // Adding fragment to activity
+        // Passing data to explanation fragment through the Bundle() class
+        Bundle explanationBundle = new Bundle();
+        explanationBundle.putParcelable(assetKey, asset);
+        explainFragment = new ExplanationFragment();
+        explainFragment.setArguments(explanationBundle);
+
+        // Adding fragments to activity
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.algorithm_fragment, algoFragment);

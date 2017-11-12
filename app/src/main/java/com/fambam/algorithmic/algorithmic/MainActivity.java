@@ -22,10 +22,12 @@ public class MainActivity extends AppCompatActivity{
                 R.drawable.examplei,
                 R.drawable.examplej,
                 R.drawable.examplek};
-        int[] data = new int[] {3, 4, 6, 7, 1, 2, 1};
+        int[] data = new int[] {3,4,6,7,1,2,1};
         Algorithm algorithm = new BubbleSort();
+        AlgorithmAssets algoAsset = new AlgorithmAssets("BubbleSort.txt",
+                                                        "", "", "");
         UpdateOrdering ordering = new UpdateOrdering(new int[] {0,0,1});
-        startAlgorithm(algorithm, data, drawables, ordering);
+        startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
     }
 
     public void toSelectionSort(View view) {
@@ -33,10 +35,12 @@ public class MainActivity extends AppCompatActivity{
                 R.drawable.examplei,
                 R.drawable.examplej
         };
-        int[] data = new int[] {5,8,9,44,5,6,3,5};
+        int[] data = new int[] {3,5,1,6,2,4,7,8};
         Algorithm algorithm = new SelectionSort();
+        AlgorithmAssets algoAsset = new AlgorithmAssets("SelectionSort.txt",
+                                                        "", "", "");
         UpdateOrdering ordering = new UpdateOrdering(new int[] {1});
-        startAlgorithm(algorithm, data, drawables, ordering);
+        startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
     }
 
     public void toInsertionSort(View view) {
@@ -52,16 +56,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void startAlgorithm(Algorithm algorithm, int[] data, int[] drawables,
-                               UpdateOrdering ordering) {
+                               UpdateOrdering ordering, AlgorithmAssets asset) {
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
         String dataKey = getString(R.string.data);
         String orderKey = getString(R.string.ordering);
+        String assetKey = getString(R.string.asset);
         Intent intent = new Intent(this, AlgorithmActivity.class);
         intent.putExtra(drawKey, drawables);
         intent.putExtra(algoKey, (Parcelable) algorithm);
         intent.putExtra(dataKey, data);
         intent.putExtra(orderKey, ordering);
+        intent.putExtra(assetKey, asset);
         startActivity(intent);
     }
 }
