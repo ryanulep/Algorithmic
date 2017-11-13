@@ -1,1 +1,17 @@
-This is the BubbleSort file which will contain the explanations of BubbleSort on each iteration.
+Here we will show you Bubble sort, one of the many algorithms used to sort an array of numbers.
+'j' and 'k' will iterate through the array and compare their elements until the 'i' index which currently is at the end.
+The highlighted elements in the array will follow 'j' and 'k' as they iterate.
+So, for the first step we will compare the value of 3 and 4. If 3 is greater than 4, we swap them. If not, nothing happens. Let's begin by pressing the "Next" button!
+Again, nothing happened since 3 is not greater than 4. Now 'j' and 'k' will be incremented by 1.
+Now we will compare 4 and 6.
+Since 4 is less than 6, nothing happened once again.
+Now we will compare 6 and 7.
+Since 6 is less than 7, nothing happened.
+Now we will compare 7 and 1. Since 7 is greater than 1 you will see them swap.
+Since 7 is the largest number it will eventually be placed at the end where 'i' is located after a full iteration.
+After an entire iteration, 'i' will be decremented by 1 and the other indices will return to the beginning.
+The same operations are repeated until all of the numbers are fully sorted.
+Sorting is complete.
+This concludes the explanation of Bubble Sort.
+
+

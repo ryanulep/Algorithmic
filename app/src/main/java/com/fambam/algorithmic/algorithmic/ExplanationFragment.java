@@ -55,12 +55,6 @@ public class ExplanationFragment extends Fragment {
         try {
             InputStream is = getActivity().getAssets().open(assets.getExplanationFilename());
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-//            int size = is.available();
-//            byte[] buffer = new byte[size];
-//            is.read(buffer);
-//            is.close();
-//            txt = new String(buffer);
-
             while ((line = br.readLine()) != null) {
                 explanations.add(line);
             }
@@ -74,6 +68,9 @@ public class ExplanationFragment extends Fragment {
             int size = explanations.size();
             if (indexExplanations < size) {
                 txtExplanation.setText(explanations.get(indexExplanations++));
+            }
+            else {
+                txtExplanation.setText(explanations.get(explanations.size() - 1));
             }
         }
     }

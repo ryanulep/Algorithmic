@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity{
         Algorithm algorithm = new BubbleSort();
         AlgorithmAssets algoAsset = new AlgorithmAssets("BubbleSort.txt",
                                                         "", "", "");
-        UpdateOrdering ordering = new UpdateOrdering(new int[] {0,0,1});
+        UpdateOrdering ordering = new UpdateOrdering(new int[] {1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0,1,
+                                                                0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                                                0,0,0,0,0,0,0,0,0,0,1,0,1}); 
         startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
     }
 
