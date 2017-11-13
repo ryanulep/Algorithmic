@@ -36,14 +36,14 @@ public class ExplanationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_explanation, container, false);
         txtExplanation = view.findViewById(R.id.tv_explanation);
+        explanations = new ArrayList<>();
+        indexExplanations = -1;     // Set to -1 because explain()
 
         // Retrieve values from bundle and check if successfully delivered
         Bundle bundle = getArguments();
         if (bundle != null) {
             assets = bundle.getParcelable(assetKey);
         }
-        explanations = new ArrayList<>();
-        indexExplanations = 0;
         read();
         explain();
 
@@ -66,11 +66,22 @@ public class ExplanationFragment extends Fragment {
     public void explain() {
         if (explanations != null) {
             int size = explanations.size();
-            if (indexExplanations < size) {
-                txtExplanation.setText(explanations.get(indexExplanations++));
+            if (indexExplanations < size && indexExplanations >= -1) {
+                txtExplanation.setText(explanations.get(++indexExplanations));
             }
             else {
                 txtExplanation.setText(explanations.get(explanations.size() - 1));
+            }
+        }
+    }
+
+    public void back() {
+        if (explanations != null) {
+            if (indexExplanations > 0) {
+                txtExplanation.setText(explanations.get(--indexExplanations));
+            }
+            else {
+                txtExplanation.setText(explanations.get(0));
             }
         }
     }

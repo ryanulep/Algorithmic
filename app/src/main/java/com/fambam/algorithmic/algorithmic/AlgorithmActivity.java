@@ -66,4 +66,14 @@ public class AlgorithmActivity extends AppCompatActivity {
             explainFragment.explain();
         }
     }
+
+    public void back(View view) {
+        int option = updateOrdering.back();
+//        if (option == ALGO) {
+//            algoFragment.back();
+//        }
+        if (option == EXPLAIN) {
+            explainFragment.back();
+        }
+    }
 }

@@ -23,6 +23,15 @@ public class UpdateOrdering implements Parcelable {
         return updateOrder[currentStep++];
     }
 
+    // Function may be buggy
+    int back() {
+        // Assuming first step of algorithm explanation will always be an update to text
+        if (currentStep == 0) {
+            return 1;
+        }
+        return updateOrder[--currentStep];
+    }
+
     public int describeContents() {
         return 0;
     }
