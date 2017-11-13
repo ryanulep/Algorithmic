@@ -32,6 +32,11 @@ public class AlgorithmQuiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algorithm_quiz);
 
+        tButton1 = findViewById(R.id.tButton1);
+        tButton2 = findViewById(R.id.tButton2);
+        tButton3 = findViewById(R.id.tButton3);
+        tButton4 = findViewById(R.id.tButton4);
+
         questionText = findViewById(R.id.questionTextView);
         String subject;
 
@@ -48,15 +53,33 @@ public class AlgorithmQuiz extends AppCompatActivity {
             int[] qList = {R.string.B_Q1_qText, R.string.B_Q2_qText, R.string.B_Q3_qText};
             int randQuestion = qList[randIndex];
             questionText.setText(getResources().getString(randQuestion));
-            int[] aList = {R.string.B_Q1_Ans, R.string.B_Q2_Wrong1, R.string.B_Q2_Wrong2, R.string.B_Q2_Wrong3};
-            //Vector<Integer> = new ArrayList<Integer>(3);
+            //int[] ansList = {R.string.B_Q1_Ans, R.string.B_Q2_Wrong1, R.string.B_Q2_Wrong2, R.string.B_Q2_Wrong3};
+            ArrayList<Integer> ansList = new ArrayList<Integer>();
+            
+            ansList.add(R.string.B_Q1_Ans);
+            ansList.add(R.string.B_Q1_Wrong1);
+            ansList.add(R.string.B_Q1_Wrong2);
+            ansList.add(R.string.B_Q1_Wrong3);
 
             randIndex = new Random().nextInt(3);
-            tButton1.setText(aList[randIndex]);
+            int oneAns = ansList.get(randIndex);
+            tButton1.setText(getResources().getString(oneAns));
+            ansList.remove(randIndex);
+
             randIndex = new Random().nextInt(2);
-            tButton1.setText(aList[randIndex]);
+            oneAns = ansList.get(randIndex);
+            tButton2.setText(getResources().getString(oneAns));
+            ansList.remove(randIndex);
+
             randIndex = new Random().nextInt(1);
-            tButton1.setText(aList[randIndex]);
+            oneAns = ansList.get(randIndex);
+            tButton3.setText(getResources().getString(oneAns));
+            ansList.remove(randIndex);
+
+            oneAns = ansList.get(0);
+            tButton4.setText(getResources().getString(oneAns));
+            ansList.remove(randIndex);
+
 
         }
         else if (subject.equals("selection")){
@@ -74,11 +97,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
             int randQuestion = qList[randIndex];
             questionText.setText(getResources().getString(randQuestion));
         }
-
-        tButton1 = findViewById(R.id.tButton1);
-        tButton2 = findViewById(R.id.tButton2);
-        tButton3 = findViewById(R.id.tButton3);
-        tButton4 = findViewById(R.id.tButton4);
 
         tButton1.setBackgroundColor(0xFFFFAAAA);
         tButton2.setBackgroundColor(0xFFFFAAAA);
