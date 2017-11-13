@@ -15,23 +15,23 @@
     <!-- Bubble Sort Questions-->
     <string name="action_settings">Settings</string>
     <string name="bubble_sort_question_1">What is the worst case runtime for Bubble Sort?</string>
-    <string name="B_Q1_qText">"What is the worst case runtime for Bubble Sort?</string>
-    <string name="B_Q1_Ans">"O(n^2)</string>
-    <string name="B_Q1_Wrong1">"O(n)</string>
-    <string name="B_Q1_Wrong2">"O(nlogn)</string>
-    <string name="B_Q1_Wrong3">"O(n^3)</string>
+    <string name="B_Q1_qText">What is the worst case runtime for Bubble Sort?</string>
+    <string name="B_Q1_Ans">O(n^2)</string>
+    <string name="B_Q1_Wrong1">O(n)</string>
+    <string name="B_Q1_Wrong2">O(nlogn)</string>
+    <string name="B_Q1_Wrong3">O(n^3)</string>
     <!-- Bubble Sort Questions-->
-    <string name="B_Q2_qText">"What is the best case runtime for Bubble Sort?</string>
-    <string name="B_Q2_Ans">"O(n)</string>
-    <string name="B_Q2_Wrong1">"O(n^2)</string>
-    <string name="B_Q2_Wrong2">"O(nlogn)</string>
-    <string name="B_Q2_Wrong3">"O(n^3)</string>
+    <string name="B_Q2_qText">What is the best case runtime for Bubble Sort?</string>
+    <string name="B_Q2_Ans">O(n)</string>
+    <string name="B_Q2_Wrong1">O(n^2)</string>
+    <string name="B_Q2_Wrong2">O(nlogn)</string>
+    <string name="B_Q2_Wrong3">O(n^3)</string>
     <!-- Bubble Sort Questions-->
     <string name="B_Q3_qText">"What is the space complexity for Bubble Sort?</string>
-    <string name="B_Q3_Ans">"O(1)</string>
-    <string name="B_Q3_Wrong1">"O(n^2)</string>
-    <string name="B_Q3_Wrong2">"O(n)</string>
-    <string name="B_Q3_Wrong3">"O(n^3)</string>
+    <string name="B_Q3_Ans">O(1)</string>
+    <string name="B_Q3_Wrong1">O(n^2)</string>
+    <string name="B_Q3_Wrong2">O(n)</string>
+    <string name="B_Q3_Wrong3">O(n^3)</string>
 
     <!-- Insertion Sort Questions-->
     <string name="I_Q1_qText">What is the runtime for Insertion Sort?</string>
@@ -59,13 +59,13 @@
     <string name="S_Q1_Wrong2">O(nlogn)</string>
     <string name="S_Q1_Wrong3">O(n^3)</string>
     <!-- Selection Sort Questions-->
-    <string name="S_Q2_qText">"What is the space complexity for Selection Sort?</string>
+    <string name="S_Q2_qText">What is the space complexity for Selection Sort?</string>
     <string name="S_Q2_Ans">O(1)</string>
     <string name="S_Q2_Wrong1">O(n)</string>
     <string name="S_Q2_Wrong2">O(n^2)</string>
     <string name="S_Q2_Wrong3">O(n^3)</string>
     <!-- Selection Sort Questions-->
-    <string name="S_Q3_qText">"What are the correct intermediate steps of the following data set when it is being sorted with the Selection sort? 15,20,10,18</string>
+    <string name="S_Q3_qText">What are the correct intermediate steps of the following data set when it is being sorted with the Selection sort? 15,20,10,18</string>
     <string name="S_Q3_Ans">10, 20,15,18  10,15,20,18  10,15,18,20</string>
     <string name="S_Q3_Wrong1">15,20,10,18 15,10,20,18  10,15,20,18  10,15,18,20</string>
     <string name="S_Q3_Wrong2">15,18,10,20  10,18,15,20  10,15,18,20  10,15,18,20</string>

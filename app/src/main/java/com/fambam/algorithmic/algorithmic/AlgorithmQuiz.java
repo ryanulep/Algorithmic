@@ -55,7 +55,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
             questionText.setText(getResources().getString(randQuestion));
             //int[] ansList = {R.string.B_Q1_Ans, R.string.B_Q2_Wrong1, R.string.B_Q2_Wrong2, R.string.B_Q2_Wrong3};
             ArrayList<Integer> ansList = new ArrayList<Integer>();
-            
+
             ansList.add(R.string.B_Q1_Ans);
             ansList.add(R.string.B_Q1_Wrong1);
             ansList.add(R.string.B_Q1_Wrong2);
