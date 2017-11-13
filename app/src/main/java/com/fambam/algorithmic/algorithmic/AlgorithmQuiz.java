@@ -61,63 +61,58 @@ public class AlgorithmQuiz extends AppCompatActivity {
             String[][] qList = {res.getStringArray(R.array.b_q1),res.getStringArray(R.array.b_q2),res.getStringArray(R.array.b_q3)};
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
-            ArrayList<String> ansList = new ArrayList<String>();
+            ArrayList<String> ansList = new ArrayList<>();
             for(int i = 4; i > 0; i--){
                 ansList.add(currentQ[i]);
             }
-            randIndex = new Random().nextInt(3);
-            tButton1.setText(ansList.get(randIndex));
-            ansList.remove(randIndex);
-
-            randIndex = new Random().nextInt(2);
-            tButton2.setText(ansList.get(randIndex));
-            ansList.remove(randIndex);
-
-            randIndex = new Random().nextInt(1);
-            tButton3.setText(ansList.get(randIndex));
-            ansList.remove(randIndex);
-
-            tButton4.setText(ansList.get(0));
-
+            for(int i = 4; i > 0; i--){
+                randIndex = new Random().nextInt(i);
+                bList.get(i-1).setText(ansList.get(randIndex));
+                ansList.remove(randIndex);
+            }
+            currentAns = currentQ[1];
         }
         else if (subject.equals("selection")){
             String[][] qList = {res.getStringArray(R.array.s_q1),res.getStringArray(R.array.s_q2),res.getStringArray(R.array.s_q3)};
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
-            ArrayList<String> ansList = new ArrayList<String>();
+            ArrayList<String> ansList = new ArrayList<>();
             for(int i = 4; i > 0; i--){
                 ansList.add(currentQ[i]);
             }
-
             for(int i = 4; i > 0; i--){
-                randIndex = new Random().nextInt(i-1);
+                randIndex = new Random().nextInt(i);
                 bList.get(i-1).setText(ansList.get(randIndex));
                 ansList.remove(randIndex);
             }
-
-//            randIndex = new Random().nextInt(3);
-//            tButton1.setText(ansList.get(randIndex));
-//            ansList.remove(randIndex);
-//
-//            randIndex = new Random().nextInt(2);
-//            tButton2.setText(ansList.get(randIndex));
-//            ansList.remove(randIndex);
-//
-//            randIndex = new Random().nextInt(1);
-//            tButton3.setText(ansList.get(randIndex));
-//            ansList.remove(randIndex);
-//
-//            tButton4.setText(ansList.get(randIndex));
         }
         else if (subject.equals("insertion")){
-//            int[] qList = {R.string.I_Q1_qText, R.string.I_Q2_qText, R.string.I_Q3_qText};
-//            int randQuestion = qList[randIndex];
-//            questionText.setText(getResources().getString(randQuestion));
+            String[][] qList = {res.getStringArray(R.array.i_q1),res.getStringArray(R.array.i_q2),res.getStringArray(R.array.i_q3)};
+            String[] currentQ = qList[randIndex];
+            questionText.setText(currentQ[0]);
+            ArrayList<String> ansList = new ArrayList<>();
+            for(int i = 4; i > 0; i--){
+                ansList.add(currentQ[i]);
+            }
+            for(int i = 4; i > 0; i--) {
+                randIndex = new Random().nextInt(i);
+                bList.get(i - 1).setText(ansList.get(randIndex));
+                ansList.remove(randIndex);
+            }
         }
         else if (subject.equals("ls")){
-//            int[] qList = {R.string.LS_Q1_qText, R.string.LS_Q2_qText, R.string.LS_Q3_qText};
-//            int randQuestion = qList[randIndex];
-//            questionText.setText(getResources().getString(randQuestion));
+            String[][] qList = {res.getStringArray(R.array.ls_q1),res.getStringArray(R.array.ls_q2),res.getStringArray(R.array.ls_q3)};
+            String[] currentQ = qList[randIndex];
+            questionText.setText(currentQ[0]);
+            ArrayList<String> ansList = new ArrayList<>();
+            for(int i = 4; i > 0; i--){
+                ansList.add(currentQ[i]);
+            }
+            for(int i = 4; i > 0; i--){
+                randIndex = new Random().nextInt(i);
+                bList.get(i-1).setText(ansList.get(randIndex));
+                ansList.remove(randIndex);
+            }
         }
 
         tButton1.setBackgroundColor(0xFFFFAAAA);
