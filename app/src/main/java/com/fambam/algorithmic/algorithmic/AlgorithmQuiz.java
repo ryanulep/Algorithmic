@@ -1,5 +1,6 @@
 package com.fambam.algorithmic.algorithmic;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,10 +33,15 @@ public class AlgorithmQuiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algorithm_quiz);
 
+        ArrayList<Button> bList = new ArrayList<>();
         tButton1 = findViewById(R.id.tButton1);
         tButton2 = findViewById(R.id.tButton2);
         tButton3 = findViewById(R.id.tButton3);
         tButton4 = findViewById(R.id.tButton4);
+        bList.add(tButton1);
+        bList.add(tButton2);
+        bList.add(tButton3);
+        bList.add(tButton4);
 
         questionText = findViewById(R.id.questionTextView);
         String subject;
@@ -48,54 +54,70 @@ public class AlgorithmQuiz extends AppCompatActivity {
             subject = "extras were NULL";
         }
 
+        Resources res = getResources();
         int randIndex = new Random().nextInt(3);
+        String currentAns;
         if (subject.equals("bubble")){
-            int[] qList = {R.string.B_Q1_qText, R.string.B_Q2_qText, R.string.B_Q3_qText};
-            int randQuestion = qList[randIndex];
-            questionText.setText(getResources().getString(randQuestion));
-            //int[] ansList = {R.string.B_Q1_Ans, R.string.B_Q2_Wrong1, R.string.B_Q2_Wrong2, R.string.B_Q2_Wrong3};
-            ArrayList<Integer> ansList = new ArrayList<Integer>();
-
-            ansList.add(R.string.B_Q1_Ans);
-            ansList.add(R.string.B_Q1_Wrong1);
-            ansList.add(R.string.B_Q1_Wrong2);
-            ansList.add(R.string.B_Q1_Wrong3);
-
+            String[][] qList = {res.getStringArray(R.array.b_q1),res.getStringArray(R.array.b_q2),res.getStringArray(R.array.b_q3)};
+            String[] currentQ = qList[randIndex];
+            questionText.setText(currentQ[0]);
+            ArrayList<String> ansList = new ArrayList<String>();
+            for(int i = 4; i > 0; i--){
+                ansList.add(currentQ[i]);
+            }
             randIndex = new Random().nextInt(3);
-            int oneAns = ansList.get(randIndex);
-            tButton1.setText(getResources().getString(oneAns));
+            tButton1.setText(ansList.get(randIndex));
             ansList.remove(randIndex);
 
             randIndex = new Random().nextInt(2);
-            oneAns = ansList.get(randIndex);
-            tButton2.setText(getResources().getString(oneAns));
+            tButton2.setText(ansList.get(randIndex));
             ansList.remove(randIndex);
 
             randIndex = new Random().nextInt(1);
-            oneAns = ansList.get(randIndex);
-            tButton3.setText(getResources().getString(oneAns));
+            tButton3.setText(ansList.get(randIndex));
             ansList.remove(randIndex);
 
-            oneAns = ansList.get(0);
-            tButton4.setText(getResources().getString(oneAns));
-            ansList.remove(randIndex);
-
+            tButton4.setText(ansList.get(0));
 
         }
         else if (subject.equals("selection")){
-            int[] qList = {R.string.S_Q1_qText, R.string.S_Q2_qText, R.string.S_Q3_qText};
-            int randQuestion = qList[randIndex];
-            questionText.setText(getResources().getString(randQuestion));
+            String[][] qList = {res.getStringArray(R.array.s_q1),res.getStringArray(R.array.s_q2),res.getStringArray(R.array.s_q3)};
+            String[] currentQ = qList[randIndex];
+            questionText.setText(currentQ[0]);
+            ArrayList<String> ansList = new ArrayList<String>();
+            for(int i = 4; i > 0; i--){
+                ansList.add(currentQ[i]);
+            }
+
+            for(int i = 4; i > 0; i--){
+                randIndex = new Random().nextInt(i-1);
+                bList.get(i-1).setText(ansList.get(randIndex));
+                ansList.remove(randIndex);
+            }
+
+//            randIndex = new Random().nextInt(3);
+//            tButton1.setText(ansList.get(randIndex));
+//            ansList.remove(randIndex);
+//
+//            randIndex = new Random().nextInt(2);
+//            tButton2.setText(ansList.get(randIndex));
+//            ansList.remove(randIndex);
+//
+//            randIndex = new Random().nextInt(1);
+//            tButton3.setText(ansList.get(randIndex));
+//            ansList.remove(randIndex);
+//
+//            tButton4.setText(ansList.get(randIndex));
         }
         else if (subject.equals("insertion")){
-            int[] qList = {R.string.I_Q1_qText, R.string.I_Q2_qText, R.string.I_Q3_qText};
-            int randQuestion = qList[randIndex];
-            questionText.setText(getResources().getString(randQuestion));
+//            int[] qList = {R.string.I_Q1_qText, R.string.I_Q2_qText, R.string.I_Q3_qText};
+//            int randQuestion = qList[randIndex];
+//            questionText.setText(getResources().getString(randQuestion));
         }
         else if (subject.equals("ls")){
-            int[] qList = {R.string.LS_Q1_qText, R.string.LS_Q2_qText, R.string.LS_Q3_qText};
-            int randQuestion = qList[randIndex];
-            questionText.setText(getResources().getString(randQuestion));
+//            int[] qList = {R.string.LS_Q1_qText, R.string.LS_Q2_qText, R.string.LS_Q3_qText};
+//            int randQuestion = qList[randIndex];
+//            questionText.setText(getResources().getString(randQuestion));
         }
 
         tButton1.setBackgroundColor(0xFFFFAAAA);
@@ -148,7 +170,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
     }
 
     private void tB1Pressed() {
-
+        //if( tButton1.getText().equals(R.string.B_Q1_Ans));
 
         //dRef.child("child1").setValue("Muh Vahlyews");
     }
