@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 /**
@@ -18,7 +21,8 @@ import java.io.InputStream;
 public class ExplanationFragment extends Fragment {
     private AlgorithmAssets assets;
     private TextView txtExplanation;
-    private String txt;
+    private ArrayList<String> explanations;
+    private int indexExplanations;
 
     public ExplanationFragment() {
         // Required empty public constructor
@@ -38,26 +42,39 @@ public class ExplanationFragment extends Fragment {
         if (bundle != null) {
             assets = bundle.getParcelable(assetKey);
         }
+        explanations = new ArrayList<>();
+        indexExplanations = 0;
         read();
+        explain();
 
         return view;
     }
 
     private void read() {
-        txt = "";
+        String line = "";
         try {
             InputStream is = getActivity().getAssets().open(assets.getExplanationFilename());
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            txt = new String(buffer);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            int size = is.available();
+//            byte[] buffer = new byte[size];
+//            is.read(buffer);
+//            is.close();
+//            txt = new String(buffer);
+
+            while ((line = br.readLine()) != null) {
+                explanations.add(line);
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     public void explain() {
-        txtExplanation.setText(txt);
+        if (explanations != null) {
+            int size = explanations.size();
+            if (indexExplanations < size) {
+                txtExplanation.setText(explanations.get(indexExplanations++));
+            }
+        }
     }
 }

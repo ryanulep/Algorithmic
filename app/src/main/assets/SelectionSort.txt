@@ -1,1 +1,3 @@
 This is the SelectionSort file which will contain the explanations of BubbleSort on each iteration.
+This algorithm iterates through the entire array, searches for the smallest value, and saves its index.
+Cool huhhhh.
