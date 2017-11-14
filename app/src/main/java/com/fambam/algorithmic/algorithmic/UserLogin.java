@@ -48,6 +48,7 @@ public class UserLogin extends AppCompatActivity {
                     // Change to new activity here because they are logged in
                     //startActivity(new Intent(UserLogin.this, /*next activity.class*/));
                     startActivity(new Intent(UserLogin.this, MainMenu.class));
+                    finish();
                 }
             }
         };
@@ -120,7 +121,9 @@ public class UserLogin extends AppCompatActivity {
                                 dRef.child("selection").child("explain").setValue("0");
                                 dRef.child("selection").child("quiz").setValue("0");
 
+
                                 startActivity(new Intent(UserLogin.this, MainMenu.class));
+                                finish();
                             } else {
                                 // If sign in fails, display a message to the user.
                                 ///Log.w(TAG, "createUserWithEmail:failure", task.getException());

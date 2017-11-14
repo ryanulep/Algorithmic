@@ -1,5 +1,6 @@
 package com.fambam.algorithmic.algorithmic;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -21,12 +22,13 @@ public class AlgorithmQuiz extends AppCompatActivity {
     private Button tButton4;
 
     private TextView questionText;
+    private TextView correctText;
 
     private String currentAns;
     // Colors for buttons
-    int defaultC = 0xFFFFAAAA;
-    int selectedIncorrectC = 0xFFFF0000;
-    int selectedCorrectC = 0xAAAAFFFF;
+    int defaultC = 0xFFC5CAE9;
+    int selectedIncorrectC = 0xFF00BCD4;
+    int selectedCorrectC = 0xFF76FF03;
 
     //FirebaseDatabase database = FirebaseDatabase.getInstance();
     //String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -49,6 +51,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
         bList.add(tButton4);
 
         questionText = findViewById(R.id.questionTextView);
+        correctText = findViewById(R.id.correctTextView);
         String subject;
 
         Bundle extras = getIntent().getExtras();
@@ -169,6 +172,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
                 tB4Pressed();
             }
         });
+
     }
 
     private void tB1Pressed() {
@@ -197,6 +201,8 @@ public class AlgorithmQuiz extends AppCompatActivity {
         }
     }
     private void createExitButton(){
+        correctText.setText("CORRECT!");
+
         ImageButton exitB = new ImageButton(this);
         exitB.setId(1);
         exitB.setImageResource(R.drawable.right_arrow);
@@ -209,6 +215,14 @@ public class AlgorithmQuiz extends AppCompatActivity {
         exitBC.constrainWidth(1, 200);
         exitBC.constrainHeight(1, 400);
         exitBC.applyTo(currentLayout);
+        exitB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
     }
 
 }
