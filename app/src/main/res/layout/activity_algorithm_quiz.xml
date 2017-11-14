@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fambam.algorithmic.algorithmic.AlgorithmQuiz">
+    tools:context="com.fambam.algorithmic.algorithmic.AlgorithmQuiz"
+    android:id="@+id/quiz">
 
     <TextView
         android:id="@+id/questionTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="180dp"
+        android:layout_marginTop="120dp"
         android:text="Text did not load"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/tButton1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,12 +32,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTextView"
-        app:layout_constraintWidth_max="250dp" />
+        app:layout_constraintWidth_max="200dp" />
 
     <ToggleButton
         android:id="@+id/tButton2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:textOff="@null"
         android:textOn="@null"
         app:layout_constraintBottom_toTopOf="@+id/tButton3"
@@ -43,12 +46,13 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tButton1"
-        app:layout_constraintWidth_max="250dp" />
+        app:layout_constraintWidth_max="200dp" />
 
     <ToggleButton
         android:id="@+id/tButton3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:textOff="@null"
         android:textOn="@null"
         app:layout_constraintBottom_toTopOf="@+id/tButton4"
@@ -56,12 +60,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tButton2"
-        app:layout_constraintWidth_max="250dp" />
+        app:layout_constraintWidth_max="200dp" />
 
     <ToggleButton
         android:id="@+id/tButton4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="30dp"
         android:textOff="@null"
         android:textOn="@null"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,6 +75,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tButton3"
-        app:layout_constraintWidth_max="250dp" />
+        app:layout_constraintWidth_max="200dp" />
 
 </android.support.constraint.ConstraintLayout>
