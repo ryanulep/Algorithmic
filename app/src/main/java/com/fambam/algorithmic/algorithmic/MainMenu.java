@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private Button lsExplain;
     private Button lsSimulate;
     private Button lsQuiz;
+
+    private int[] drawables;
+    private int[] data;
+    private Algorithm algorithm;
+    private UpdateOrdering ordering;
+    private AlgorithmAssets algoAsset;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,33 +111,107 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsExplain.setOnClickListener(this);
         lsSimulate.setOnClickListener(this);
         lsQuiz.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-        Intent i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
+        Intent i;
         switch (v.getId()) {
+            /* -------------------- Quiz button conditions -------------------- */
             case R.id.bubbleQuizB:
+                i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
                 i.putExtra("subject", "bubble");
                 startActivity(i);
                 break;
             case R.id.selectionQuizB:
+                i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
                 i.putExtra("subject", "selection");
                 startActivity(i);
                 break;
             case R.id.insertionQuizB:
+                i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
                 i.putExtra("subject", "insertion");
                 startActivity(i);
                 break;
             case R.id.lsQuizB:
+                i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
                 i.putExtra("subject", "ls");
                 startActivity(i);
                 break;
+
+            /* -------------------- Explanation button conditions -------------------- */
+            case R.id.bubbleExplanationB:
+                drawables = new int[] {
+                        R.drawable.examplei,
+                        R.drawable.examplej,
+                        R.drawable.examplek};
+                data = new int[] {3,4,6,7,1,2,1};
+                algorithm = new BubbleSort();
+                algoAsset = new AlgorithmAssets("BubbleSort.txt",
+                                                                "", "", "");
+                ordering = new UpdateOrdering(new int[] {   1,1,1,0,1,0,1,0,1,0,
+                                                            1,0,1,0,1,0,0,1,0,0,
+                                                            0,1,0,1,0,0,0,0,0,0,
+                                                            0,0,0,0,0,0,0,0,0,0,
+                                                            0,0,0,0,0,0,0,0,0,0,
+                                                            0,0,0,1,0,1 });
+                startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
+                break;
+
+            case R.id.selectionExplanationB:
+                drawables = new int[] {
+                        R.drawable.examplei,
+                        R.drawable.examplej
+                };
+                data = new int[] {3,5,1,6,2,4,7,8};
+                algorithm = new SelectionSort();
+                algoAsset = new AlgorithmAssets("SelectionSort.txt",
+                                                "", "", "");
+                ordering = new UpdateOrdering(new int[] {   1,1,1,0,1,0,1,0,1,0,1,
+                                                            0,0,1,0,0,0,1,1,0,0,0,
+                                                            0,0,0,0,0,0,0,0,0,0,0,
+                                                            0,0,0,0,0,0,0,0,0,0,0,
+                                                            0,0,0,0,0,0,0,0,1,1});
+                startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
+                break;
+
+            case R.id.insertionExplanationB:
+                drawables = new int[] {
+                        R.drawable.examplei,
+                        R.drawable.examplej,
+                        R.drawable.examplek
+                };
+                data = new int[] {1,2,6,5,7,8,4,4};
+                algorithm = new InsertionSort();
+                ordering = new UpdateOrdering(new int[] {   0});
+                algoAsset = new AlgorithmAssets("InsertionSort.txt",
+                                                "", "", "");
+                startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
+                break;
+
+            case R.id.lsExplanationB:
+                break;
+
+            /* -------------------- Other button conditions -------------------- */
             default:
                 break;
         }
     }
 
+    private void startAlgorithm(Algorithm algorithm, int[] data, int[] drawables,
+                               UpdateOrdering ordering, AlgorithmAssets asset) {
+        String algoKey = getString(R.string.algo_key);
+        String drawKey = getString(R.string.drawables);
+        String dataKey = getString(R.string.data);
+        String orderKey = getString(R.string.ordering);
+        String assetKey = getString(R.string.asset);
+        Intent intent = new Intent(this, AlgorithmActivity.class);
+        intent.putExtra(drawKey, drawables);
+        intent.putExtra(algoKey, (Parcelable) algorithm);
+        intent.putExtra(dataKey, data);
+        intent.putExtra(orderKey, ordering);
+        intent.putExtra(assetKey, asset);
+        startActivity(intent);
+    }
 }
 
