@@ -1,6 +1,7 @@
 package com.fambam.algorithmic.algorithmic;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.constraint.ConstraintLayout;
@@ -10,8 +11,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -68,6 +67,8 @@ public class AlgorithmFragment extends Fragment {
             DataView pointer = new DataView(getActivity());
             pointer.setId(imageIds[i]);
             pointer.setText(Character.toString((char) drawableIds[i]));
+            pointer.setBackgroundColor(Color.WHITE);
+            pointer.setTextColor(Color.BLACK);
             pointer.setGravity(Gravity.CENTER);
             baseLayout.addView(pointer);
         }
