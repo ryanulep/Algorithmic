@@ -18,10 +18,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void toBubbleSort(View view) {
-        int[] drawables = new int[] {
-                R.drawable.examplei,
-                R.drawable.examplej,
-                R.drawable.examplek};
+        int[] drawables = new int[] {'i', 'j', 'k'};
         int[] data = new int[] {3,4,6,7,1,2,1};
         Algorithm algorithm = new BubbleSort();
         AlgorithmAssets algoAsset = new AlgorithmAssets("BubbleSort.txt",
@@ -33,10 +30,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void toSelectionSort(View view) {
-        int[] drawables = new int[] {
-                R.drawable.examplei,
-                R.drawable.examplej
-        };
+        int[] drawables = new int[] {'i', 'j'};
         int[] data = new int[] {3,5,1,6,2,4,7,8};
         Algorithm algorithm = new SelectionSort();
         AlgorithmAssets algoAsset = new AlgorithmAssets("SelectionSort.txt",
@@ -46,11 +40,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void toInsertionSort(View view) {
-        int[] drawables = new int[] {
-                R.drawable.examplei,
-                R.drawable.examplej,
-                R.drawable.examplek
-        };
+        int[] drawables = new int[] {'i', 'j', 'k'};
         int[] data = new int[] {1,2,6,5,7,8,4,4};
         Algorithm algorithm = new InsertionSort();
         UpdateOrdering ordering = new UpdateOrdering(new int[] {1,1,1,0});
