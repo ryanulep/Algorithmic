@@ -66,7 +66,7 @@ public class ExplanationFragment extends Fragment {
     public void explain() {
         if (explanations != null) {
             int size = explanations.size();
-            if (indexExplanations < size && indexExplanations >= -1) {
+            if (indexExplanations < size-1 && indexExplanations >= -1) {
                 txtExplanation.setText(explanations.get(++indexExplanations));
             }
             else {

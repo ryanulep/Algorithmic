@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity{
                                                         "", "", "");
         UpdateOrdering ordering = new UpdateOrdering(new int[] {1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0,1,
                                                                 0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                                                                0,0,0,0,0,0,0,0,0,0,1,0,1}); 
+                                                                0,0,0,0,0,0,0,0,0,0,1,0,1});
         startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
     }
 
@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity{
         Algorithm algorithm = new SelectionSort();
         AlgorithmAssets algoAsset = new AlgorithmAssets("SelectionSort.txt",
                                                         "", "", "");
-        UpdateOrdering ordering = new UpdateOrdering(new int[] {1,1,1,0,1});
+        UpdateOrdering ordering = new UpdateOrdering(new int[] {1,1,1,0,1,0,1,0,1,0,1,0,0,1,0,
+                                                                0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                                                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1});
         startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
     }
 
