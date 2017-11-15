@@ -48,6 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Back"
+            android:onClick="back"
             android:layout_weight="1"
             android:layout_marginRight="8dp"
             style="?android:attr/borderlessButtonStyle"/>

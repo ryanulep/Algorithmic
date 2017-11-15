@@ -7,3 +7,6 @@
 /build
 /captures
 .externalNativeBuild
+*MainActivity.java
+*activity_main.xml
+*AndroidManifest.xml

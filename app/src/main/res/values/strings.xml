@@ -8,8 +8,113 @@
     <string name="data">com.example.Algorithmic.Data</string>
     <string name="asset">com.example.Algorithmic.Asset</string>
     <string name="ordering">com.example.Algorithmic.Ordering</string>
-    <string name="title_activity_new_algorithm">NewAlgorithmActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_new_algorithm">NewAlgorithmActivity</string>
+    <string name="login_button">Login Existing User</string>
+    <string name="new_user_button">Register A New User</string>
+    <string name="title_activity_menu">Menu</string>
+
+    <string name="summary">Summary</string>
+    <string name="explanation">Explanation</string>
+    <string name="simulate">Simulate</string>
+    <string name="quiz">Quiz</string>
+
+    <string name="large_text">
+        "Fuckin straight up text right here"
+    </string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Bubble Sort Questions-->
+    <string-array name="b_q1">
+        <item>What is the worst case runtime for Bubble Sort?</item>
+        <item>O(n^2)</item>
+        <item>O(n)</item>
+        <item>O(nlogn)</item>
+        <item>O(n^3)</item>
+    </string-array>
+    <string-array name="b_q2">
+        <item>What is the best case runtime for Bubble Sort?</item>
+        <item>O(n)</item>
+        <item>O(n^2)</item>
+        <item>O(nlogn)</item>
+        <item>O(n^3)</item>
+    </string-array>
+    <string-array name="b_q3">
+        <item>What is the space complexity for Bubble Sort?</item>
+        <item>O(1)</item>
+        <item>O(n^2)</item>
+        <item>O(n)</item>
+        <item>O(n^3)</item>
+    </string-array>
+
+    <!-- Selection Sort Questions-->
+    <string-array name="s_q1">
+        <item>What is the runtime for Selection Sort?</item>
+        <item>O(n^2)</item>
+        <item>O(n)</item>
+        <item>O(nlogn)</item>
+        <item>O(n^3)</item>
+    </string-array>
+    <string-array name="s_q2">
+        <item>What is the space complexity for Selection Sort?</item>
+        <item>O(1)</item>
+        <item>O(n)</item>
+        <item>O(n^2)</item>
+        <item>O(n^3)</item>
+    </string-array>
+    <string-array name="s_q3">
+        <item>What are the correct intermediate steps of the following data set when it is being sorted with the Selection sort? 15,20,10,18</item>
+        <item>10, 20,15,18  10,15,20,18  10,15,18,20</item>
+        <item>15,20,10,18 15,10,20,18  10,15,20,18  10,15,18,20</item>
+        <item>15,18,10,20  10,18,15,20  10,15,18,20  10,15,18,20</item>
+        <item>15,10,20,18  15,10,18,20  10,15,18,20</item>
+    </string-array>
+
+    <!-- Insertion Sort Questions-->
+    <string-array name="i_q1">
+        <item>What is the runtime for Insertion Sort?</item>
+        <item>O(n^2)</item>
+        <item>O(n)</item>
+        <item>O(nlogn)</item>
+        <item>O(n^3)</item>
+    </string-array>
+    <string-array name="i_q2">
+        <item>What is the space complexity for Insertion Sort?</item>
+        <item>O(1)</item>
+        <item>O(n^2)</item>
+        <item>O(n)</item>
+        <item>O(n^3)</item>
+    </string-array>
+    <string-array name="i_q3">
+        <item>Consider the following lists of partially sorted numbers. The double bars represent the sort marker. How many comparisons and swaps are needed to sort the next number. [1 3 4 5 8 9 || 2]</item>
+        <item>6 comparisons, 5 swaps</item>
+        <item>5 comparisons, 4 swaps</item>
+        <item>4 comparisons, 5 swaps</item>
+        <item>5 comparisons, 6 swaps</item>
+    </string-array>
+
+    <!-- Linear Search Questions-->
+    <string-array name="ls_q1">
+        <item>What is the worst case runtime for Linear Search?</item>
+        <item>O(n)</item>
+        <item>O(n^2)</item>
+        <item>O(nlogn)</item>
+        <item>O(n^3)</item>
+    </string-array>
+    <string-array name="ls_q2">
+        <item>Which of these would be considered the worst case scenario for a linear search?</item>
+        <item>The target value is not found in the list.</item>
+        <item>The target value is found at the beginning of the list.</item>
+        <item>The target value is found at the end of the list.</item>
+        <item>The target value is found somewhere in the middle of the list.</item>
+    </string-array>
+    <string-array name="ls_q3">
+        <item>Consider the following list: { 9, 2, 6, 8, -3, 7, 2, 15, 0, -1, 14, 99, -1 }If a linear search for the value -1 is performed, what will be returned?</item>
+        <item>9</item>
+        <item>10</item>
+        <item>12</item>
+        <item>-1</item>
+    </string-array>
 </resources>
