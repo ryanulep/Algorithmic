@@ -31,26 +31,38 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         size = this.data.length;
         updateIndicies(baseSet);
         select(getDataIdAt(i_index));
-        select(getDataIdAt(j_index));
         applyUpdates();
     }
 
     public void next(ConstraintSet set) {
-        if (is_swap_phase) {
+        if (is_swap_phase && has_min_changed) {
             swapData(i_index, min_index);
             swapDataIds(i_index, min_index);
             is_swap_phase = false;
             swapped = true;
+            has_min_changed = false;
             buildChain(set);
+        }
+        else if (is_swap_phase && !has_min_changed) {
+            deselect(getDataIdAt(i_index));
+            i_index++;
+            is_sorted = i_index == dataIds.length - 1;
+            if (hasNext()) {
+                j_index = i_index + 1;
+                min_index = i_index;
+                select(getDataIdAt(min_index));
+            }
+            if (is_sorted) {
+                deselect(getDataIdAt(i_index));
+            }
+            is_swap_phase = false;
         }
         else if (swapped) {
             deselect(getDataIdAt(i_index));
             i_index++;
             is_sorted = i_index == dataIds.length - 1;
             if (hasNext()) {
-                deselect(getDataIdAt(j_index));
                 j_index = i_index + 1;
-                select(getDataIdAt(j_index));
                 min_index = i_index;
                 select(getDataIdAt(min_index));
             }
@@ -70,13 +82,8 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
             is_swap_phase = j_index == dataIds.length - 1;
 
             if (!is_swap_phase) {
-                if (!has_min_changed) {
-                    deselect(getDataIdAt(j_index));
-                }
                 j_index++;
-                select(getDataIdAt(j_index));
             }
-            has_min_changed = false;
         }
         updateIndicies(set);
     }
