@@ -86,25 +86,31 @@ public abstract class ArrayAlgorithm extends Algorithm {
     }
 
     final void select(int dataIdLoc) {
-        TextView tView = parent.findViewById(dataIdLoc);
-        tView.getBackground();
-        updates.addFirst(new UpdateTextViewBackground(Color.WHITE, Color.CYAN, tView));
+        DataView dView = parent.findViewById(dataIdLoc);
+        dView.getBackground();
+        updates.addFirst(new UpdateTextViewBackground(Color.CYAN, dView));
+    }
+
+    final void select(int dataIdLoc, int colorTo) {
+        DataView dView = parent.findViewById(dataIdLoc);
+        dView.getBackground();
+        updates.addFirst(new UpdateTextViewBackground(colorTo, dView));
     }
 
     final void deselect(int dataIdLoc) {
-        TextView tView = parent.findViewById(dataIdLoc);
-        updates.addFirst(new UpdateTextViewBackground(Color.CYAN, Color.WHITE, tView));
+        DataView dView = parent.findViewById(dataIdLoc);
+        updates.addFirst(new UpdateTextViewBackground(Color.WHITE, dView));
     }
 
     private final void initializeDataViews() {
         for (int dataId : dataIds) {
-            TextView tView = parent.findViewById(dataId);
-            tView.setTextColor(Color.BLACK);
+            DataView dView = parent.findViewById(dataId);
+            dView.setTextColor(Color.BLACK);
             GradientDrawable gd = new GradientDrawable();
             gd.setColor(Color.WHITE);
             gd.setStroke(5, Color.BLACK);
             gd.setCornerRadius(4);
-            tView.setBackground(gd);
+            dView.setBackground(gd);
         }
     }
 }

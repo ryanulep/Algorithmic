@@ -11,10 +11,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -58,21 +54,23 @@ public class AlgorithmFragment extends Fragment {
 
         for (int i = 0; i < data.length; ++i) {
             dataIds[i] = 200+i;
-            TextView tView = new TextView(getActivity());
-            tView.setId(dataIds[i]);
-            tView.setText(Integer.toString(data[i]));
-            tView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
-            tView.setGravity(Gravity.CENTER);
-            tView.setBackgroundColor(Color.WHITE);
-            baseLayout.addView(tView);
+            DataView dView = new DataView(getActivity());
+            dView.setId(dataIds[i]);
+            dView.setText(Integer.toString(data[i]));
+            dView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
+            dView.setGravity(Gravity.CENTER);
+            baseLayout.addView(dView);
         }
 
         for (int i = 0; i < imageIds.length; i++) {
             imageIds[i] = 100+i;
-            ImageView image = new ImageView(getActivity());
-            image.setId(imageIds[i]);
-            image.setImageResource(drawableIds[i]);
-            baseLayout.addView(image);
+            DataView pointer = new DataView(getActivity());
+            pointer.setId(imageIds[i]);
+            pointer.setText(Character.toString((char) drawableIds[i]));
+            pointer.setBackgroundColor(Color.WHITE);
+            pointer.setTextColor(Color.BLACK);
+            pointer.setGravity(Gravity.CENTER);
+            baseLayout.addView(pointer);
         }
 
         ConstraintSet set = new ConstraintSet();

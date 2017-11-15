@@ -141,10 +141,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
             /* -------------------- Explanation button conditions -------------------- */
             case R.id.bubbleExplanationB:
-                drawables = new int[] {
-                        R.drawable.examplei,
-                        R.drawable.examplej,
-                        R.drawable.examplek};
+                drawables = new int[] {'i','j','k'};
                 data = new int[] {3,4,6,7,1,2,1};
                 algorithm = new BubbleSort();
                 algoAsset = new AlgorithmAssets("BubbleSort.txt",
@@ -159,10 +156,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.selectionExplanationB:
-                drawables = new int[] {
-                        R.drawable.examplei,
-                        R.drawable.examplej
-                };
+                drawables = new int[] {'i','j'};
                 data = new int[] {3,5,1,6,2,4,7,8};
                 algorithm = new SelectionSort();
                 algoAsset = new AlgorithmAssets("SelectionSort.txt",
@@ -176,11 +170,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.insertionExplanationB:
-                drawables = new int[] {
-                        R.drawable.examplei,
-                        R.drawable.examplej,
-                        R.drawable.examplek
-                };
+                drawables = new int[] {'i','j','k'};
                 data = new int[] {1,2,6,5,7,8,4,4};
                 algorithm = new InsertionSort();
                 ordering = new UpdateOrdering(new int[] {   0});
