@@ -63,9 +63,9 @@ public class AlgorithmQuiz extends AppCompatActivity {
         }
 
         Resources res = getResources();
-        int randIndex = new Random().nextInt(3);
+        int randIndex = new Random().nextInt(5);
         if (subject.equals("bubble")){
-            String[][] qList = {res.getStringArray(R.array.b_q1),res.getStringArray(R.array.b_q2),res.getStringArray(R.array.b_q3)};
+            String[][] qList = {res.getStringArray(R.array.b_q1),res.getStringArray(R.array.b_q2),res.getStringArray(R.array.b_q3),res.getStringArray(R.array.b_q4),res.getStringArray(R.array.b_q5)};
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -80,7 +80,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
             currentAns = currentQ[1];
         }
         else if (subject.equals("selection")){
-            String[][] qList = {res.getStringArray(R.array.s_q1),res.getStringArray(R.array.s_q2),res.getStringArray(R.array.s_q3)};
+            String[][] qList = {res.getStringArray(R.array.s_q1),res.getStringArray(R.array.s_q2),res.getStringArray(R.array.s_q3),res.getStringArray(R.array.s_q4),res.getStringArray(R.array.s_q5)};
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -95,7 +95,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
             currentAns = currentQ[1];
         }
         else if (subject.equals("insertion")){
-            String[][] qList = {res.getStringArray(R.array.i_q1),res.getStringArray(R.array.i_q2),res.getStringArray(R.array.i_q3)};
+            String[][] qList = {res.getStringArray(R.array.i_q1),res.getStringArray(R.array.i_q2),res.getStringArray(R.array.i_q3),res.getStringArray(R.array.i_q4),res.getStringArray(R.array.i_q5)};
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -110,7 +110,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
             currentAns = currentQ[1];
         }
         else if (subject.equals("ls")){
-            String[][] qList = {res.getStringArray(R.array.ls_q1),res.getStringArray(R.array.ls_q2),res.getStringArray(R.array.ls_q3)};
+            String[][] qList = {res.getStringArray(R.array.ls_q1),res.getStringArray(R.array.ls_q2),res.getStringArray(R.array.ls_q3),res.getStringArray(R.array.ls_q4),res.getStringArray(R.array.ls_q5)};
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -180,6 +180,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
             tButton1.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
+        else{correctText.setText("Try again");}
         //dRef.child("child1").setValue("Muh Vahlyews");
     }
     private void tB2Pressed() {
@@ -187,18 +188,21 @@ public class AlgorithmQuiz extends AppCompatActivity {
             tButton2.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
+        else{correctText.setText("Try again");}
     }
     private void tB3Pressed() {
         if (tButton3.getText().equals(currentAns)){
             tButton3.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
+        else{correctText.setText("Try again");}
     }
     private void tB4Pressed() {
         if (tButton4.getText().equals(currentAns)){
             tButton4.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
+        else{correctText.setText("Try again");}
     }
     private void createExitButton(){
         correctText.setText("CORRECT!");
