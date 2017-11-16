@@ -15,6 +15,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     private boolean is_sorted = false;
     private boolean is_swap_phase = false;
     private boolean swapped = false;
+    private boolean has_min_changed = false;
 
     public SelectionSort() { super(); }
 
@@ -33,13 +34,28 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     }
 
     public void next(ConstraintSet set) {
-        if (is_swap_phase) {
+        if (is_swap_phase && has_min_changed) {
             swapData(i_index, min_index);
             swapDataIds(i_index, min_index);
             is_swap_phase = false;
             min_index = i_index;
             swapped = true;
+            has_min_changed = false;
             buildChain(set);
+        }
+        else if (is_swap_phase && !has_min_changed) {
+            deselect(getDataIdAt(i_index));
+            i_index++;
+            is_sorted = i_index == dataIds.length - 1;
+            if (hasNext()) {
+                j_index = i_index + 1;
+                min_index = i_index;
+                select(getDataIdAt(min_index));
+            }
+            if (is_sorted) {
+                deselect(getDataIdAt(i_index));
+            }
+            is_swap_phase = false;
         }
         else if (swapped) {
             i_index++;
