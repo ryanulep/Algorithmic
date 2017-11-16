@@ -37,8 +37,6 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
         k_image = getImageIdAt(2);
         size = data.length;
         updateIndices(baseSet);
-        select(getDataIdAt(i_index));
-        applyUpdates();
         update_i_phase = false;
         is_move_k_phase = true;
     }
@@ -56,24 +54,19 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
         } else if (is_move_k_phase) {
             is_swap_phase = true;
             is_move_k_phase = false;
-            select(getDataIdAt(j_index - 1));
         } else {
-            deselect(getDataIdAt(j_index));
             --j_index;
             if (j_index == 0 || !has_swapped) {
                 ++i_index;
-                deselect(getDataIdAt(j_index));
                 if (i_index == size) {
                     --i_index;
                     is_sorted = true;
                 } else {
-                    select(getDataIdAt(i_index));
                     is_move_k_phase = true;
                 }
                 j_index = i_index;
                 update_i_phase = true;
             } else {
-                select(getDataIdAt(j_index-1));
                 is_swap_phase = true;
                 has_swapped = false;
             }
@@ -91,11 +84,18 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
     }
 
     private void updateIndices(ConstraintSet set) {
+        int [] newHighLights;
         updateIndex(set, i_image, getDataIdAt(i_index));
         if (update_i_phase) {
+            newHighLights = this.getHighlights(new int[] {j_index});
             updateIndex(set, j_image, i_image);
             updateIndex(set, k_image, j_image);
+            if (is_sorted) {
+                this.deselectAll();
+                return;
+            }
         } else {
+            newHighLights = this.getHighlights(new int[] {j_index, j_index - 1});
             int target = i_image;
             if (i_index != j_index) {
                 target = getDataIdAt(j_index);
@@ -103,6 +103,8 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
             updateIndex(set, j_image, target);
             updateIndex(set, k_image, getDataIdAt(j_index - 1));
         }
+        this.applyHighlightDifference(newHighLights);
+        this.highlights = newHighLights;
     }
 
     public int describeContents() {

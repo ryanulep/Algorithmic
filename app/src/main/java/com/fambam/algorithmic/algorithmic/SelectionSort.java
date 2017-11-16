@@ -30,7 +30,6 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         min_index = 0;
         size = this.data.length;
         updateIndicies(baseSet);
-        select(getDataIdAt(i_index));
         applyUpdates();
     }
 
@@ -39,44 +38,33 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
             swapData(i_index, min_index);
             swapDataIds(i_index, min_index);
             is_swap_phase = false;
+            min_index = i_index;
             swapped = true;
             has_min_changed = false;
             buildChain(set);
         }
         else if (is_swap_phase && !has_min_changed) {
-            deselect(getDataIdAt(i_index));
             i_index++;
             is_sorted = i_index == dataIds.length - 1;
             if (hasNext()) {
                 j_index = i_index + 1;
                 min_index = i_index;
-                select(getDataIdAt(min_index));
-            }
-            if (is_sorted) {
-                deselect(getDataIdAt(i_index));
             }
             is_swap_phase = false;
         }
         else if (swapped) {
-            deselect(getDataIdAt(i_index));
             i_index++;
             is_sorted = i_index == dataIds.length - 1;
             if (hasNext()) {
                 j_index = i_index + 1;
                 min_index = i_index;
-                select(getDataIdAt(min_index));
-            }
-            if (is_sorted) {
-                deselect(getDataIdAt(i_index));
             }
             swapped = false;
         }
 
         else {
             if (getDataAt(j_index) < getDataAt(min_index)) {
-                deselect(getDataIdAt(min_index));
                 min_index = j_index;
-                select(getDataIdAt(min_index));
                 has_min_changed = true;
             }
             is_swap_phase = j_index == dataIds.length - 1;
@@ -97,13 +85,18 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     }
 
     private void updateIndicies(ConstraintSet currentSet) {
+        int[] newHighlights = this.getHighlights(new int[] {min_index});
         updateIndex(currentSet, i_image, getDataIdAt(i_index));
         if (is_sorted) {
             updateIndex(currentSet, j_image, i_image);
+            this.deselectAll();
+            return;
         }
         else {
             updateIndex(currentSet, j_image, getDataIdAt(j_index));
         }
+        this.applyHighlightDifference(newHighlights);
+        this.highlights = newHighlights;
     }
 
     public int describeContents() {

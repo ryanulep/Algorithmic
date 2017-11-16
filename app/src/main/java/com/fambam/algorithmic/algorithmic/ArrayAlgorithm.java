@@ -17,6 +17,7 @@ public abstract class ArrayAlgorithm extends Algorithm {
         this.imageIds = imageIds;
         this.dataIds = dataIds;
         this.data = data;
+        this.highlights = new int[data.length];
         this.setSizeConstaints(baseSet, imageIds, 100, 100);
         this.setSizeConstaints(baseSet, dataIds, 100, 100);
         this.initializeDataViews();
@@ -44,6 +45,30 @@ public abstract class ArrayAlgorithm extends Algorithm {
         currentSet.constrainHeight(indexId, 100);
         currentSet.connect(indexId, ConstraintSet.BOTTOM, targetId, ConstraintSet.TOP);
         currentSet.connect(indexId, ConstraintSet.LEFT, targetId, ConstraintSet.LEFT);
+    }
+
+    final int[] getHighlights(int[] selections) {
+        int[] newHighlights = new int[this.highlights.length];
+        for (int i : selections) {
+            newHighlights[i] = 1;
+        }
+        return newHighlights;
+    }
+
+    final void applyHighlightDifference(int[] newHighlights) {
+        for (int i = 0; i < newHighlights.length; ++i) {
+            if (newHighlights[i] != this.highlights[i]) {
+                if (this.highlights[i] == 0) {
+                    select(getDataIdAt(i));
+                } else {
+                    deselect(getDataIdAt(i));
+                }
+            }
+        }
+    }
+
+    final void deselectAll() {
+        applyHighlightDifference(new int[this.highlights.length]);
     }
 
     final void setSizeConstaints(ConstraintSet currentSet, int[] ids, int width, int height) {
