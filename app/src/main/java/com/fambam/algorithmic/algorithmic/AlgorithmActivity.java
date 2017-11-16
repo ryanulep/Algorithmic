@@ -69,10 +69,10 @@ public class AlgorithmActivity extends AppCompatActivity {
 
     public void back(View view) {
         int option = updateOrdering.back();
-//        if (option == ALGO) {
-//            algoFragment.back();
-//        }
-        if (option == EXPLAIN) {
+        if (option == ALGO) {
+            algoFragment.back();
+        }
+        else if (option == EXPLAIN) {
             explainFragment.back();
         }
     }

@@ -29,11 +29,14 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         j_index = 1;
         min_index = 0;
         size = this.data.length;
-        updateIndicies(baseSet);
+        updateSelectors(baseSet);
+        updateHighlights();
         applyUpdates();
     }
 
     public void next(ConstraintSet set) {
+        AlgorithmState state = this.getState();
+        this.states.push(state);
         if (is_swap_phase && has_min_changed) {
             swapData(i_index, min_index);
             swapDataIds(i_index, min_index);
@@ -41,7 +44,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
             min_index = i_index;
             swapped = true;
             has_min_changed = false;
-            buildChain(set);
+            this.buildStructure(set);
         }
         else if (is_swap_phase && !has_min_changed) {
             i_index++;
@@ -73,15 +76,15 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
                 j_index++;
             }
         }
-        updateIndicies(set);
+        this.updateSelectors(set);
+        this.updateHighlights();
     }
 
     public boolean hasNext() {
         return !is_sorted;
     }
 
-    private void updateIndicies(ConstraintSet currentSet) {
-        int[] newHighlights = this.getHighlights(new int[] {min_index});
+    void updateSelectors(ConstraintSet currentSet) {
         updateIndex(currentSet, i_image, getDataIdAt(i_index));
         if (is_sorted) {
             updateIndex(currentSet, j_image, i_image);
@@ -91,8 +94,23 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         else {
             updateIndex(currentSet, j_image, getDataIdAt(j_index));
         }
-        this.applyHighlightDifference(newHighlights);
+    }
+
+    void updateHighlights() {
+        int[] newHighlights = this.getHighlights(new int[] {min_index});
+        this.applyHighlightDifference(this.highlights, newHighlights);
         this.highlights = newHighlights;
+    }
+
+    public void loadState(AlgorithmState state) {
+        return;
+    }
+
+    public AlgorithmState getState() {
+        int[] selectors = new int[1];
+        boolean[] flags = new boolean[1];
+        return new AlgorithmState(selectors, this.highlights.clone(), this.data.clone(),
+                                  this.dataIds.clone(), flags);
     }
 
     public int describeContents() {

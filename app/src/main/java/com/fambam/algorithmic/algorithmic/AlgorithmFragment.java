@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -91,5 +92,17 @@ public class AlgorithmFragment extends Fragment {
         TransitionManager.beginDelayedTransition(baseLayout);
         set.applyTo(baseLayout);
         algorithm.applyUpdates();
+    }
+
+    public void back() {
+        if (algorithm.hasBack()) {
+            ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment_layout);
+            ConstraintSet set = new ConstraintSet();
+            set.clone(baseLayout);
+            algorithm.back(set);
+            TransitionManager.beginDelayedTransition(baseLayout);
+            set.applyTo(baseLayout);
+            algorithm.applyUpdates();
+        }
     }
 }
