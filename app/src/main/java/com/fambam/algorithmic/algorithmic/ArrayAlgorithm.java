@@ -25,6 +25,7 @@ public abstract class ArrayAlgorithm extends Algorithm {
     }
     public abstract void next(ConstraintSet currentSet);
     public abstract boolean hasNext();
+    public abstract boolean isSortingAlgorithm();
 
     final void buildChain(ConstraintSet currentSet) {
         currentSet.createHorizontalChain(

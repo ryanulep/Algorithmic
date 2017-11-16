@@ -11,11 +11,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AlgorithmFragment extends Fragment {
     private Algorithm algorithm;
+    private TextView tv_searching;
 
     public AlgorithmFragment() {
         // Required empty public constructor
@@ -44,6 +47,12 @@ public class AlgorithmFragment extends Fragment {
             algorithm = bundle.getParcelable(algoKey);
             drawableIds = bundle.getIntArray(drawKey);
             data = bundle.getIntArray(dataKey);
+        }
+
+        // If sorting algorithm, use the TextView inside fragment to display info. Else, empty
+        if (this.algorithm.isSortingAlgorithm()) {
+            tv_searching = view.findViewById(R.id.tv_search);
+            tv_searching.setText("Search: 6");
         }
 
         // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView

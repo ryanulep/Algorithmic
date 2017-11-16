@@ -20,6 +20,7 @@ public abstract class Algorithm {
                              int[] imageIds, int[] dataIds, int[] data);
     abstract void next(ConstraintSet currentSet);
     abstract boolean hasNext();
+    abstract boolean isSortingAlgorithm();
 
     final void applyUpdates() {
         while(!updates.isEmpty()) {
