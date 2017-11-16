@@ -18,8 +18,8 @@ public abstract class ArrayAlgorithm extends Algorithm {
         this.dataIds = dataIds;
         this.data = data;
         this.highlights = new int[data.length];
-        this.setSizeConstaints(baseSet, imageIds, 100, 100);
-        this.setSizeConstaints(baseSet, dataIds, 100, 100);
+        this.setSizeConstaints(baseSet, imageIds, 120, 120);
+        this.setSizeConstaints(baseSet, dataIds, 120, 120);
         this.initializeDataViews();
         this.buildChain(baseSet);
 
@@ -41,8 +41,8 @@ public abstract class ArrayAlgorithm extends Algorithm {
 
     final void updateIndex(ConstraintSet currentSet, int indexId, int targetId) {
         currentSet.clear(indexId);
-        currentSet.constrainWidth(indexId, 100);
-        currentSet.constrainHeight(indexId, 100);
+        currentSet.constrainWidth(indexId, 120);
+        currentSet.constrainHeight(indexId, 120);
         currentSet.connect(indexId, ConstraintSet.BOTTOM, targetId, ConstraintSet.TOP);
         currentSet.connect(indexId, ConstraintSet.LEFT, targetId, ConstraintSet.LEFT);
     }
