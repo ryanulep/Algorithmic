@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.fambam.algorithmic.algorithmic.UserLogin">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
+        android:layout_marginTop="320dp"
+        app:layout_constraintBottom_toTopOf="@+id/backgroundFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_algorithmic_white" />
+
     <FrameLayout
         android:id="@+id/backgroundFrame"
         android:layout_width="wrap_content"
@@ -13,13 +26,17 @@
         android:alpha="0.25"
         android:background="@drawable/logo_two_crop"
         android:visibility="visible"
-        app:layout_constraintVertical_bias="0.0"></FrameLayout>
+        app:layout_constraintVertical_bias="0.0">
+
+    </FrameLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/usernameWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="64dp">
+        android:layout_marginTop="128dp"
+        android:paddingTop="64dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -42,8 +59,8 @@
         android:id="@+id/passwordWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/usernameWrapper"
-        android:paddingTop="36dp">
+        android:paddingTop="36dp"
+        app:layout_constraintTop_toBottomOf="@id/usernameWrapper">
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -56,8 +73,8 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.design.widget.TextInputLayout>
 
