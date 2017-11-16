@@ -44,16 +44,11 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
             buildChain(set);
         }
         else if (is_swap_phase && !has_min_changed) {
-            deselect(getDataIdAt(i_index));
             i_index++;
             is_sorted = i_index == dataIds.length - 1;
             if (hasNext()) {
                 j_index = i_index + 1;
                 min_index = i_index;
-                select(getDataIdAt(min_index));
-            }
-            if (is_sorted) {
-                deselect(getDataIdAt(i_index));
             }
             is_swap_phase = false;
         }
@@ -64,15 +59,13 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
                 j_index = i_index + 1;
                 min_index = i_index;
             }
-            if (is_sorted) {
-
-            }
             swapped = false;
         }
 
         else {
             if (getDataAt(j_index) < getDataAt(min_index)) {
                 min_index = j_index;
+                has_min_changed = true;
             }
             is_swap_phase = j_index == dataIds.length - 1;
 
