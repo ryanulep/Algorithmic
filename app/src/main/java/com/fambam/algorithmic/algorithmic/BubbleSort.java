@@ -114,7 +114,6 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         boolean[] flags = new boolean[] {is_sorted, has_swapped, is_swap_phase};
         return new AlgorithmState(selectors, this.highlights.clone(), this.data.clone(),
                                   this.dataIds.clone(), flags);
-
     }
 
     public int describeContents() {

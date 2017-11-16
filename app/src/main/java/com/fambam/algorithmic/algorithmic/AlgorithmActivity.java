@@ -81,7 +81,8 @@ public class AlgorithmActivity extends AppCompatActivity {
             explainFragment.back();
         }
         else if (option == BOTH) {
-
+            algoFragment.back();
+            explainFragment.back();
         }
     }
 }
