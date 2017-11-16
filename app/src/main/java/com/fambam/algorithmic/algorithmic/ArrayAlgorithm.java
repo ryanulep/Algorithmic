@@ -17,6 +17,7 @@ public abstract class ArrayAlgorithm extends Algorithm {
         this.imageIds = imageIds;
         this.dataIds = dataIds;
         this.data = data;
+        this.highlights = new int[data.length];
         this.setSizeConstaints(baseSet, imageIds, 100, 100);
         this.setSizeConstaints(baseSet, dataIds, 100, 100);
         this.initializeDataViews();
@@ -25,6 +26,7 @@ public abstract class ArrayAlgorithm extends Algorithm {
     }
     public abstract void next(ConstraintSet currentSet);
     public abstract boolean hasNext();
+    public abstract boolean isSortingAlgorithm();
 
     final void buildChain(ConstraintSet currentSet) {
         currentSet.createHorizontalChain(
@@ -43,6 +45,30 @@ public abstract class ArrayAlgorithm extends Algorithm {
         currentSet.constrainHeight(indexId, 100);
         currentSet.connect(indexId, ConstraintSet.BOTTOM, targetId, ConstraintSet.TOP);
         currentSet.connect(indexId, ConstraintSet.LEFT, targetId, ConstraintSet.LEFT);
+    }
+
+    final int[] getHighlights(int[] selections) {
+        int[] newHighlights = new int[this.highlights.length];
+        for (int i : selections) {
+            newHighlights[i] = 1;
+        }
+        return newHighlights;
+    }
+
+    final void applyHighlightDifference(int[] newHighlights) {
+        for (int i = 0; i < newHighlights.length; ++i) {
+            if (newHighlights[i] != this.highlights[i]) {
+                if (this.highlights[i] == 0) {
+                    select(getDataIdAt(i));
+                } else {
+                    deselect(getDataIdAt(i));
+                }
+            }
+        }
+    }
+
+    final void deselectAll() {
+        applyHighlightDifference(new int[this.highlights.length]);
     }
 
     final void setSizeConstaints(ConstraintSet currentSet, int[] ids, int width, int height) {
@@ -86,25 +112,31 @@ public abstract class ArrayAlgorithm extends Algorithm {
     }
 
     final void select(int dataIdLoc) {
-        TextView tView = parent.findViewById(dataIdLoc);
-        tView.getBackground();
-        updates.addFirst(new UpdateTextViewBackground(Color.WHITE, Color.CYAN, tView));
+        DataView dView = parent.findViewById(dataIdLoc);
+        dView.getBackground();
+        updates.addFirst(new UpdateTextViewBackground(Color.CYAN, dView));
+    }
+
+    final void select(int dataIdLoc, int colorTo) {
+        DataView dView = parent.findViewById(dataIdLoc);
+        dView.getBackground();
+        updates.addFirst(new UpdateTextViewBackground(colorTo, dView));
     }
 
     final void deselect(int dataIdLoc) {
-        TextView tView = parent.findViewById(dataIdLoc);
-        updates.addFirst(new UpdateTextViewBackground(Color.CYAN, Color.WHITE, tView));
+        DataView dView = parent.findViewById(dataIdLoc);
+        updates.addFirst(new UpdateTextViewBackground(Color.WHITE, dView));
     }
 
     private final void initializeDataViews() {
         for (int dataId : dataIds) {
-            TextView tView = parent.findViewById(dataId);
-            tView.setTextColor(Color.BLACK);
+            DataView dView = parent.findViewById(dataId);
+            dView.setTextColor(Color.BLACK);
             GradientDrawable gd = new GradientDrawable();
             gd.setColor(Color.WHITE);
             gd.setStroke(5, Color.BLACK);
             gd.setCornerRadius(4);
-            tView.setBackground(gd);
+            dView.setBackground(gd);
         }
     }
 }

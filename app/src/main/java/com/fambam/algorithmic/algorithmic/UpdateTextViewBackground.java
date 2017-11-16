@@ -12,23 +12,25 @@ import android.widget.TextView;
 public class UpdateTextViewBackground implements UIUpdate {
     int colorTo;
     int colorFrom;
-    TextView tView;
+    DataView dView;
 
-    UpdateTextViewBackground(int colorFrom, int colorTo, TextView tView) {
+    UpdateTextViewBackground(int colorTo, DataView dView) {
         super();
+        this.colorFrom = dView.getBackgroundColor();
         this.colorTo = colorTo;
-        this.colorFrom = colorFrom;
-        this.tView = tView;
+        this.dView = dView;
+        this.dView.setBackColor(colorTo);
     }
 
     public void apply() {
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),
+                colorFrom, colorTo);
         colorAnimation.setDuration(500); // milliseconds
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
             @Override
             public void onAnimationUpdate(ValueAnimator animator) {
-                GradientDrawable gd = (GradientDrawable) tView.getBackground();
+                GradientDrawable gd = (GradientDrawable) dView.getBackground();
                 gd.setColor((int) animator.getAnimatedValue());
             }
         });

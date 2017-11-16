@@ -31,8 +31,8 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         j_index = 0;
         size = data.length;
         updateIndices(baseSet);
-        select(getDataIdAt(j_index));
-        select(getDataIdAt(j_index + 1));
+        //select(getDataIdAt(j_index));
+        //select(getDataIdAt(j_index + 1));
         applyUpdates();
     }
     
@@ -48,23 +48,20 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
             }
         }
         else {
-            deselect(getDataIdAt(j_index));
             j_index++;
             int i_actual = size - i_index - 1;
             if (j_index == i_actual) {
-                deselect(getDataIdAt(j_index));
                 if (!has_swapped) {
                     is_sorted = true;
+                    this.deselectAll();
                     return;
                 }
                 else {
                     i_index++;
                     j_index = 0;
-                    select(getDataIdAt(j_index));
                     has_swapped = false;
                 }
             }
-            select(getDataIdAt(j_index + 1));
         }
         updateIndices(set);
         is_swap_phase = !is_swap_phase;
@@ -74,7 +71,13 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         return !(is_sorted);
     }
 
+    public boolean isSortingAlgorithm() {
+        return false;
+    }
+
     private void updateIndices(ConstraintSet set) {
+        int[] newHighlights = this.getHighlights(new int[] {j_index, j_index + 1});
+        this.applyHighlightDifference(newHighlights);
         int target;
         int i_actual = dataIds.length - i_index - 1;
         int k_index = j_index + 1;
@@ -87,6 +90,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
             target = getDataIdAt(i_actual);
         }
         updateIndex(set, i_image, target);
+        this.highlights = newHighlights;
     }
 
     public int describeContents() {
@@ -127,5 +131,4 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         has_swapped = (other[7] == 1);
         is_swap_phase = (other[8] == 1);
     }
-
 }
