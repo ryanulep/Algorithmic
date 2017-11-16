@@ -42,6 +42,7 @@ public abstract class Algorithm {
     final boolean hasBack() {
         return !states.isEmpty();
     }
+    abstract boolean isSortingAlgorithm();
 
     final void applyUpdates() {
         while(!updates.isEmpty()) {

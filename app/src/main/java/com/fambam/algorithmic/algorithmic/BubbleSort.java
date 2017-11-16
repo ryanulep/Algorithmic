@@ -73,6 +73,10 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         return !(is_sorted);
     }
 
+    public boolean isSortingAlgorithm() {
+        return false;
+    }
+
     void updateSelectors(ConstraintSet set) {
         int target;
         int i_actual = dataIds.length - i_index - 1;
@@ -151,5 +155,4 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         has_swapped = (other[7] == 1);
         is_swap_phase = (other[8] == 1);
     }
-
 }

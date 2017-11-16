@@ -84,6 +84,10 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
         return !(is_sorted);
     }
 
+    public boolean isSortingAlgorithm() {
+        return false;
+    }
+
     void updateSelectors(ConstraintSet set) {
         updateIndex(set, i_image, getDataIdAt(i_index));
         if (update_i_phase) {

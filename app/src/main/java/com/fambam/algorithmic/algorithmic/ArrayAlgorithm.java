@@ -30,6 +30,7 @@ public abstract class ArrayAlgorithm extends Algorithm {
     public abstract void loadState(AlgorithmState state);
     public abstract AlgorithmState getState();
     abstract void updateHighlights();
+    public abstract boolean isSortingAlgorithm();
 
     final void buildStructure(ConstraintSet currentSet) {
         currentSet.createHorizontalChain(

@@ -84,6 +84,10 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         return !is_sorted;
     }
 
+    public boolean isSortingAlgorithm() {
+        return false;
+    }
+
     void updateSelectors(ConstraintSet currentSet) {
         updateIndex(currentSet, i_image, getDataIdAt(i_index));
         if (is_sorted) {

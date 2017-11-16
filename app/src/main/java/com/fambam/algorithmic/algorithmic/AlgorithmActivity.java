@@ -15,6 +15,7 @@ public class AlgorithmActivity extends AppCompatActivity {
     private UpdateOrdering updateOrdering;
     private static final int ALGO = 0;
     private static final int EXPLAIN = 1;
+    private static final int BOTH = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,10 @@ public class AlgorithmActivity extends AppCompatActivity {
         else if (option == EXPLAIN) {
             explainFragment.explain();
         }
+        else if (option == BOTH) {
+            explainFragment.explain();
+            algoFragment.swap();
+        }
     }
 
     public void back(View view) {
@@ -74,6 +79,9 @@ public class AlgorithmActivity extends AppCompatActivity {
         }
         else if (option == EXPLAIN) {
             explainFragment.back();
+        }
+        else if (option == BOTH) {
+
         }
     }
 }
