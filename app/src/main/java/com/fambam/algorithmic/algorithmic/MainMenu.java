@@ -183,7 +183,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 drawables = new int[] {'i'};
                 data = new int[] {3,8,2,1,4,6,5,7};
                 algorithm = new LinearSearch();
-                ordering = new UpdateOrdering(new int[] {   0});
+                ordering = new UpdateOrdering(new int[] {   1,1,1,2,0,0,0,0,2,2,1,1});
                 algoAsset = new AlgorithmAssets("LinearSearch.txt",
                                                 "", "", "");
                 startAlgorithm(algorithm, data, drawables, ordering, algoAsset);

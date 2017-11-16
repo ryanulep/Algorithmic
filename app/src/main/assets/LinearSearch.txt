@@ -1,1 +1,9 @@
-This is linear search.
+Here we will show you Linear Search, one of the algorithms used to search elements in an array.
+Let's try searching for the number 6.
+First, we examine the leftmost number at index 'i'.
+We compare it with 6, and if it matches, the search ends. If it doesn't match, we examine the next number to the right.
+We repeat the comparisons until the 6 is found.
+We found the 6, so the search ends.
+As you can see, linear search is a simple technique for doing repeated comparisons in order from the beginning.
+When there's a lot of data, the number of comparisons increases, and it takes more time.
+This concludes the explanation of linear search.
