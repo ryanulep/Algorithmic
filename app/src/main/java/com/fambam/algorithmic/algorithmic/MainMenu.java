@@ -165,7 +165,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                                                             0,0,1,0,0,0,1,1,0,0,0,
                                                             0,0,0,0,0,0,0,0,0,0,0,
                                                             0,0,0,0,0,0,0,0,0,0,0,
-                                                            0,0,0,0,0,0,0,0,1,1});
+                                                            0,0,0,0,0,1,1});
                 startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
                 break;
 
