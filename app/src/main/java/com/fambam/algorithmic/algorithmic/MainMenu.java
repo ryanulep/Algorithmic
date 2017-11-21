@@ -2,6 +2,7 @@ package com.fambam.algorithmic.algorithmic;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,6 +55,27 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     DatabaseReference dRef = database.getReference();
 
     int finishedColor = 0xAAAAFFFF;
+    int defaultColor = 0xFFFFFFFF;
+
+    private static final int[] bIDs = {
+            R.id.bubbleSummaryB,
+            R.id.bubbleExplanationB,
+            R.id.bubbleSimulateB,
+            R.id.bubbleQuizB,
+            R.id.selectionSummaryB,
+            R.id.selectionExplanationB,
+            R.id.selectionSimulateB,
+            R.id.selectionQuizB,
+            R.id.insertionSummaryB,
+            R.id.insertionExplanationB,
+            R.id.insertionSimulateB,
+            R.id.insertionQuizB,
+            R.id.lsSummaryB,
+            R.id.lsExplanationB,
+            R.id.lsSimulateB,
+            R.id.lsQuizB,
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,26 +101,25 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsSimulate = findViewById(R.id.lsSimulateB);
         lsQuiz = findViewById(R.id.lsQuizB);
 
+
         dRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //userData aUser = new userData();
-                String bSum = dataSnapshot.child(UID).getValue(userData.class).getbSummary();
-                String bEx = dataSnapshot.child(UID).getValue(userData.class).getbExplain();
-                String bSim = dataSnapshot.child(UID).getValue(userData.class).getbSimulate();
-                String bQ = dataSnapshot.child(UID).getValue(userData.class).getbQuiz();
-                if(bSum.equals("1")){
-                    bubbleSummary.setBackgroundColor(finishedColor);
+
+                String flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
+
+                for(int i = 0; i < 16; i++){
+                    char flag = flags.charAt(i);
+                    if(flag == '1'){
+                        Button currentButton = findViewById(bIDs[i]);
+                        currentButton.setTextColor(finishedColor);
+                    }
+                    else{
+                        Button currentButton = findViewById(bIDs[i]);
+                        currentButton.setTextColor(defaultColor);
+                    }
                 }
-                if(bEx.equals("1")){
-                    bubbleSummary.setBackgroundColor(finishedColor);
-                }
-                if(bSim.equals("1")){
-                    bubbleSummary.setBackgroundColor(finishedColor);
-                }
-                if(bQ.equals("1")){
-                    bubbleSummary.setBackgroundColor(finishedColor);
-                }
+
             }
 
             @Override
