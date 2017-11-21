@@ -30,21 +30,21 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         i_index = 0;
         j_index = 0;
         size = data.length;
-        updateIndices(baseSet);
-        //select(getDataIdAt(j_index));
-        //select(getDataIdAt(j_index + 1));
+        updateSelectors(baseSet);
+        updateHighlights();
         applyUpdates();
     }
     
     public void next(ConstraintSet set) {
-        // Swap conditions
+        AlgorithmState state = this.getState();
+        this.states.push(state);
         if (is_swap_phase) {
             int k_index = j_index + 1;
             if (getDataAt(j_index) > getDataAt(k_index)) {
                 swapData(j_index, k_index);
                 swapDataIds(j_index, k_index);
                 has_swapped = true;
-                buildChain(set);
+                this.buildStructure(set);
             }
         }
         else {
@@ -63,7 +63,9 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
                 }
             }
         }
-        updateIndices(set);
+
+        updateSelectors(set);
+        this.updateHighlights();
         is_swap_phase = !is_swap_phase;
     }
     
@@ -75,9 +77,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         return false;
     }
 
-    private void updateIndices(ConstraintSet set) {
-        int[] newHighlights = this.getHighlights(new int[] {j_index, j_index + 1});
-        this.applyHighlightDifference(newHighlights);
+    void updateSelectors(ConstraintSet set) {
         int target;
         int i_actual = dataIds.length - i_index - 1;
         int k_index = j_index + 1;
@@ -90,7 +90,30 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
             target = getDataIdAt(i_actual);
         }
         updateIndex(set, i_image, target);
+    }
+
+    void updateHighlights() {
+        int[] newHighlights = this.getHighlights(new int[] {j_index, j_index + 1});
+        this.applyHighlightDifference(this.highlights, newHighlights);
         this.highlights = newHighlights;
+    }
+
+    public void loadState(AlgorithmState state) {
+        i_index = state.selectors[0];
+        j_index = state.selectors[1];
+        is_sorted = state.flags[0];
+        has_swapped = state.flags[1];
+        is_swap_phase = state.flags[2];
+        this.data = state.data;
+        this.dataIds = state.dataIds;
+        this.highlights = state.highlights;
+    }
+
+    public AlgorithmState getState() {
+        int[] selectors = new int[] {i_index, j_index};
+        boolean[] flags = new boolean[] {is_sorted, has_swapped, is_swap_phase};
+        return new AlgorithmState(selectors, this.highlights.clone(), this.data.clone(),
+                                  this.dataIds.clone(), flags);
     }
 
     public int describeContents() {

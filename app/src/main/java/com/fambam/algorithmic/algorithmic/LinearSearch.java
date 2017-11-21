@@ -22,11 +22,14 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
         size = this.data.length;
         is_found = false;
         locating = 6;
-        updateIndicies(baseSet);
+        updateSelectors(baseSet);
+        updateHighlights();
         applyUpdates();
     }
 
     public void next(ConstraintSet set) {
+        AlgorithmState state = this.getState();
+        this.states.push(state);
         if (hasNext()) {
             if (getDataAt(i_index) == locating) {
                 is_found = true;
@@ -39,15 +42,37 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
         else if (i_index == dataIds.length - 1) {
             // Do nothing
         }
-        updateIndicies(set);
+        updateSelectors(set);
+        updateHighlights();
     }
 
     public boolean hasNext() {
         return !is_found;
     }
 
-    private void updateIndicies(ConstraintSet currentSet) {
+    void updateSelectors(ConstraintSet currentSet) {
         updateIndex(currentSet, i_image, getDataIdAt(i_index));
+    }
+
+    void updateHighlights() {
+        int[] newHighlights = this.getHighlights(new int[] {i_index});
+        this.applyHighlightDifference(this.highlights, newHighlights);
+        this.highlights = newHighlights;
+    }
+
+    public void loadState(AlgorithmState state) {
+        this.i_index = state.selectors[0];
+        this.is_found = state.flags[0];
+        this.data = state.data;
+        this.dataIds = state.dataIds;
+        this.highlights = state.highlights;
+    }
+
+    public AlgorithmState getState() {
+        int[] selectors = new int[] {i_index};
+        boolean[] flags = new boolean[] {is_found};
+        return new AlgorithmState(selectors, this.highlights.clone(), this.data.clone(),
+                this.dataIds.clone(), flags);
     }
 
     public boolean isSortingAlgorithm() {

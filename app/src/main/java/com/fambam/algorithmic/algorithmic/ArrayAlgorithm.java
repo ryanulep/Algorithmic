@@ -18,17 +18,21 @@ public abstract class ArrayAlgorithm extends Algorithm {
         this.dataIds = dataIds;
         this.data = data;
         this.highlights = new int[data.length];
-        this.setSizeConstaints(baseSet, imageIds, 100, 100);
-        this.setSizeConstaints(baseSet, dataIds, 100, 100);
+        this.setSizeConstaints(baseSet, imageIds, 120, 120);
+        this.setSizeConstaints(baseSet, dataIds, 120, 120);
         this.initializeDataViews();
-        this.buildChain(baseSet);
+        this.buildStructure(baseSet);
 
     }
     public abstract void next(ConstraintSet currentSet);
     public abstract boolean hasNext();
+    abstract void updateSelectors(ConstraintSet currentSet);
+    public abstract void loadState(AlgorithmState state);
+    public abstract AlgorithmState getState();
+    abstract void updateHighlights();
     public abstract boolean isSortingAlgorithm();
 
-    final void buildChain(ConstraintSet currentSet) {
+    final void buildStructure(ConstraintSet currentSet) {
         currentSet.createHorizontalChain(
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.LEFT,
@@ -41,35 +45,13 @@ public abstract class ArrayAlgorithm extends Algorithm {
 
     final void updateIndex(ConstraintSet currentSet, int indexId, int targetId) {
         currentSet.clear(indexId);
-        currentSet.constrainWidth(indexId, 100);
-        currentSet.constrainHeight(indexId, 100);
+        currentSet.constrainWidth(indexId, 120);
+        currentSet.constrainHeight(indexId, 120);
         currentSet.connect(indexId, ConstraintSet.BOTTOM, targetId, ConstraintSet.TOP);
         currentSet.connect(indexId, ConstraintSet.LEFT, targetId, ConstraintSet.LEFT);
     }
 
-    final int[] getHighlights(int[] selections) {
-        int[] newHighlights = new int[this.highlights.length];
-        for (int i : selections) {
-            newHighlights[i] = 1;
-        }
-        return newHighlights;
-    }
 
-    final void applyHighlightDifference(int[] newHighlights) {
-        for (int i = 0; i < newHighlights.length; ++i) {
-            if (newHighlights[i] != this.highlights[i]) {
-                if (this.highlights[i] == 0) {
-                    select(getDataIdAt(i));
-                } else {
-                    deselect(getDataIdAt(i));
-                }
-            }
-        }
-    }
-
-    final void deselectAll() {
-        applyHighlightDifference(new int[this.highlights.length]);
-    }
 
     final void setSizeConstaints(ConstraintSet currentSet, int[] ids, int width, int height) {
         for (int id : ids) {
@@ -77,22 +59,6 @@ public abstract class ArrayAlgorithm extends Algorithm {
             currentSet.constrainHeight(id, height);
             currentSet.centerVertically(id, ConstraintSet.PARENT_ID);
         }
-    }
-
-    final void setDataIdAt(int dataIdLoc, int dataId) {
-        this.dataIds[dataIdLoc] = dataId;
-    }
-
-    final int getDataAt(int dataLoc) {
-        return this.data[dataLoc];
-    }
-
-    final void setDataAt(int dataLoc, int data) {
-        this.data[dataLoc] = data;
-    }
-
-    final int getImageIdAt(int imageIdLoc) {
-        return this.imageIds[imageIdLoc];
     }
 
     final void swapData(int dataLoc1, int dataLoc2) {
@@ -105,27 +71,6 @@ public abstract class ArrayAlgorithm extends Algorithm {
         int temp = this.getDataIdAt(dataIdLoc1);
         this.setDataIdAt(dataIdLoc1, this.getDataIdAt(dataIdLoc2));
         this.setDataIdAt(dataIdLoc2, temp);
-    }
-
-    final int getDataIdAt(int dataIdLoc) {
-        return this.dataIds[dataIdLoc];
-    }
-
-    final void select(int dataIdLoc) {
-        DataView dView = parent.findViewById(dataIdLoc);
-        dView.getBackground();
-        updates.addFirst(new UpdateTextViewBackground(Color.CYAN, dView));
-    }
-
-    final void select(int dataIdLoc, int colorTo) {
-        DataView dView = parent.findViewById(dataIdLoc);
-        dView.getBackground();
-        updates.addFirst(new UpdateTextViewBackground(colorTo, dView));
-    }
-
-    final void deselect(int dataIdLoc) {
-        DataView dView = parent.findViewById(dataIdLoc);
-        updates.addFirst(new UpdateTextViewBackground(Color.WHITE, dView));
     }
 
     private final void initializeDataViews() {
