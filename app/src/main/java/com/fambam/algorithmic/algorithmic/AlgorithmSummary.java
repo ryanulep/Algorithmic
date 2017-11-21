@@ -1,10 +1,7 @@
 package com.fambam.algorithmic.algorithmic;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +21,7 @@ public class AlgorithmSummary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algorithm_summary);
 
-        image = findViewById(R.id.simmaryImageView);
+        image = findViewById(R.id.summaryImageView);
 
         String subject;
         Bundle extras = getIntent().getExtras();
