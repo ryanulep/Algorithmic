@@ -44,7 +44,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         bubbleSummary = findViewById(R.id.bubbleSummaryB);
@@ -64,7 +64,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsSimulate = findViewById(R.id.lsSimulateB);
         lsQuiz = findViewById(R.id.lsQuizB);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,13 +85,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
+                                // Nothing Here
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
             }
         });
 

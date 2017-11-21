@@ -44,9 +44,7 @@ public class UserLogin extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 if(firebaseAuth.getCurrentUser() != null){
-                    // If CurrentUser is not null, user must be logged in
-                    // Change to new activity here because they are logged in
-                    //startActivity(new Intent(UserLogin.this, /*next activity.class*/));
+                    // If CurrentUser is not null, then there must be a user logged in
                     startActivity(new Intent(UserLogin.this, MainMenu.class));
                     finish();
                 }
@@ -108,7 +106,6 @@ public class UserLogin extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
 
-                                // Do something after success? Change Activity
                                 Toast.makeText(UserLogin.this, "Authentication SUCCESS",
                                         Toast.LENGTH_SHORT).show();
 
@@ -125,9 +122,7 @@ public class UserLogin extends AppCompatActivity {
                                 startActivity(new Intent(UserLogin.this, MainMenu.class));
                                 finish();
                             } else {
-                                // If sign in fails, display a message to the user.
-                                ///Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                //^ USE LOGGING?
+
                                 Toast.makeText(UserLogin.this, "Authentication FAILED",
                                         Toast.LENGTH_SHORT).show();
                             }
