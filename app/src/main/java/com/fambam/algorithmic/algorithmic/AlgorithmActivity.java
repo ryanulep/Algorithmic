@@ -86,9 +86,9 @@ public class AlgorithmActivity extends AppCompatActivity {
             backBtn.setEnabled(true);
         }
         // Restricting next button presses for user when reaching last move
-        if (updateOrdering.getCurrentStep() == updateOrdering.getUpdateOrderSize()) {
-            nextBtn.setEnabled(false);
-        }
+//        if (updateOrdering.getCurrentStep() == updateOrdering.getUpdateOrderSize()) {
+//            nextBtn.setEnabled(false);
+//        }
     }
 
     public void back(View view) {

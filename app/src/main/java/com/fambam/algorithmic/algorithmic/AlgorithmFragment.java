@@ -20,6 +20,9 @@ import android.widget.TextView;
 public class AlgorithmFragment extends Fragment {
     private Algorithm algorithm;
     private TextView tv_searching;
+    private int[] dataIds;
+    private int[] imageIds;
+    private View view;
 
     public AlgorithmFragment() {
         // Required empty public constructor
@@ -32,7 +35,7 @@ public class AlgorithmFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // A default view must be instantiated on creation of a Fragment
-        View view = inflater.inflate(R.layout.fragment_algorithm, container, false);
+        view = inflater.inflate(R.layout.fragment_algorithm, container, false);
 
         // Keys to retrieve values
         String algoKey = getString(R.string.algo_key);
@@ -58,8 +61,8 @@ public class AlgorithmFragment extends Fragment {
         // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
         ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
 
-        int[] imageIds = new int[drawableIds.length];
-        int[] dataIds = new int[data.length];
+        imageIds = new int[drawableIds.length];
+        dataIds = new int[data.length];
 
         for (int i = 0; i < data.length; ++i) {
             dataIds[i] = 200+i;
@@ -113,5 +116,59 @@ public class AlgorithmFragment extends Fragment {
             set.applyTo(baseLayout);
             algorithm.applyUpdates();
         }
+    }
+
+    // Clears all the dynamic content
+    public void clear() {
+        ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment_layout);
+        baseLayout.removeAllViews();
+    }
+
+    public View reset() {
+        int[] data = null;
+        int[] drawableIds = null;
+        String dataKey = getString(R.string.data);
+        String drawKey = getString(R.string.drawables);
+        Bundle bundle = getArguments();
+
+        clear();
+
+        // Retrieve values from bundle if successfully delivered
+        if (bundle != null) {
+            data = bundle.getIntArray(dataKey);
+            drawableIds = bundle.getIntArray(drawKey);
+        }
+
+        // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
+        ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
+
+        for (int i = 0; i < data.length; ++i) {
+            dataIds[i] = 200+i;
+            DataView dView = new DataView(getActivity());
+            dView.setId(dataIds[i]);
+            dView.setText(Integer.toString(data[i]));
+            dView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
+            dView.setGravity(Gravity.CENTER);
+            baseLayout.addView(dView);
+        }
+
+        for (int i = 0; i < imageIds.length; i++) {
+            imageIds[i] = 100+i;
+            DataView pointer = new DataView(getActivity());
+            pointer.setId(imageIds[i]);
+            pointer.setText(Character.toString((char) drawableIds[i]));
+            pointer.setBackgroundColor(Color.WHITE);
+            pointer.setTextColor(Color.BLACK);
+            pointer.setGravity(Gravity.CENTER);
+            baseLayout.addView(pointer);
+        }
+
+        ConstraintSet set = new ConstraintSet();
+        set.clone(baseLayout);
+        this.algorithm.initialize(view, set, imageIds, dataIds, data);
+        set.applyTo(baseLayout);
+
+        return view;
+
     }
 }
