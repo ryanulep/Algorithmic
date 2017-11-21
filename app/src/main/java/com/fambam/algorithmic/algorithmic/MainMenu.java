@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,6 +47,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private UpdateOrdering ordering;
     private AlgorithmAssets algoAsset;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference dRef = database.getReference();
+
+    int finishedColor = 0xAAAAFFFF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +77,26 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsSimulate = findViewById(R.id.lsSimulateB);
         lsQuiz = findViewById(R.id.lsQuizB);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference dRef = database.getReference(userUID);
-
         dRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //String someVal = dataSnapshot.getValue(String.class);
-
+                //userData aUser = new userData();
+                String bSum = dataSnapshot.child(UID).getValue(userData.class).getbSummary();
+                String bEx = dataSnapshot.child(UID).getValue(userData.class).getbExplain();
+                String bSim = dataSnapshot.child(UID).getValue(userData.class).getbSimulate();
+                String bQ = dataSnapshot.child(UID).getValue(userData.class).getbQuiz();
+                if(bSum.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
+                if(bEx.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
+                if(bSim.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
+                if(bQ.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
             }
 
             @Override
@@ -86,6 +105,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 // User logger??
             }
         });
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -134,6 +154,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsSimulate.setOnClickListener(this);
         lsQuiz.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {

@@ -34,19 +34,19 @@ public class AlgorithmSummary extends AppCompatActivity {
 
         if (subject.equals("bubble")){
             image.setImageResource(R.drawable.cs_summary);
-            dRef.child("bubble").child("summary").setValue(1);
+            dRef.child("bSummary").setValue("1");
         }
         else if (subject.equals("selection")){
-            image.setImageResource(R.drawable.cs_summary);
-            dRef.child("selection").child("summary").setValue(1);
+            image.setImageResource(R.drawable.selection_summary);
+            dRef.child("sSummary").setValue("1");
         }
         else if (subject.equals("insertion")){
-            image.setImageResource(R.drawable.cs_summary);
-            dRef.child("insertion").child("summary").setValue(1);
+            image.setImageResource(R.drawable.insertion_summary);
+            dRef.child("iSummary").setValue("1");
         }
         else if (subject.equals("ls")) {
-            image.setImageResource(R.drawable.cs_summary);
-            dRef.child("ls").child("summary").setValue(1);
+            image.setImageResource(R.drawable.ls_summary);
+            dRef.child("lsSummary").setValue("1");
         }
     }
 }

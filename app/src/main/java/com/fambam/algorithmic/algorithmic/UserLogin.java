@@ -110,25 +110,25 @@ public class UserLogin extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
 
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                final DatabaseReference dRef = database.getReference(userUID);
+                                String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                final DatabaseReference dRef = database.getReference(UID);
 
-                                dRef.child("bubble").child("summary").setValue("0");
-                                dRef.child("bubble").child("explain").setValue("0");
-                                dRef.child("bubble").child("simulate").setValue("0");
-                                dRef.child("bubble").child("quiz").setValue("0");
-                                dRef.child("selection").child("summary").setValue("0");
-                                dRef.child("selection").child("explain").setValue("0");
-                                dRef.child("selection").child("simulate").setValue("0");
-                                dRef.child("selection").child("quiz").setValue("0");
-                                dRef.child("insertion").child("summary").setValue("0");
-                                dRef.child("insertion").child("explain").setValue("0");
-                                dRef.child("insertion").child("simulate").setValue("0");
-                                dRef.child("insertion").child("quiz").setValue("0");
-                                dRef.child("ls").child("summary").setValue("0");
-                                dRef.child("ls").child("explain").setValue("0");
-                                dRef.child("ls").child("simulate").setValue("0");
-                                dRef.child("ls").child("quiz").setValue("0");
+                                dRef.child("bSummary").setValue("0");
+                                dRef.child("bExplain").setValue("0");
+                                dRef.child("bSimulate").setValue("0");
+                                dRef.child("bQuiz").setValue("0");
+                                dRef.child("sSummary").setValue("0");
+                                dRef.child("sExplain").setValue("0");
+                                dRef.child("sSimulate").setValue("0");
+                                dRef.child("sQuiz").setValue("0");
+                                dRef.child("iSummary").setValue("0");
+                                dRef.child("iExplain").setValue("0");
+                                dRef.child("iSimulate").setValue("0");
+                                dRef.child("iQuiz").setValue("0");
+                                dRef.child("lsSummary").setValue("0");
+                                dRef.child("lsExplain").setValue("0");
+                                dRef.child("lsSimulate").setValue("0");
+                                dRef.child("lsQuiz").setValue("0");
 
                                 startActivity(new Intent(UserLogin.this, MainMenu.class));
                                 finish();
