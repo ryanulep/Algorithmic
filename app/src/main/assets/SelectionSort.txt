@@ -1,13 +1,14 @@
 Here we will show you Selection Sort, one of the many algorithms used to sort an array of numbers.
 Using a linear search, the smallest value in the sequence is located. A more detailed explanation of "linear search" can be found elsewhere in this app.
 'i' represents the position where the smallest value will be placed. 'j' is used to iterate through the array.
-'i' is set as the current minimum value which is why it is highlighted. 5 is not less than 3, so it will be skipped. Press 'Next'!
-Since 1 is less than the current minimum of 3, it is the new minimum and becomes highlighted.
-6 is not less than 1 so 'j' is incremented.
-2 is not less than 1 so 'j' is incremented again.
+The value at index 'i' is set as the current minimum value (3) which is why it is highlighted.
+5 is not less than 3, so 'j' is incremented.
+Since 1 is less than the current minimum (3), 1 becomes the new minimum and is now highlighted.
+6 is not less than 1 so 'j' will be incremented.
+2 is not less than 1 so 'j' will be incremented again.
 1 is clearly the smallest at this moment so Selection Sort continues looking forward until we reach the end.
 Now that we have reached the end of the array it is time to swap. The minimum value swaps places with the element at 'i', then 'i' is incremented.
-If 1 was the the first element in the array, then no swap would take place but 'i' still must be incremented after a full iteration.
+If 1 was the the first element in the array, then no swap would take place. However 'i' must be incremented.
 The same operations are repeated until all of the numbers are fully sorted.
 Sorting is complete.
 This concludes the explanation of Selection Sort.

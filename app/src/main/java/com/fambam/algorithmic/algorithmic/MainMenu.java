@@ -25,6 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
     private Button bubbleSummary;
@@ -49,6 +54,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private Algorithm algorithm;
     private UpdateOrdering ordering;
     private AlgorithmAssets algoAsset;
+    private static final int RANDOMSIZE = 8;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -249,11 +255,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 algorithm = new SelectionSort();
                 algoAsset = new AlgorithmAssets("SelectionSort.txt",
                                                 "", "", "");
-                ordering = new UpdateOrdering(new int[] {   1,1,1,0,1,0,1,0,1,0,1,
-                                                            0,0,1,0,0,0,1,1,0,0,0,
+                ordering = new UpdateOrdering(new int[] {   1,1,1,1,0,2,2,1,0,2,0,
+                                                            2,0,0,1,1,0,0,0,0,0,0,
                                                             0,0,0,0,0,0,0,0,0,0,0,
                                                             0,0,0,0,0,0,0,0,0,0,0,
-                                                            0,0,0,0,0,1,1});
+                                                            0,0,1,1});
                 startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
                 break;
 
@@ -271,10 +277,18 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 drawables = new int[] {'i'};
                 data = new int[] {3,8,2,1,4,6,5,7};
                 algorithm = new LinearSearch();
-                ordering = new UpdateOrdering(new int[] {   1,1,1,2,0,0,0,0,2,2,1,1});
+                ordering = new UpdateOrdering(new int[] {1,1,1,2,0,0,0,0,2,2,1,1});
                 algoAsset = new AlgorithmAssets("LinearSearch.txt",
                                                 "", "", "");
                 startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
+                break;
+
+            /* -------------------- Simulation button conditions -------------------- */
+            case R.id.bubbleSimulateB:
+                algorithm = new BubbleSort();
+                data = getRandomArray();
+                drawables = new int[] {'i','j','k'};
+                startSimulation(algorithm, data, drawables);
                 break;
 
             /* -------------------- Other button conditions -------------------- */
@@ -298,5 +312,31 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         intent.putExtra(assetKey, asset);
         startActivity(intent);
     }
+
+    private void startSimulation(Algorithm algorithm, int[] data, int[] drawables) {
+        String algoKey = getString(R.string.algo_key);
+        String drawKey = getString(R.string.drawables);
+        String dataKey = getString(R.string.data);
+        Intent intent = new Intent(this, SimulateActivity.class);
+        intent.putExtra(algoKey, (Parcelable) algorithm);
+        intent.putExtra(drawKey, drawables);
+        intent.putExtra(dataKey, data);
+        startActivity(intent);
+    }
+
+    private int[] getRandomArray() {
+        ArrayList<Integer> n = new ArrayList<>();
+        int[] data = new int[RANDOMSIZE];
+        int i = 0;
+        while (n.size() < RANDOMSIZE) {
+            int r = new Random().nextInt(10);
+            if (!n.contains(r)) {
+                n.add(r);
+                data[i++] = r;
+            }
+        }
+        return data;
+    }
+
 }
 
