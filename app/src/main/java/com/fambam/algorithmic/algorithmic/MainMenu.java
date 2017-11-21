@@ -13,6 +13,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,6 +68,25 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsExplain = findViewById(R.id.lsExplanationB);
         lsSimulate = findViewById(R.id.lsSimulateB);
         lsQuiz = findViewById(R.id.lsQuizB);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference dRef = database.getReference(userUID);
+
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //String someVal = dataSnapshot.getValue(String.class);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Could not read value
+                // User logger??
+            }
+        });
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

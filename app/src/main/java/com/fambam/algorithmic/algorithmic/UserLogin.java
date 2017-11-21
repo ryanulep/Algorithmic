@@ -113,11 +113,22 @@ public class UserLogin extends AppCompatActivity {
                                 String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 final DatabaseReference dRef = database.getReference(userUID);
 
+                                dRef.child("bubble").child("summary").setValue("0");
                                 dRef.child("bubble").child("explain").setValue("0");
+                                dRef.child("bubble").child("simulate").setValue("0");
                                 dRef.child("bubble").child("quiz").setValue("0");
+                                dRef.child("selection").child("summary").setValue("0");
                                 dRef.child("selection").child("explain").setValue("0");
+                                dRef.child("selection").child("simulate").setValue("0");
                                 dRef.child("selection").child("quiz").setValue("0");
-
+                                dRef.child("insertion").child("summary").setValue("0");
+                                dRef.child("insertion").child("explain").setValue("0");
+                                dRef.child("insertion").child("simulate").setValue("0");
+                                dRef.child("insertion").child("quiz").setValue("0");
+                                dRef.child("ls").child("summary").setValue("0");
+                                dRef.child("ls").child("explain").setValue("0");
+                                dRef.child("ls").child("simulate").setValue("0");
+                                dRef.child("ls").child("quiz").setValue("0");
 
                                 startActivity(new Intent(UserLogin.this, MainMenu.class));
                                 finish();
