@@ -7,9 +7,8 @@
     tools:context="com.fambam.algorithmic.algorithmic.AlgorithmSummary">
 
     <ImageView
-        android:id="@+id/simmaryImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/cs_summary"
+        android:id="@+id/summaryImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp" />
 </android.support.constraint.ConstraintLayout>
