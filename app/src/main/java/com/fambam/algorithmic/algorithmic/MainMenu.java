@@ -118,6 +118,28 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         Intent i;
         switch (v.getId()) {
             /* -------------------- Quiz button conditions -------------------- */
+            case R.id.bubbleSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "bubble");
+                startActivity(i);
+                break;
+            case R.id.selectionSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "selection");
+                startActivity(i);
+                break;
+            case R.id.insertionSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "insertion");
+                startActivity(i);
+                break;
+            case R.id.lsSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "ls");
+                startActivity(i);
+                break;
+
+            /* -------------------- Quiz button conditions -------------------- */
             case R.id.bubbleQuizB:
                 i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
                 i.putExtra("subject", "bubble");
