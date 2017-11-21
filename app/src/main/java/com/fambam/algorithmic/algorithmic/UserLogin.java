@@ -44,9 +44,7 @@ public class UserLogin extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 if(firebaseAuth.getCurrentUser() != null){
-                    // If CurrentUser is not null, user must be logged in
-                    // Change to new activity here because they are logged in
-                    //startActivity(new Intent(UserLogin.this, /*next activity.class*/));
+                    // If CurrentUser is not null, then there must be a user logged in
                     startActivity(new Intent(UserLogin.this, MainMenu.class));
                     finish();
                 }
@@ -108,26 +106,34 @@ public class UserLogin extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
 
-                                // Do something after success? Change Activity
                                 Toast.makeText(UserLogin.this, "Authentication SUCCESS",
                                         Toast.LENGTH_SHORT).show();
 
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                final DatabaseReference dRef = database.getReference(userUID);
+                                String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                final DatabaseReference dRef = database.getReference(UID);
 
-                                dRef.child("bubble").child("explain").setValue("0");
-                                dRef.child("bubble").child("quiz").setValue("0");
-                                dRef.child("selection").child("explain").setValue("0");
-                                dRef.child("selection").child("quiz").setValue("0");
-
+                                dRef.child("bSummary").setValue("0");
+                                dRef.child("bExplain").setValue("0");
+                                dRef.child("bSimulate").setValue("0");
+                                dRef.child("bQuiz").setValue("0");
+                                dRef.child("sSummary").setValue("0");
+                                dRef.child("sExplain").setValue("0");
+                                dRef.child("sSimulate").setValue("0");
+                                dRef.child("sQuiz").setValue("0");
+                                dRef.child("iSummary").setValue("0");
+                                dRef.child("iExplain").setValue("0");
+                                dRef.child("iSimulate").setValue("0");
+                                dRef.child("iQuiz").setValue("0");
+                                dRef.child("lsSummary").setValue("0");
+                                dRef.child("lsExplain").setValue("0");
+                                dRef.child("lsSimulate").setValue("0");
+                                dRef.child("lsQuiz").setValue("0");
 
                                 startActivity(new Intent(UserLogin.this, MainMenu.class));
                                 finish();
                             } else {
-                                // If sign in fails, display a message to the user.
-                                ///Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                //^ USE LOGGING?
+
                                 Toast.makeText(UserLogin.this, "Authentication FAILED",
                                         Toast.LENGTH_SHORT).show();
                             }

@@ -9,10 +9,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,12 +53,17 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private AlgorithmAssets algoAsset;
     private static final int RANDOMSIZE = 8;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference dRef = database.getReference();
+
+    int finishedColor = 0xAAAAFFFF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         bubbleSummary = findViewById(R.id.bubbleSummaryB);
@@ -70,7 +83,38 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsSimulate = findViewById(R.id.lsSimulateB);
         lsQuiz = findViewById(R.id.lsQuizB);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //userData aUser = new userData();
+                String bSum = dataSnapshot.child(UID).getValue(userData.class).getbSummary();
+                String bEx = dataSnapshot.child(UID).getValue(userData.class).getbExplain();
+                String bSim = dataSnapshot.child(UID).getValue(userData.class).getbSimulate();
+                String bQ = dataSnapshot.child(UID).getValue(userData.class).getbQuiz();
+                if(bSum.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
+                if(bEx.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
+                if(bSim.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
+                if(bQ.equals("1")){
+                    bubbleSummary.setBackgroundColor(finishedColor);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Could not read value
+                // User logger??
+            }
+        });
+
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,13 +135,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
+                                // Nothing Here
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
             }
         });
 
@@ -119,10 +161,33 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsQuiz.setOnClickListener(this);
     }
 
+
     @Override
     public void onClick(View v) {
         Intent i;
         switch (v.getId()) {
+            /* -------------------- Quiz button conditions -------------------- */
+            case R.id.bubbleSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "bubble");
+                startActivity(i);
+                break;
+            case R.id.selectionSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "selection");
+                startActivity(i);
+                break;
+            case R.id.insertionSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "insertion");
+                startActivity(i);
+                break;
+            case R.id.lsSummaryB:
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "ls");
+                startActivity(i);
+                break;
+
             /* -------------------- Quiz button conditions -------------------- */
             case R.id.bubbleQuizB:
                 i = new Intent(getApplicationContext(), AlgorithmQuiz.class);

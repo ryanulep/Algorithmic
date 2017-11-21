@@ -30,11 +30,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
     int selectedIncorrectC = 0xFF00BCD4;
     int selectedCorrectC = 0xFF76FF03;
 
-    //FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    //DatabaseReference dRef = database.getReference(userUID);
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
