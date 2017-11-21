@@ -58,7 +58,7 @@ public class AlgorithmSummary extends AppCompatActivity {
 
 
         if (subject.equals("bubble")){
-            image.setImageResource(R.drawable.cs_summary);
+            image.setImageResource(R.drawable.bubble_summary);
 
             String flagsUpdate = '1'+flags.substring(1, 16);
             dRef.child("flags").setValue(flagsUpdate);

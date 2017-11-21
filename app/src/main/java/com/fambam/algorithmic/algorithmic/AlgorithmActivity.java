@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AlgorithmActivity extends AppCompatActivity {
     private Algorithm algorithm;
     private AlgorithmFragment algoFragment;
@@ -19,6 +23,12 @@ public class AlgorithmActivity extends AppCompatActivity {
     private static final int ALGO = 0;
     private static final int EXPLAIN = 1;
     private static final int BOTH = 2;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference dRef = database.getReference(UID);
+
+    String flags = "0000000000000000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +96,14 @@ public class AlgorithmActivity extends AppCompatActivity {
             backBtn.setEnabled(true);
         }
         // Restricting next button presses for user when reaching last move
-//        if (updateOrdering.getCurrentStep() == updateOrdering.getUpdateOrderSize()) {
-//            nextBtn.setEnabled(false);
-//        }
+        if (updateOrdering.getCurrentStep() == updateOrdering.getUpdateOrderSize()) {
+            nextBtn.setEnabled(false);
+
+            // Database flags. Highlight button when complete
+
+            //String flagsUpdate = flags.substring(0,4)+'1'+flags.substring(5, 16);
+            //dRef.child("flags").setValue(flagsUpdate);
+        }
     }
 
     public void back(View view) {
