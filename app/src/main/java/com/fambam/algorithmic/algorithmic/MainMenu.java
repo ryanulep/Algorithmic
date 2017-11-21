@@ -111,8 +111,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         dRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                String flags = "0000000000000000";
 
-                String flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
+                try {
+                    flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 for(int i = 0; i < 16; i++){
                     char flag = flags.charAt(i);
@@ -120,12 +125,12 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                         Button currentButton = findViewById(bIDs[i]);
                         currentButton.setTextColor(finishedColor);
                     }
-                    else{
-                        Button currentButton = findViewById(bIDs[i]);
-                        currentButton.setTextColor(defaultColor);
-                    }
+                    //else{
+                    //Recolor buttons white
+                    //    Button currentButton = findViewById(bIDs[i]);
+                    //    currentButton.setTextColor(defaultColor);
+                    //}
                 }
-
             }
 
             @Override
