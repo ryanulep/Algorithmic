@@ -28,16 +28,16 @@ public class AlgorithmSummary extends AppCompatActivity {
         }
 
         if (subject.equals("bubble")){
-            image.setImageResource(R.drawable.MySummaryPic);
+            image.setImageResource(R.drawable.cs_summary);
         }
         else if (subject.equals("selection")){
-            image.setImageResource(R.drawable.MySummaryPic);
+            image.setImageResource(R.drawable.cs_summary);
         }
         else if (subject.equals("insertion")){
-            image.setImageResource(R.drawable.MySummaryPic);
+            image.setImageResource(R.drawable.cs_summary);
         }
-        else if (subject.equals("insertion")) {
-            image.setImageResource(R.drawable.MySummaryPic);
+        else if (subject.equals("ls")) {
+            image.setImageResource(R.drawable.cs_summary);
         }
     }
 }
