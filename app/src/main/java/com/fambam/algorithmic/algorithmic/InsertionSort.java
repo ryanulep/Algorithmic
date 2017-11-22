@@ -27,22 +27,21 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
-
         reset(baseSet);
     }
 
     @Override
     void reset(ConstraintSet set) {
         super.reset(set);
-        i_image = getImageIdAt(0);
-        j_image = getImageIdAt(1);
-        k_image = getImageIdAt(2);
         is_sorted = false;
         is_swap_phase = true;
         has_swapped = false;
     }
 
     void resetIndices() {
+        i_image = getImageIdAt(0);
+        j_image = getImageIdAt(1);
+        k_image = getImageIdAt(2);
         i_index = 1;
         j_index = 1;
     }

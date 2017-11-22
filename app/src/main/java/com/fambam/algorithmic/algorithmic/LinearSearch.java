@@ -45,8 +45,8 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
             }
             else {
                 i_index++;
-                if (i_index == 8) {
-                    i_index = 7;
+                if (i_index > size) {
+                    --i_index;
                 }
             }
         }
