@@ -115,6 +115,7 @@ public class UserLogin extends AppCompatActivity {
 
                                 dRef.child("flags").setValue("0000000000000000");
                                 dRef.child("quiz_score").setValue(0);
+                                dRef.child("trys").setValue(0);
 
                                 startActivity(new Intent(UserLogin.this, MainMenu.class));
                                 finish();

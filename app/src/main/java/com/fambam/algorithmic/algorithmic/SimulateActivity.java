@@ -2,19 +2,17 @@ package com.fambam.algorithmic.algorithmic;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SimulateActivity extends AppCompatActivity {
@@ -50,6 +48,8 @@ public class SimulateActivity extends AppCompatActivity {
 
         // Set default text for next button
         nextButton.setText("Next");
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);
@@ -106,6 +106,8 @@ public class SimulateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 algoFragment.clear();
+                editText.setText("");
+                editText.setHint("Enter value then press ADD to build custom array");
                 nextButton.setText("Done");
                 nextButton.setEnabled(false);
                 backButton.setEnabled(false);
@@ -156,12 +158,11 @@ public class SimulateActivity extends AppCompatActivity {
                     algorithmBundle.putIntArray(dataKey, data);
                     algoFragment.updateViews();
                 }
-                else if (TextUtils.isEmpty(editText.getText().toString()) || resetData.size()==8) {
-                    // Do nothing
-                }
-                else {
+                else if (resetData.size()==8) {
+                    editText.setText("");
                     editText.setHint("Max entries for array is 8");
                 }
+
                 nextButton.setEnabled(isReadyToSimulate());
                 removeButton.setEnabled(resetData.size() > 0);
 
