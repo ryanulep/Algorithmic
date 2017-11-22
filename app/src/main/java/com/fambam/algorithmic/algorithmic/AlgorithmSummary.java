@@ -16,11 +16,6 @@ public class AlgorithmSummary extends AppCompatActivity {
 
     private ImageView image;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    DatabaseReference dRef = database.getReference(UID);
-    private String flags = "0000000000000000";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,48 +32,18 @@ public class AlgorithmSummary extends AppCompatActivity {
             subject = "extras were NULL";
         }
 
-        dRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
-                //} catch (Exception e) {
-                //    e.printStackTrace();
-                //}
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Could not read value
-                // User logger??
-            }
-        });
-
 
         if (subject.equals("bubble")){
             image.setImageResource(R.drawable.bubble_summary);
-
-//            String flagsUpdate = '1'+flags.substring(1, 16);
-//            dRef.child("flags").setValue(flagsUpdate);
         }
         else if (subject.equals("selection")){
             image.setImageResource(R.drawable.cs_summary);
-
-//            String flagsUpdate = flags.substring(0,4)+'1'+flags.substring(5, 16);
-//            dRef.child("flags").setValue(flagsUpdate);
         }
         else if (subject.equals("insertion")){
             image.setImageResource(R.drawable.cs_summary);
-
-//            String flagsUpdate = flags.substring(0,8)+'1'+flags.substring(9, 16);
-//            dRef.child("flags").setValue(flagsUpdate);
         }
         else if (subject.equals("ls")) {
             image.setImageResource(R.drawable.cs_summary);
-
-//            String flagsUpdate = flags.substring(0,12)+'1'+flags.substring(13, 16);
-//            dRef.child("flags").setValue(flagsUpdate);
         }
     }
 }

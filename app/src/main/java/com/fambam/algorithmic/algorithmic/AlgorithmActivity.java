@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AlgorithmActivity extends AppCompatActivity {
     private Algorithm algorithm;
@@ -26,9 +29,9 @@ public class AlgorithmActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    DatabaseReference dRef = database.getReference(UID);
-
+    DatabaseReference dRef = database.getReference();
     String flags = "0000000000000000";
+    String flagsUpdate = "0000000000000000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,25 @@ public class AlgorithmActivity extends AppCompatActivity {
         if (updateOrdering.getCurrentStep() == 0) {
             backBtn.setEnabled(false);
         }
+
+        //For database
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+                    flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Could not read value
+                // User logger??
+            }
+        });
     }
 
     public void swap(View view) {
@@ -99,10 +121,24 @@ public class AlgorithmActivity extends AppCompatActivity {
         if (updateOrdering.getCurrentStep() == updateOrdering.getUpdateOrderSize()) {
             nextBtn.setEnabled(false);
 
-            // Database flags. Highlight button when complete
+            // Database flags update. Highlights button when explanation is complete.
+            if(algorithm.getID() == 1){
+                flagsUpdate = flags.substring(0,1)+'1'+flags.substring(2, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+            }
+            else if(algorithm.getID() == 2){
+                flagsUpdate = flags.substring(0,5)+'1'+flags.substring(6, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+            }
+            else if(algorithm.getID() == 3){
+                flagsUpdate = flags.substring(0,9)+'1'+flags.substring(10, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+            }
+            else if(algorithm.getID() == 4){
+                flagsUpdate = flags.substring(0,13)+'1'+flags.substring(14, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+            }
 
-            //String flagsUpdate = flags.substring(0,4)+'1'+flags.substring(5, 16);
-            //dRef.child("flags").setValue(flagsUpdate);
         }
     }
 

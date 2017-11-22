@@ -114,6 +114,7 @@ public class UserLogin extends AppCompatActivity {
                                 final DatabaseReference dRef = database.getReference(UID);
 
                                 dRef.child("flags").setValue("0000000000000000");
+                                dRef.child("quiz_score").setValue(0);
 
                                 startActivity(new Intent(UserLogin.this, MainMenu.class));
                                 finish();
