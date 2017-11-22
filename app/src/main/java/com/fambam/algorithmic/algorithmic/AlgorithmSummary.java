@@ -19,7 +19,7 @@ public class AlgorithmSummary extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     DatabaseReference dRef = database.getReference(UID);
-    String flags = "0000000000000000";
+    private String flags = "0000000000000000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +41,10 @@ public class AlgorithmSummary extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                try {
-                    flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                //flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
+                //} catch (Exception e) {
+                //    e.printStackTrace();
+                //}
 
             }
 
@@ -60,26 +59,26 @@ public class AlgorithmSummary extends AppCompatActivity {
         if (subject.equals("bubble")){
             image.setImageResource(R.drawable.bubble_summary);
 
-            String flagsUpdate = '1'+flags.substring(1, 16);
-            dRef.child("flags").setValue(flagsUpdate);
+//            String flagsUpdate = '1'+flags.substring(1, 16);
+//            dRef.child("flags").setValue(flagsUpdate);
         }
         else if (subject.equals("selection")){
             image.setImageResource(R.drawable.cs_summary);
 
-            String flagsUpdate = flags.substring(0,4)+'1'+flags.substring(5, 16);
-            dRef.child("flags").setValue(flagsUpdate);
+//            String flagsUpdate = flags.substring(0,4)+'1'+flags.substring(5, 16);
+//            dRef.child("flags").setValue(flagsUpdate);
         }
         else if (subject.equals("insertion")){
             image.setImageResource(R.drawable.cs_summary);
 
-            String flagsUpdate = flags.substring(0,8)+'1'+flags.substring(9, 16);
-            dRef.child("flags").setValue(flagsUpdate);
+//            String flagsUpdate = flags.substring(0,8)+'1'+flags.substring(9, 16);
+//            dRef.child("flags").setValue(flagsUpdate);
         }
         else if (subject.equals("ls")) {
             image.setImageResource(R.drawable.cs_summary);
 
-            String flagsUpdate = flags.substring(0,12)+'1'+flags.substring(13, 16);
-            dRef.child("flags").setValue(flagsUpdate);
+//            String flagsUpdate = flags.substring(0,12)+'1'+flags.substring(13, 16);
+//            dRef.child("flags").setValue(flagsUpdate);
         }
     }
 }

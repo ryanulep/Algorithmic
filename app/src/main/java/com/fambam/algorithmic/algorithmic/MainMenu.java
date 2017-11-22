@@ -59,6 +59,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     DatabaseReference dRef = database.getReference();
+    private String flags = "0000000000000000";
+    private String flagsUpdate = "0000000000000000";
 
     int finishedColor = 0xAAAAFFFF;
     int defaultColor = 0xFFFFFFFF;
@@ -111,7 +113,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         dRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String flags = "0000000000000000";
 
                 try {
                     flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
@@ -125,11 +126,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                         Button currentButton = findViewById(bIDs[i]);
                         currentButton.setTextColor(finishedColor);
                     }
-                    //else{
-                    //Recolor buttons white
-                    //    Button currentButton = findViewById(bIDs[i]);
-                    //    currentButton.setTextColor(defaultColor);
-                    //}
+                    else{
+                        Button currentButton = findViewById(bIDs[i]);
+                        currentButton.setTextColor(defaultColor);
+                    }
                 }
             }
 
@@ -139,7 +139,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 // User logger??
             }
         });
-
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -196,21 +195,40 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             /* -------------------- Quiz button conditions -------------------- */
             case R.id.bubbleSummaryB:
+
+                flagsUpdate = '1'+flags.substring(1, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
                 i = new Intent(getApplicationContext(), AlgorithmSummary.class);
                 i.putExtra("subject", "bubble");
                 startActivity(i);
                 break;
+
             case R.id.selectionSummaryB:
+
+                flagsUpdate = flags.substring(0,4)+'1'+flags.substring(5, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
                 i = new Intent(getApplicationContext(), AlgorithmSummary.class);
                 i.putExtra("subject", "selection");
                 startActivity(i);
                 break;
+
             case R.id.insertionSummaryB:
+
+                flagsUpdate = flags.substring(0,8)+'1'+flags.substring(9, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
                 i = new Intent(getApplicationContext(), AlgorithmSummary.class);
                 i.putExtra("subject", "insertion");
                 startActivity(i);
                 break;
+
             case R.id.lsSummaryB:
+
+                flagsUpdate = flags.substring(0,12)+'1'+flags.substring(13, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
                 i = new Intent(getApplicationContext(), AlgorithmSummary.class);
                 i.putExtra("subject", "ls");
                 startActivity(i);
