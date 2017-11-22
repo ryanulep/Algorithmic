@@ -18,9 +18,9 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
 
     public BubbleSort() {
         super();
+        this.setID(1);
     }
 
-    @Override
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
@@ -125,7 +125,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         out.writeIntArray(dataIds);
         out.writeIntArray(data);
         out.writeIntArray(new int[] {size, i_index, j_index, i_image, j_image, k_image,
-        (is_sorted ? 1 : 0), (has_swapped ? 1 : 0), (is_swap_phase ? 1 : 0)});
+        (is_sorted ? 1 : 0), (has_swapped ? 1 : 0), (is_swap_phase ? 1 : 0), algoID});
     }
 
     public static final Parcelable.Creator<BubbleSort> CREATOR =
@@ -153,5 +153,6 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         is_sorted = (other[6] == 1);
         has_swapped = (other[7] == 1);
         is_swap_phase = (other[8] == 1);
+        algoID = other[9];
     }
 }

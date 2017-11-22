@@ -11,13 +11,10 @@ import android.widget.TextView;
  */
 
 public abstract class ArrayAlgorithm extends Algorithm {
+
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
-        this.parent = parent;
-        this.imageIds = imageIds;
-        this.dataIds = dataIds;
-        this.data = data;
-        this.highlights = new int[data.length];
+        super.initialize(parent, baseSet, imageIds, dataIds, data);
         this.setSizeConstaints(baseSet, imageIds, 120, 120);
         this.setSizeConstaints(baseSet, dataIds, 120, 120);
         this.initializeDataViews();
