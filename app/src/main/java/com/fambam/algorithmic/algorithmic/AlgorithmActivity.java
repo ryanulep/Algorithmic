@@ -120,8 +120,6 @@ public class AlgorithmActivity extends AppCompatActivity {
         // Restricting next button presses for user when reaching last move
         if (updateOrdering.getCurrentStep() == updateOrdering.getUpdateOrderSize()) {
             nextBtn.setEnabled(false);
-<<<<<<< HEAD
-=======
 
             // Database flags update. Highlights button when explanation is complete.
             if(algorithm.getID() == 1){
@@ -140,8 +138,6 @@ public class AlgorithmActivity extends AppCompatActivity {
                 flagsUpdate = flags.substring(0,13)+'1'+flags.substring(14, 16);
                 dRef.child(UID).child("flags").setValue(flagsUpdate);
             }
-
->>>>>>> 6a99e3a70cb6d893176e454039233ce74d65c704
         }
     }
 

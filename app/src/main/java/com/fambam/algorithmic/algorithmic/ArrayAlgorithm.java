@@ -11,6 +11,7 @@ import android.widget.TextView;
  */
 
 public abstract class ArrayAlgorithm extends Algorithm {
+    int size;
 
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
@@ -28,6 +29,17 @@ public abstract class ArrayAlgorithm extends Algorithm {
     public abstract AlgorithmState getState();
     abstract void updateHighlights();
     public abstract boolean isSearchingAlgorithm();
+    abstract void resetIndices();
+
+    void reset(ConstraintSet set) {
+        states.clear();
+        resetHighlights();
+        resetIndices();
+        size = data.length;
+        updateSelectors(set);
+        updateHighlights();
+        applyUpdates();
+    }
 
     final void setAlgorithmInfo(int[] data, int[] dataIds) {
         this.data = data.clone();

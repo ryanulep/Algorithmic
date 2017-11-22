@@ -16,9 +16,9 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
     private int i_image;
     private int j_image;
     private int k_image;
-    private boolean is_sorted = false;
-    private boolean is_swap_phase = true;
-    private boolean has_swapped = false;
+    private boolean is_sorted;
+    private boolean is_swap_phase;
+    private boolean has_swapped;
 
     public InsertionSort() {
         super();
@@ -28,14 +28,23 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
-        i_index = 1;
-        j_index = 1;
         i_image = getImageIdAt(0);
         j_image = getImageIdAt(1);
         k_image = getImageIdAt(2);
-        size = data.length;
-        updateSelectors(baseSet);
-        updateHighlights();
+        reset(baseSet);
+    }
+
+    @Override
+    void reset(ConstraintSet set) {
+        super.reset(set);
+        is_sorted = false;
+        is_swap_phase = true;
+        has_swapped = false;
+    }
+
+    void resetIndices() {
+        i_index = 1;
+        j_index = 1;
     }
 
     public void next(ConstraintSet set) {

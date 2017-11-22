@@ -5,16 +5,17 @@ import android.os.Parcelable;
 import android.support.constraint.ConstraintSet;
 import android.view.View;
 
+import java.util.zip.CheckedOutputStream;
+
 public class BubbleSort extends ArrayAlgorithm implements Parcelable {
-    private int size;
     private int i_index;
     private int j_index;
     private int i_image;
     private int j_image;
     private int k_image;
-    private boolean is_sorted = false;
-    private boolean has_swapped = false;
-    private boolean is_swap_phase = true;
+    private boolean is_sorted;
+    private boolean has_swapped;
+    private boolean is_swap_phase;
 
     public BubbleSort() {
         super();
@@ -27,23 +28,22 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         i_image = getImageIdAt(0);
         j_image = getImageIdAt(1);
         k_image = getImageIdAt(2);
-        i_index = 0;
-        j_index = 0;
-        size = data.length;
-        updateSelectors(baseSet);
-        updateHighlights();
-        applyUpdates();
+        reset(baseSet);
     }
 
-    /*
-    i_index = 0;
+    @Override
+    public void reset(ConstraintSet baseSet) {
+        super.reset(baseSet);
+        is_sorted = false;
+        has_swapped = false;
+        is_swap_phase = true;
+    }
+
+    public void resetIndices() {
+        i_index = 0;
         j_index = 0;
-        size = data.length;
-        updateSelectors(baseSet);
-        updateHighlights();
-        applyUpdates();
-     */
-    
+    }
+
     public void next(ConstraintSet set) {
         AlgorithmState state = this.getState();
         this.states.push(state);
@@ -60,7 +60,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
             j_index++;
             int i_actual = size - i_index - 1;
             if (j_index == i_actual) {
-                if (!has_swapped) {
+                if (i_actual == 1) {
                     is_sorted = true;
                     this.deselectAll();
                     return;

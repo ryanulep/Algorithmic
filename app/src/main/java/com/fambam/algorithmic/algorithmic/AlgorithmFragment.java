@@ -119,6 +119,27 @@ public class AlgorithmFragment extends Fragment {
         }
     }
 
+    public void startNew() {
+        String drawKey = getString(R.string.drawables);
+        Bundle bundle = getArguments();
+        ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment_layout);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(baseLayout);
+        int[] drawableIds = bundle.getIntArray(drawKey);
+        for (int i = 0; i < imageIds.length; i++) {
+            imageIds[i] = 100+i;
+            DataView pointer = new DataView(getActivity());
+            pointer.setId(imageIds[i]);
+            pointer.setText(Character.toString((char) drawableIds[i]));
+            pointer.setBackgroundColor(Color.WHITE);
+            pointer.setTextColor(Color.BLACK);
+            pointer.setGravity(Gravity.CENTER);
+            baseLayout.addView(pointer);
+        }
+        algorithm.reset(set);
+        set.applyTo(baseLayout);
+    }
+
     // Clears all the dynamic content
     public void clear() {
         ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment_layout);

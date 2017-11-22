@@ -26,6 +26,7 @@ public abstract class Algorithm {
         this.imageIds = imageIds;
         this.dataIds = dataIds;
         this.data = data;
+        resetHighlights();
         this.highlights = new int[data.length];
     }
 
@@ -38,6 +39,7 @@ public abstract class Algorithm {
     abstract void setAlgorithmInfo(int[] data, int[] dataIds);
     abstract void createUserArray(ConstraintSet currentSet);
     abstract AlgorithmState getState();
+    abstract void reset(ConstraintSet set);
 
     final void back(ConstraintSet currentSet) {
         AlgorithmState state = states.pop();
@@ -78,6 +80,10 @@ public abstract class Algorithm {
 
     final int getImageIdAt(int imageIdLoc) {
         return this.imageIds[imageIdLoc];
+    }
+
+    final void resetHighlights() {
+        this.highlights = new int[data.length];
     }
 
     final int[] getHighlights(int[] selections) {

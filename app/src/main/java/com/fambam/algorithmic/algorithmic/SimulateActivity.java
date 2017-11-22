@@ -48,6 +48,9 @@ public class SimulateActivity extends AppCompatActivity {
         addButton.setEnabled(false);
         removeButton.setEnabled(false);
 
+        // Set default text for next button
+        nextButton.setText("Next");
+
         // Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);
         String drawKey = getString(R.string.drawables);
@@ -77,9 +80,15 @@ public class SimulateActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isReadyToSimulate()) {
-                    nextButton.setText("Next");
+                if (!doneFlag) {
                     algoFragment.swap();
+                } else {
+                    algoFragment.startNew();
+                    nextButton.setText("Next");
+                    addButton.setEnabled(false);
+                    removeButton.setEnabled(false);
+                    resetButton.setEnabled(true);
+                    doneFlag = false;
                 }
             }
         });
@@ -99,8 +108,10 @@ public class SimulateActivity extends AppCompatActivity {
                 algoFragment.clear();
                 nextButton.setText("Done");
                 nextButton.setEnabled(false);
+                resetButton.setEnabled(false);
                 addButton.setEnabled(true);
                 removeButton.setEnabled(true);
+                doneFlag = true;
                 resetData.clear();
             }
         });
@@ -120,10 +131,9 @@ public class SimulateActivity extends AppCompatActivity {
                 for (int i = 0; i < resetImageIds.size(); i++)
                     drawableIds[i] = resetImageIds.get(i);
 
-                Bundle algorithmBundle = new Bundle();
+                Bundle algorithmBundle = algoFragment.getArguments();
                 algorithmBundle.putIntArray(dataKey, data);
                 algorithmBundle.putIntArray(drawKey, drawableIds);
-                algoFragment.setArguments(algorithmBundle);
                 algoFragment.reset();
             }
         });
@@ -132,7 +142,7 @@ public class SimulateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String dataKey = getString(R.string.data);
-                Bundle algorithmBundle = new Bundle();
+                Bundle algorithmBundle = algoFragment.getArguments();
 
                 if(!TextUtils.isEmpty(editText.getText().toString()) && resetData.size() < 8) {
                     String str = editText.getText().toString();
@@ -144,7 +154,6 @@ public class SimulateActivity extends AppCompatActivity {
                         data[i] = resetData.get(i);
 
                     algorithmBundle.putIntArray(dataKey, data);
-                    algoFragment.setArguments(algorithmBundle);
                     algoFragment.addView();
                 }
                 else if (TextUtils.isEmpty(editText.getText().toString()) || resetData.size()==8) {
@@ -162,10 +171,7 @@ public class SimulateActivity extends AppCompatActivity {
 
     // Ready to simulate once there are at least 2 values in array
     private boolean isReadyToSimulate() {
-        if (resetData.size() > 1)
-            return true;
-        else
-            return false;
+        return resetData.size() > 1;
     }
 
     private ArrayList<Integer> fillResetInfo(int[] data) {
