@@ -106,6 +106,8 @@ public class SimulateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 algoFragment.clear();
+                editText.setText("");
+                editText.setHint("Enter value then press ADD to build custom array");
                 nextButton.setText("Done");
                 nextButton.setEnabled(false);
                 resetButton.setEnabled(false);
@@ -156,11 +158,12 @@ public class SimulateActivity extends AppCompatActivity {
                     algorithmBundle.putIntArray(dataKey, data);
                     algoFragment.addView();
                 }
-                else if (TextUtils.isEmpty(editText.getText().toString()) || resetData.size()==8) {
-                    // Do nothing
-                }
-                else {
+                else if (resetData.size()==8) {
+                    editText.setText("");
                     editText.setHint("Max entries for array is 8");
+                }
+                else if (TextUtils.isEmpty(editText.getText().toString())) {
+                    // Do nothing
                 }
                 if (isReadyToSimulate()) {
                     nextButton.setEnabled(true);
