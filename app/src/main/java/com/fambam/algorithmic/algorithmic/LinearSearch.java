@@ -50,9 +50,6 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
                 }
             }
         }
-        else if (i_index == dataIds.length - 1) {
-            // Do nothing
-        }
         updateSelectors(set);
         updateHighlights();
     }
