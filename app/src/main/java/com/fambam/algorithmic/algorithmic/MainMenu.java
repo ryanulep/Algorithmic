@@ -61,6 +61,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     DatabaseReference dRef = database.getReference();
     private String flags = "0000000000000000";
     private String flagsUpdate = "0000000000000000";
+    int score;
+    int trys;
 
     int finishedColor = 0xAAAAFFFF;
     int defaultColor = 0xFFFFFFFF;
@@ -116,10 +118,23 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
                 try {
                     flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
+                    score = dataSnapshot.child(UID).getValue(userData.class).getQuiz_score();
+                    trys = dataSnapshot.child(UID).getValue(userData.class).getTrys();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                /*
+                try {
+                    score = dataSnapshot.child(UID).getValue(userData.class).getQuiz_score();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    trys = dataSnapshot.child(UID).getValue(userData.class).getTrys();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+*/
                 for(int i = 0; i < 16; i++){
                     char flag = flags.charAt(i);
                     if(flag == '1'){
@@ -131,6 +146,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                         currentButton.setTextColor(defaultColor);
                     }
                 }
+
+                String stringSpace = "                                 "+
+                                     "                                 ";
+                bubbleQuiz.setText("Quiz"+stringSpace+score+"/"+trys);
             }
 
             @Override
@@ -139,7 +158,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 // User logger??
             }
         });
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
