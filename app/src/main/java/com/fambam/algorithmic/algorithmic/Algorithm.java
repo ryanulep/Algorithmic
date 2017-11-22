@@ -28,6 +28,8 @@ public abstract class Algorithm {
     abstract void buildStructure(ConstraintSet currentSet);
     abstract void updateSelectors(ConstraintSet currentSet);
     abstract void updateHighlights();
+    abstract void setAlgorithmInfo(int[] data, int[] dataIds);
+    abstract void createUserArray(ConstraintSet currentSet);
     abstract AlgorithmState getState();
 
     final void back(ConstraintSet currentSet) {
@@ -42,7 +44,7 @@ public abstract class Algorithm {
     final boolean hasBack() {
         return !states.isEmpty();
     }
-    abstract boolean isSortingAlgorithm();
+    abstract boolean isSearchingAlgorithm();
 
     final void applyUpdates() {
         while(!updates.isEmpty()) {

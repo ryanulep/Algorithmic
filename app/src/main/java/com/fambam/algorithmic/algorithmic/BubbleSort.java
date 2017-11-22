@@ -34,6 +34,15 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         updateHighlights();
         applyUpdates();
     }
+
+    /*
+    i_index = 0;
+        j_index = 0;
+        size = data.length;
+        updateSelectors(baseSet);
+        updateHighlights();
+        applyUpdates();
+     */
     
     public void next(ConstraintSet set) {
         AlgorithmState state = this.getState();
@@ -73,7 +82,7 @@ public class BubbleSort extends ArrayAlgorithm implements Parcelable {
         return !(is_sorted);
     }
 
-    public boolean isSortingAlgorithm() {
+    public boolean isSearchingAlgorithm() {
         return false;
     }
 

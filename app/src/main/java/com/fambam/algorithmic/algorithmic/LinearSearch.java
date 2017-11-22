@@ -75,7 +75,7 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
                 this.dataIds.clone(), flags);
     }
 
-    public boolean isSortingAlgorithm() {
+    public boolean isSearchingAlgorithm() {
         return true;
     }
 

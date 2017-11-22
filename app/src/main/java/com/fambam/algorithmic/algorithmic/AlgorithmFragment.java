@@ -53,7 +53,7 @@ public class AlgorithmFragment extends Fragment {
         }
 
         // If sorting algorithm, use the TextView inside fragment to display info. Else, empty
-        if (this.algorithm.isSortingAlgorithm()) {
+        if (this.algorithm.isSearchingAlgorithm()) {
             tv_searching = view.findViewById(R.id.tv_search);
             tv_searching.setText("Search: 6");
         }
@@ -170,5 +170,40 @@ public class AlgorithmFragment extends Fragment {
 
         return view;
 
+    }
+
+    public View addView() {
+        int[] data = null;
+        String dataKey = getString(R.string.data);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            data = bundle.getIntArray(dataKey);
+        }
+
+        clear();
+        dataIds = new int[data.length];
+
+        // TODO start dynamically populating layout one element at a time
+
+        // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
+        ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
+
+        for (int i = 0; i < data.length; ++i) {
+            dataIds[i] = 200+i;
+            DataView dView = new DataView(getActivity());
+            dView.setId(dataIds[i]);
+            dView.setText(Integer.toString(data[i]));
+            dView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
+            dView.setGravity(Gravity.CENTER);
+            baseLayout.addView(dView);
+        }
+
+        ConstraintSet set = new ConstraintSet();
+        set.clone(baseLayout);
+        this.algorithm.setAlgorithmInfo(data, dataIds);
+        this.algorithm.createUserArray(set);
+        set.applyTo(baseLayout);
+
+        return view;
     }
 }

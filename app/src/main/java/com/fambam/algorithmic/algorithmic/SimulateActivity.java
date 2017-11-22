@@ -27,6 +27,7 @@ public class SimulateActivity extends AppCompatActivity {
     private Button addButton;
     private Button resetButton;
     private EditText editText;
+    private boolean doneFlag;
     private ArrayList<Integer> resetData = new ArrayList<>();
     private ArrayList<Integer> resetImageIds = new ArrayList<>();
 
@@ -77,6 +78,7 @@ public class SimulateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isReadyToSimulate()) {
+                    nextButton.setText("Next");
                     algoFragment.swap();
                 }
             }
@@ -129,12 +131,21 @@ public class SimulateActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String dataKey = getString(R.string.data);
+                Bundle algorithmBundle = new Bundle();
+
                 if(!TextUtils.isEmpty(editText.getText().toString()) && resetData.size() < 8) {
                     String str = editText.getText().toString();
                     editText.setText("");
                     resetData.add(Integer.valueOf(str));
 
+                    int[] data = new int[resetData.size()];
+                    for (int i = 0; i < resetData.size(); i++)
+                        data[i] = resetData.get(i);
 
+                    algorithmBundle.putIntArray(dataKey, data);
+                    algoFragment.setArguments(algorithmBundle);
+                    algoFragment.addView();
                 }
                 else if (TextUtils.isEmpty(editText.getText().toString()) || resetData.size()==8) {
                     // Do nothing

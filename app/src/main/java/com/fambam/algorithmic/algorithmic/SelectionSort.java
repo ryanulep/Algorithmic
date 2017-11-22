@@ -84,7 +84,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         return !is_sorted;
     }
 
-    public boolean isSortingAlgorithm() {
+    public boolean isSearchingAlgorithm() {
         return false;
     }
 
