@@ -148,7 +148,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 }
 
                 String spacing = new String();
-                for(int i = 0; i < bubbleQuiz.getWidth() - 1175; i++){
+                //Andorid 7.0 - bubbleQuiz.getWidth() - 1175
+                for(int i = 0; i < 66; i++){
                         spacing += " ";
                 }
                 bubbleQuiz.setText("Quiz"+spacing+score+"/"+trys);
