@@ -2,6 +2,7 @@ package com.fambam.algorithmic.algorithmic;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
@@ -32,19 +33,28 @@ public class AlgorithmQuiz extends AppCompatActivity {
     private TextView correctText;
 
     private String currentAns;
-    // Colors for buttons
-    int defaultC = 0xFFC5CAE9;
-    int selectedIncorrectC = 0xFF00BCD4;
-    int selectedCorrectC = 0xFF76FF03;
 
-    private int num = 0;
-    private int denom = 0;
+//    String image1 = "rounded_quiz_button_default";
+//    String image2 = "rounded_quiz_button_right";
+//    String image3 = "rounded_quiz_button_wrong";
+//    int defaultC = getResources().getIdentifier(image1 , "drawable", "package.name");
+//    int selectedCorrectC = getResources().getIdentifier(image2 , "drawable", "package.name");
+//    int selectedIncorrectC = getResources().getIdentifier(image3 , "drawable", "package.name");
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     DatabaseReference dRef = database.getReference();
-    int score;
-    int trys;
+    int score1;
+    int trys1;
+    int score2;
+    int trys2;
+    int score3;
+    int trys3;
+    int score4;
+    int trys4;
+    int randIndex;
+    int buttAns = 0;
+    String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +73,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
 
         questionText = findViewById(R.id.questionTextView);
         correctText = findViewById(R.id.correctTextView);
-        String subject;
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -74,9 +83,10 @@ public class AlgorithmQuiz extends AppCompatActivity {
         }
 
         Resources res = getResources();
-        int randIndex = new Random().nextInt(5);
+        randIndex = new Random().nextInt(5);
         if (subject.equals("bubble")){
             String[][] qList = {res.getStringArray(R.array.b_q1),res.getStringArray(R.array.b_q2),res.getStringArray(R.array.b_q3),res.getStringArray(R.array.b_q4),res.getStringArray(R.array.b_q5)};
+            randIndex = new Random().nextInt(5);
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -92,6 +102,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
         }
         else if (subject.equals("selection")){
             String[][] qList = {res.getStringArray(R.array.s_q1),res.getStringArray(R.array.s_q2),res.getStringArray(R.array.s_q3),res.getStringArray(R.array.s_q4),res.getStringArray(R.array.s_q5)};
+            randIndex = new Random().nextInt(5);
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -107,6 +118,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
         }
         else if (subject.equals("insertion")){
             String[][] qList = {res.getStringArray(R.array.i_q1),res.getStringArray(R.array.i_q2),res.getStringArray(R.array.i_q3),res.getStringArray(R.array.i_q4),res.getStringArray(R.array.i_q5)};
+            randIndex = new Random().nextInt(5);
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -122,6 +134,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
         }
         else if (subject.equals("ls")){
             String[][] qList = {res.getStringArray(R.array.ls_q1),res.getStringArray(R.array.ls_q2),res.getStringArray(R.array.ls_q3),res.getStringArray(R.array.ls_q4),res.getStringArray(R.array.ls_q5)};
+            randIndex = new Random().nextInt(5);
             String[] currentQ = qList[randIndex];
             questionText.setText(currentQ[0]);
             ArrayList<String> ansList = new ArrayList<>();
@@ -136,50 +149,49 @@ public class AlgorithmQuiz extends AppCompatActivity {
             currentAns = currentQ[1];
         }
 
-        tButton1.setBackgroundColor(defaultC);
-        tButton2.setBackgroundColor(defaultC);
-        tButton3.setBackgroundColor(defaultC);
-        tButton4.setBackgroundColor(defaultC);
-
+        tButton1.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+        tButton2.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+        tButton3.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+        tButton4.setBackgroundResource(R.drawable.rounded_quiz_button_default);
 
         tButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tButton1.setBackgroundColor(selectedIncorrectC);
-                tButton2.setBackgroundColor(defaultC);
-                tButton3.setBackgroundColor(defaultC);
-                tButton4.setBackgroundColor(defaultC);
-                tB1Pressed();
+                tButton1.setBackgroundResource(R.drawable.rounded_quiz_button_wrong);
+                tButton2.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton3.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton4.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                genericPressed(1);
             }
         });
         tButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tButton1.setBackgroundColor(defaultC);
-                tButton2.setBackgroundColor(selectedIncorrectC);
-                tButton3.setBackgroundColor(defaultC);
-                tButton4.setBackgroundColor(defaultC);
-                tB2Pressed();
+                tButton1.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton2.setBackgroundResource(R.drawable.rounded_quiz_button_wrong);
+                tButton3.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton4.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                genericPressed(2);
             }
         });
         tButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tButton1.setBackgroundColor(defaultC);
-                tButton2.setBackgroundColor(defaultC);
-                tButton3.setBackgroundColor(selectedIncorrectC);
-                tButton4.setBackgroundColor(defaultC);
-                tB3Pressed();
+                tButton1.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton2.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton3.setBackgroundResource(R.drawable.rounded_quiz_button_wrong);
+                tButton4.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                genericPressed(3);
             }
         });
         tButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tButton1.setBackgroundColor(defaultC);
-                tButton2.setBackgroundColor(defaultC);
-                tButton3.setBackgroundColor(defaultC);
-                tButton4.setBackgroundColor(selectedIncorrectC);
-                tB4Pressed();
+                tButton1.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton2.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton3.setBackgroundResource(R.drawable.rounded_quiz_button_default);
+                tButton4.setBackgroundResource(R.drawable.rounded_quiz_button_wrong);
+                genericPressed(4);
             }
         });
 
@@ -189,8 +201,14 @@ public class AlgorithmQuiz extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 try {
-                    score = dataSnapshot.child(UID).getValue(userData.class).getQuiz_score();
-                    trys = dataSnapshot.child(UID).getValue(userData.class).getTrys();
+                    score1 = dataSnapshot.child(UID).getValue(userData.class).getB_quiz_score();
+                    trys1 = dataSnapshot.child(UID).getValue(userData.class).getB_trys();
+                    score2 = dataSnapshot.child(UID).getValue(userData.class).getS_quiz_score();
+                    trys2 = dataSnapshot.child(UID).getValue(userData.class).getS_trys();
+                    score3 = dataSnapshot.child(UID).getValue(userData.class).getI_quiz_score();
+                    trys3 = dataSnapshot.child(UID).getValue(userData.class).getI_trys();
+                    score4 = dataSnapshot.child(UID).getValue(userData.class).getLs_quiz_score();
+                    trys4 = dataSnapshot.child(UID).getValue(userData.class).getLs_trys();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -205,57 +223,93 @@ public class AlgorithmQuiz extends AppCompatActivity {
 
     }
 
-    private void tB1Pressed() {
-        if (tButton1.getText().equals(currentAns)){
-            tButton1.setBackgroundColor(selectedCorrectC);
-            createExitButton();
+    private void genericPressed(int butt) {
+        if (tButton1.getText().equals(currentAns)) {
+            buttAns = 1;
         }
-        else{
+        else if (tButton2.getText().equals(currentAns)){
+            buttAns = 2;
+        }
+        else if (tButton3.getText().equals(currentAns)){
+            buttAns = 3;
+        }
+        else if (tButton4.getText().equals(currentAns)){
+            buttAns = 4;
+        }
+
+        if(butt == buttAns) {
+            switch(buttAns) {
+                case 1:
+                    tButton1.setBackgroundResource(R.drawable.rounded_quiz_button_right);
+                    createExitButton(butt);
+                    break;
+                case 2:
+                    tButton2.setBackgroundResource(R.drawable.rounded_quiz_button_right);
+                    createExitButton(butt);
+                    break;
+                case 3:
+                    tButton3.setBackgroundResource(R.drawable.rounded_quiz_button_right);
+                    createExitButton(butt);
+                    break;
+                case 4:
+                    tButton4.setBackgroundResource(R.drawable.rounded_quiz_button_right);
+                    createExitButton(butt);
+                    break;
+            }
+        }
+        else {
             correctText.setText("Try again");
-            trys = trys + 1;
-            dRef.child(UID).child("trys").setValue(trys);
+            switch(subject) {
+                case "bubble":
+                    trys1 += 1;
+                    dRef.child(UID).child("b_trys").setValue(trys1);
+                    break;
+                case "selection":
+                    trys2 += 1;
+                    dRef.child(UID).child("s_trys").setValue(trys2);
+                    break;
+                case "insertion":
+                    trys3 += 1;
+                    dRef.child(UID).child("i_trys").setValue(trys3);
+                    break;
+                case "ls":
+                    trys4 += 1;
+                    dRef.child(UID).child("ls_trys").setValue(trys4);
+                    break;
+            }
         }
+
     }
-    private void tB2Pressed() {
-        if (tButton2.getText().equals(currentAns)){
-            tButton2.setBackgroundColor(selectedCorrectC);
-            createExitButton();
-        }
-        else{
-            correctText.setText("Try again");
-            trys = trys + 1;
-            dRef.child(UID).child("trys").setValue(trys);
-        }
-    }
-    private void tB3Pressed() {
-        if (tButton3.getText().equals(currentAns)){
-            tButton3.setBackgroundColor(selectedCorrectC);
-            createExitButton();
-        }
-        else{
-            correctText.setText("Try again");
-            trys = trys + 1;
-            dRef.child(UID).child("trys").setValue(trys);
-        }
-    }
-    private void tB4Pressed() {
-        if (tButton4.getText().equals(currentAns)){
-            tButton4.setBackgroundColor(selectedCorrectC);
-            createExitButton();
-        }
-        else{
-            correctText.setText("Try again");
-            trys = trys + 1;
-            dRef.child(UID).child("trys").setValue(trys);
-        }
-    }
-    private void createExitButton(){
+
+    private void createExitButton(int butt){
         correctText.setText("CORRECT!");
 
-        trys = trys + 1;
-        dRef.child(UID).child("trys").setValue(trys);
-        score = score + 1;
-        dRef.child(UID).child("quiz_score").setValue(score);
+        switch(subject) {
+            case "bubble":
+                    trys1 += 1;
+                    dRef.child(UID).child("b_trys").setValue(trys1);
+                    score1 += 1;
+                    dRef.child(UID).child("b_quiz_score").setValue(score1);
+                    break;
+            case "selection":
+                    trys2 += 1;
+                    dRef.child(UID).child("s_trys").setValue(trys2);
+                    score2 += 1;
+                    dRef.child(UID).child("s_quiz_score").setValue(score2);
+                    break;
+            case "insertion":
+                    trys3 += 1;
+                    dRef.child(UID).child("i_trys").setValue(trys3);
+                    score3 += 1;
+                    dRef.child(UID).child("i_quiz_score").setValue(score3);
+                    break;
+            case "ls":
+                    trys4 += 1;
+                    dRef.child(UID).child("ls_trys").setValue(trys4);
+                    score4 += 1;
+                    dRef.child(UID).child("ls_quiz_score").setValue(score4);
+                    break;
+        }
 
         tButton1.setEnabled(false);
         tButton2.setEnabled(false);

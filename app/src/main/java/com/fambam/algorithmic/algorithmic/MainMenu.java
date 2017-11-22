@@ -61,8 +61,14 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     DatabaseReference dRef = database.getReference();
     private String flags = "0000000000000000";
     private String flagsUpdate = "0000000000000000";
-    int score;
-    int trys;
+    int score1;
+    int trys1;
+    int score2;
+    int trys2;
+    int score3;
+    int trys3;
+    int score4;
+    int trys4;
 
     int finishedColor = 0xAAAAFFFF;
     int defaultColor = 0xFFFFFFFF;
@@ -118,23 +124,18 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
                 try {
                     flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
-                    score = dataSnapshot.child(UID).getValue(userData.class).getQuiz_score();
-                    trys = dataSnapshot.child(UID).getValue(userData.class).getTrys();
+                    score1 = dataSnapshot.child(UID).getValue(userData.class).getB_quiz_score();
+                    trys1 = dataSnapshot.child(UID).getValue(userData.class).getB_trys();
+                    score2 = dataSnapshot.child(UID).getValue(userData.class).getS_quiz_score();
+                    trys2 = dataSnapshot.child(UID).getValue(userData.class).getS_trys();
+                    score3 = dataSnapshot.child(UID).getValue(userData.class).getI_quiz_score();
+                    trys3 = dataSnapshot.child(UID).getValue(userData.class).getI_trys();
+                    score4 = dataSnapshot.child(UID).getValue(userData.class).getLs_quiz_score();
+                    trys4 = dataSnapshot.child(UID).getValue(userData.class).getLs_trys();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                /*
-                try {
-                    score = dataSnapshot.child(UID).getValue(userData.class).getQuiz_score();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    trys = dataSnapshot.child(UID).getValue(userData.class).getTrys();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-*/
+
                 for(int i = 0; i < 16; i++){
                     char flag = flags.charAt(i);
                     if(flag == '1'){
@@ -149,10 +150,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
                 String spacing = new String();
                 //Andorid 7.0 - bubbleQuiz.getWidth() - 1175
-                for(int i = 0; i < 66; i++){
+                for(int i = 0; i < 62; i++){
                         spacing += " ";
                 }
-                bubbleQuiz.setText("Quiz"+spacing+score+"/"+trys);
+                bubbleQuiz.setText("Quiz"+spacing+score1+"/"+trys1);
+                selectionQuiz.setText("Quiz"+spacing+score2+"/"+trys2);
+                insertionQuiz.setText("Quiz"+spacing+score3+"/"+trys3);
+                lsQuiz.setText("Quiz"+spacing+score4+"/"+trys4);
             }
 
             @Override
