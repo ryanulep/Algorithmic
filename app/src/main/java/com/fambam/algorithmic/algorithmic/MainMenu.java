@@ -314,6 +314,20 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 startSimulation(algorithm, data, drawables);
                 break;
 
+            case R.id.selectionSimulateB:
+                algorithm = new SelectionSort();
+                data = getRandomArray();
+                drawables = new int[] {'i','j'};
+                startSimulation(algorithm, data, drawables);
+                break;
+
+            case R.id.insertionSimulateB:
+                algorithm = new InsertionSort();
+                data = getRandomArray();
+                drawables = new int[] {'i','j','k'};
+                startSimulation(algorithm, data, drawables);
+                break;
+
             /* -------------------- Other button conditions -------------------- */
             default:
                 break;

@@ -10,7 +10,6 @@ import android.view.View;
  */
 
 public class InsertionSort extends ArrayAlgorithm implements Parcelable {
-    private int size;
     private int i_index;
     private int j_index;
     private int i_image;
