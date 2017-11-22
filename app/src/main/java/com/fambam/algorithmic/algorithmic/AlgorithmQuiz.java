@@ -11,6 +11,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,6 +36,15 @@ public class AlgorithmQuiz extends AppCompatActivity {
     int defaultC = 0xFFC5CAE9;
     int selectedIncorrectC = 0xFF00BCD4;
     int selectedCorrectC = 0xFF76FF03;
+
+    private int num = 0;
+    private int denom = 0;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference dRef = database.getReference();
+    int score;
+    int trys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +141,6 @@ public class AlgorithmQuiz extends AppCompatActivity {
         tButton3.setBackgroundColor(defaultC);
         tButton4.setBackgroundColor(defaultC);
 
-        //mAuth = FirebaseAuth.getInstance();
 
         tButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +183,26 @@ public class AlgorithmQuiz extends AppCompatActivity {
             }
         });
 
+
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+                    score = dataSnapshot.child(UID).getValue(userData.class).getQuiz_score();
+                    trys = dataSnapshot.child(UID).getValue(userData.class).getTrys();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Could not read value
+                // User logger??
+            }
+        });
+
     }
 
     private void tB1Pressed() {
@@ -175,32 +210,57 @@ public class AlgorithmQuiz extends AppCompatActivity {
             tButton1.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
-        else{correctText.setText("Try again");}
-        //dRef.child("child1").setValue("Muh Vahlyews");
+        else{
+            correctText.setText("Try again");
+            trys = trys + 1;
+            dRef.child(UID).child("trys").setValue(trys);
+        }
     }
     private void tB2Pressed() {
         if (tButton2.getText().equals(currentAns)){
             tButton2.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
-        else{correctText.setText("Try again");}
+        else{
+            correctText.setText("Try again");
+            trys = trys + 1;
+            dRef.child(UID).child("trys").setValue(trys);
+        }
     }
     private void tB3Pressed() {
         if (tButton3.getText().equals(currentAns)){
             tButton3.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
-        else{correctText.setText("Try again");}
+        else{
+            correctText.setText("Try again");
+            trys = trys + 1;
+            dRef.child(UID).child("trys").setValue(trys);
+        }
     }
     private void tB4Pressed() {
         if (tButton4.getText().equals(currentAns)){
             tButton4.setBackgroundColor(selectedCorrectC);
             createExitButton();
         }
-        else{correctText.setText("Try again");}
+        else{
+            correctText.setText("Try again");
+            trys = trys + 1;
+            dRef.child(UID).child("trys").setValue(trys);
+        }
     }
     private void createExitButton(){
         correctText.setText("CORRECT!");
+        
+        trys = trys + 1;
+        dRef.child(UID).child("trys").setValue(trys);
+        score = score + 1;
+        dRef.child(UID).child("quiz_score").setValue(score);
+
+        tButton1.setEnabled(false);
+        tButton2.setEnabled(false);
+        tButton3.setEnabled(false);
+        tButton4.setEnabled(false);
 
         ImageButton exitB = new ImageButton(this);
         exitB.setId(1);

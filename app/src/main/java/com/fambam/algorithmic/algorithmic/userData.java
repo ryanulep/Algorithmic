@@ -7,10 +7,19 @@ package com.fambam.algorithmic.algorithmic;
 public class userData {
 
     public String flags;
+    public int trys;
     public int quiz_score;
 
     public userData(){
         // default constructor req for DataSnapshot
+    }
+
+    public int getTrys() {
+        return trys;
+    }
+
+    public void setTrys(int trys) {
+        this.trys = trys;
     }
 
     public String getFlags() {

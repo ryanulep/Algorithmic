@@ -37,13 +37,13 @@ public class AlgorithmSummary extends AppCompatActivity {
             image.setImageResource(R.drawable.bubble_summary);
         }
         else if (subject.equals("selection")){
-            image.setImageResource(R.drawable.cs_summary);
+            image.setImageResource(R.drawable.selection_summary);
         }
         else if (subject.equals("insertion")){
-            image.setImageResource(R.drawable.cs_summary);
+            image.setImageResource(R.drawable.insertion_summary);
         }
         else if (subject.equals("ls")) {
-            image.setImageResource(R.drawable.cs_summary);
+            image.setImageResource(R.drawable.ls_summary);
         }
     }
 }
