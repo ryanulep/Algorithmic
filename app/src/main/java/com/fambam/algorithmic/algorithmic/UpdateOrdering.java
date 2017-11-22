@@ -34,6 +34,10 @@ public class UpdateOrdering implements Parcelable {
         return updateOrder[currentStep];
     }
 
+    int getCurrentStep() { return currentStep; }
+
+    int getUpdateOrderSize() { return updateOrder.length; }
+
     public int describeContents() {
         return 0;
     }

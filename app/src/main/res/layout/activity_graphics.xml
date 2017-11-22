@@ -40,8 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Tmp"
             android:layout_weight="1"
-            android:layout_marginRight="8dp"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:layout_marginRight="8dp"/>
 
         <Button
             android:id="@+id/btn_back"
@@ -50,8 +49,7 @@
             android:text="Back"
             android:onClick="back"
             android:layout_weight="1"
-            android:layout_marginRight="8dp"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:layout_marginRight="8dp"/>
 
         <Button
             android:id="@+id/btn_next"
@@ -59,8 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:onClick="swap"
-            android:text="Next"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:text="Next"/>
 
     </LinearLayout>
 

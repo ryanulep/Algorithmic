@@ -2,6 +2,7 @@ package com.fambam.algorithmic.algorithmic;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -9,10 +10,25 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,13 +54,42 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private Algorithm algorithm;
     private UpdateOrdering ordering;
     private AlgorithmAssets algoAsset;
+    private static final int RANDOMSIZE = 8;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference dRef = database.getReference();
+    private String flags = "0000000000000000";
+    private String flagsUpdate = "0000000000000000";
+
+    int finishedColor = 0xAAAAFFFF;
+    int defaultColor = 0xFFFFFFFF;
+
+    private static final int[] bIDs = {
+            R.id.bubbleSummaryB,
+            R.id.bubbleExplanationB,
+            R.id.bubbleSimulateB,
+            R.id.bubbleQuizB,
+            R.id.selectionSummaryB,
+            R.id.selectionExplanationB,
+            R.id.selectionSimulateB,
+            R.id.selectionQuizB,
+            R.id.insertionSummaryB,
+            R.id.insertionExplanationB,
+            R.id.insertionSimulateB,
+            R.id.insertionQuizB,
+            R.id.lsSummaryB,
+            R.id.lsExplanationB,
+            R.id.lsSimulateB,
+            R.id.lsQuizB,
+    };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         bubbleSummary = findViewById(R.id.bubbleSummaryB);
@@ -64,7 +109,39 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsSimulate = findViewById(R.id.lsSimulateB);
         lsQuiz = findViewById(R.id.lsQuizB);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+                    flags = dataSnapshot.child(UID).getValue(userData.class).getFlags();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                for(int i = 0; i < 16; i++){
+                    char flag = flags.charAt(i);
+                    if(flag == '1'){
+                        Button currentButton = findViewById(bIDs[i]);
+                        currentButton.setTextColor(finishedColor);
+                    }
+                    else{
+                        Button currentButton = findViewById(bIDs[i]);
+                        currentButton.setTextColor(defaultColor);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Could not read value
+                // User logger??
+            }
+        });
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,13 +162,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
+                                // Nothing Here
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
             }
         });
 
@@ -113,10 +188,52 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         lsQuiz.setOnClickListener(this);
     }
 
+
     @Override
     public void onClick(View v) {
         Intent i;
         switch (v.getId()) {
+            /* -------------------- Quiz button conditions -------------------- */
+            case R.id.bubbleSummaryB:
+
+                flagsUpdate = '1'+flags.substring(1, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "bubble");
+                startActivity(i);
+                break;
+
+            case R.id.selectionSummaryB:
+
+                flagsUpdate = flags.substring(0,4)+'1'+flags.substring(5, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "selection");
+                startActivity(i);
+                break;
+
+            case R.id.insertionSummaryB:
+
+                flagsUpdate = flags.substring(0,8)+'1'+flags.substring(9, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "insertion");
+                startActivity(i);
+                break;
+
+            case R.id.lsSummaryB:
+
+                flagsUpdate = flags.substring(0,12)+'1'+flags.substring(13, 16);
+                dRef.child(UID).child("flags").setValue(flagsUpdate);
+
+                i = new Intent(getApplicationContext(), AlgorithmSummary.class);
+                i.putExtra("subject", "ls");
+                startActivity(i);
+                break;
+
             /* -------------------- Quiz button conditions -------------------- */
             case R.id.bubbleQuizB:
                 i = new Intent(getApplicationContext(), AlgorithmQuiz.class);
@@ -161,11 +278,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 algorithm = new SelectionSort();
                 algoAsset = new AlgorithmAssets("SelectionSort.txt",
                                                 "", "", "");
-                ordering = new UpdateOrdering(new int[] {   1,1,1,0,1,0,1,0,1,0,1,
-                                                            0,0,1,0,0,0,1,1,0,0,0,
+                ordering = new UpdateOrdering(new int[] {   1,1,1,1,0,2,2,1,0,2,0,
+                                                            2,0,0,1,1,0,0,0,0,0,0,
                                                             0,0,0,0,0,0,0,0,0,0,0,
                                                             0,0,0,0,0,0,0,0,0,0,0,
-                                                            0,0,0,0,0,0,0,0,1,1});
+                                                            0,0,1,1});
                 startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
                 break;
 
@@ -183,10 +300,18 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 drawables = new int[] {'i'};
                 data = new int[] {3,8,2,1,4,6,5,7};
                 algorithm = new LinearSearch();
-                ordering = new UpdateOrdering(new int[] {   1,1,1,2,0,0,0,0,2,2,1,1});
+                ordering = new UpdateOrdering(new int[] {1,1,1,2,0,0,0,0,2,2,1,1});
                 algoAsset = new AlgorithmAssets("LinearSearch.txt",
                                                 "", "", "");
                 startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
+                break;
+
+            /* -------------------- Simulation button conditions -------------------- */
+            case R.id.bubbleSimulateB:
+                algorithm = new BubbleSort();
+                data = getRandomArray();
+                drawables = new int[] {'i','j','k'};
+                startSimulation(algorithm, data, drawables);
                 break;
 
             /* -------------------- Other button conditions -------------------- */
@@ -210,5 +335,31 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         intent.putExtra(assetKey, asset);
         startActivity(intent);
     }
+
+    private void startSimulation(Algorithm algorithm, int[] data, int[] drawables) {
+        String algoKey = getString(R.string.algo_key);
+        String drawKey = getString(R.string.drawables);
+        String dataKey = getString(R.string.data);
+        Intent intent = new Intent(this, SimulateActivity.class);
+        intent.putExtra(algoKey, (Parcelable) algorithm);
+        intent.putExtra(drawKey, drawables);
+        intent.putExtra(dataKey, data);
+        startActivity(intent);
+    }
+
+    private int[] getRandomArray() {
+        ArrayList<Integer> n = new ArrayList<>();
+        int[] data = new int[RANDOMSIZE];
+        int i = 0;
+        while (n.size() < RANDOMSIZE) {
+            int r = new Random().nextInt(10);
+            if (!n.contains(r)) {
+                n.add(r);
+                data[i++] = r;
+            }
+        }
+        return data;
+    }
+
 }
 
