@@ -82,6 +82,10 @@ public abstract class Algorithm {
         return this.imageIds[imageIdLoc];
     }
 
+    final void setSelectorIds(int[] selectors) {
+        this.imageIds = selectors.clone();
+    }
+
     final void resetHighlights() {
         this.highlights = new int[data.length];
     }

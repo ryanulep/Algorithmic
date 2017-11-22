@@ -24,8 +24,6 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
-        i_image = imageIds[0];
-        j_image = imageIds[1];
         reset(baseSet);
     }
 
@@ -39,6 +37,8 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     }
 
     void resetIndices() {
+        i_image = getImageIdAt(0);
+        j_image = getImageIdAt(1);
         i_index = 0;
         j_index = 1;
         min_index = 0;

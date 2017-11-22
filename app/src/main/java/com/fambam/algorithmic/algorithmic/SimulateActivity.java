@@ -108,9 +108,9 @@ public class SimulateActivity extends AppCompatActivity {
                 algoFragment.clear();
                 nextButton.setText("Done");
                 nextButton.setEnabled(false);
+                backButton.setEnabled(false);
                 resetButton.setEnabled(false);
                 addButton.setEnabled(true);
-                removeButton.setEnabled(true);
                 doneFlag = true;
                 resetData.clear();
             }
@@ -154,7 +154,7 @@ public class SimulateActivity extends AppCompatActivity {
                         data[i] = resetData.get(i);
 
                     algorithmBundle.putIntArray(dataKey, data);
-                    algoFragment.addView();
+                    algoFragment.updateViews();
                 }
                 else if (TextUtils.isEmpty(editText.getText().toString()) || resetData.size()==8) {
                     // Do nothing
@@ -162,9 +162,25 @@ public class SimulateActivity extends AppCompatActivity {
                 else {
                     editText.setHint("Max entries for array is 8");
                 }
-                if (isReadyToSimulate()) {
-                    nextButton.setEnabled(true);
-                }
+                nextButton.setEnabled(isReadyToSimulate());
+                removeButton.setEnabled(resetData.size() > 0);
+
+            }
+        });
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dataKey = getString(R.string.data);
+                Bundle algorithmBundle = algoFragment.getArguments();
+                resetData.remove(resetData.size() - 1);
+                int[] data = new int[resetData.size()];
+                for (int i = 0; i < resetData.size(); i++)
+                    data[i] = resetData.get(i);
+                algorithmBundle.putIntArray(dataKey, data);
+                algoFragment.updateViews();
+                nextButton.setEnabled(isReadyToSimulate());
+                removeButton.setEnabled(resetData.size() > 0);
             }
         });
     }
