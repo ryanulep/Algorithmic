@@ -205,8 +205,6 @@ public class AlgorithmFragment extends Fragment {
         clear();
         dataIds = new int[data.length];
 
-        // TODO start dynamically populating layout one element at a time
-
         // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
         ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
 
