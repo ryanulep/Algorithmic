@@ -12,7 +12,10 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
     private int locating;
     private boolean is_found;
 
-    public LinearSearch() { super(); }
+    public LinearSearch() {
+        super();
+        this.setID(4);
+    }
 
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
@@ -91,6 +94,7 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
         out.writeInt(i_index);
         out.writeInt(locating);
         out.writeInt((is_found ? 1 : 0));
+        out.writeInt(algoID);
     }
 
     public static final Parcelable.Creator<LinearSearch> CREATOR =
@@ -112,5 +116,6 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
         i_index = in.readInt();
         locating = in.readInt();
         is_found = (in.readInt() == 1);
+        algoID = in.readInt();
     }
 }

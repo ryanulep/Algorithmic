@@ -13,6 +13,7 @@ import java.util.LinkedList;
 
 public abstract class Algorithm {
     View parent;
+    int algoID;
     int[] imageIds;
     int[] dataIds;
     int[] data;
@@ -20,8 +21,14 @@ public abstract class Algorithm {
     LinkedList<UIUpdate> updates = new LinkedList<>();
     LinkedList<AlgorithmState> states = new LinkedList<>();
 
-    abstract void initialize(View parent, ConstraintSet baseSet,
-                             int[] imageIds, int[] dataIds, int[] data);
+    void initialize(View parent, ConstraintSet set, int[] imageIds, int[] dataIds, int[] data) {
+        this.parent = parent;
+        this.imageIds = imageIds;
+        this.dataIds = dataIds;
+        this.data = data;
+        this.highlights = new int[data.length];
+    }
+
     abstract void next(ConstraintSet currentSet);
     abstract boolean hasNext();
     abstract void loadState(AlgorithmState state);
@@ -112,5 +119,13 @@ public abstract class Algorithm {
     final void deselect(int dataIdLoc) {
         DataView dView = parent.findViewById(dataIdLoc);
         updates.addFirst(new UpdateTextViewBackground(Color.WHITE, dView));
+    }
+
+    final int getID() {
+        return algoID;
+    }
+
+    final void setID(int algoID) {
+        this.algoID = algoID;
     }
 }

@@ -17,9 +17,11 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     private boolean swapped = false;
     private boolean has_min_changed = false;
 
-    public SelectionSort() { super(); }
+    public SelectionSort() {
+        super();
+        this.setID(2);
+    }
 
-    @Override
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
@@ -107,12 +109,21 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
     }
 
     public void loadState(AlgorithmState state) {
-        return;
+        i_index = state.selectors[0];
+        j_index = state.selectors[1];
+        min_index = state.selectors[2];
+        is_sorted = state.flags[0];
+        is_swap_phase = state.flags[1];
+        swapped = state.flags[2];
+        has_min_changed = state.flags[3];
+        this.data = state.data;
+        this.dataIds = state.dataIds;
+        this.highlights = state.highlights;
     }
 
     public AlgorithmState getState() {
-        int[] selectors = new int[1];
-        boolean[] flags = new boolean[1];
+        int[] selectors = new int[] {i_index, j_index, min_index};
+        boolean[] flags = new boolean[] {is_sorted, is_swap_phase, swapped, has_min_changed};
         return new AlgorithmState(selectors, this.highlights.clone(), this.data.clone(),
                                   this.dataIds.clone(), flags);
     }
@@ -129,6 +140,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         out.writeInt(j_index);
         out.writeInt(min_index);
         out.writeInt((is_sorted ? 1 : 0));
+        out.writeInt(algoID);
     }
 
     public static final Parcelable.Creator<SelectionSort> CREATOR =
@@ -150,5 +162,6 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         j_index = in.readInt();
         min_index = in.readInt();
         is_sorted = (in.readInt() == 1);
+        algoID = in.readInt();
     }
 }

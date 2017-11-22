@@ -88,6 +88,7 @@ public class AlgorithmFragment extends Fragment {
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
         this.algorithm.initialize(view, set, imageIds, dataIds, data);
+        int x = this.algorithm.getID();
         set.applyTo(baseLayout);
 
         return view;
