@@ -138,7 +138,6 @@ public class AlgorithmActivity extends AppCompatActivity {
                 flagsUpdate = flags.substring(0,13)+'1'+flags.substring(14, 16);
                 dRef.child(UID).child("flags").setValue(flagsUpdate);
             }
-
         }
     }
 

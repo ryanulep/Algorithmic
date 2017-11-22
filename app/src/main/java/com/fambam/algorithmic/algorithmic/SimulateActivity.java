@@ -27,6 +27,7 @@ public class SimulateActivity extends AppCompatActivity {
     private Button addButton;
     private Button resetButton;
     private EditText editText;
+    private boolean doneFlag;
     private ArrayList<Integer> resetData = new ArrayList<>();
     private ArrayList<Integer> resetImageIds = new ArrayList<>();
 
@@ -46,6 +47,9 @@ public class SimulateActivity extends AppCompatActivity {
         // Disabling remove and add buttons on creation
         addButton.setEnabled(false);
         removeButton.setEnabled(false);
+
+        // Set default text for next button
+        nextButton.setText("Next");
 
         // Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);
@@ -76,8 +80,15 @@ public class SimulateActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isReadyToSimulate()) {
+                if (!doneFlag) {
                     algoFragment.swap();
+                } else {
+                    algoFragment.startNew();
+                    nextButton.setText("Next");
+                    addButton.setEnabled(false);
+                    removeButton.setEnabled(false);
+                    resetButton.setEnabled(true);
+                    doneFlag = false;
                 }
             }
         });
@@ -97,8 +108,10 @@ public class SimulateActivity extends AppCompatActivity {
                 algoFragment.clear();
                 nextButton.setText("Done");
                 nextButton.setEnabled(false);
+                resetButton.setEnabled(false);
                 addButton.setEnabled(true);
                 removeButton.setEnabled(true);
+                doneFlag = true;
                 resetData.clear();
             }
         });
@@ -118,10 +131,9 @@ public class SimulateActivity extends AppCompatActivity {
                 for (int i = 0; i < resetImageIds.size(); i++)
                     drawableIds[i] = resetImageIds.get(i);
 
-                Bundle algorithmBundle = new Bundle();
+                Bundle algorithmBundle = algoFragment.getArguments();
                 algorithmBundle.putIntArray(dataKey, data);
                 algorithmBundle.putIntArray(drawKey, drawableIds);
-                algoFragment.setArguments(algorithmBundle);
                 algoFragment.reset();
             }
         });
@@ -129,12 +141,20 @@ public class SimulateActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String dataKey = getString(R.string.data);
+                Bundle algorithmBundle = algoFragment.getArguments();
+
                 if(!TextUtils.isEmpty(editText.getText().toString()) && resetData.size() < 8) {
                     String str = editText.getText().toString();
                     editText.setText("");
                     resetData.add(Integer.valueOf(str));
 
+                    int[] data = new int[resetData.size()];
+                    for (int i = 0; i < resetData.size(); i++)
+                        data[i] = resetData.get(i);
 
+                    algorithmBundle.putIntArray(dataKey, data);
+                    algoFragment.addView();
                 }
                 else if (TextUtils.isEmpty(editText.getText().toString()) || resetData.size()==8) {
                     // Do nothing
@@ -151,10 +171,7 @@ public class SimulateActivity extends AppCompatActivity {
 
     // Ready to simulate once there are at least 2 values in array
     private boolean isReadyToSimulate() {
-        if (resetData.size() > 1)
-            return true;
-        else
-            return false;
+        return resetData.size() > 1;
     }
 
     private ArrayList<Integer> fillResetInfo(int[] data) {

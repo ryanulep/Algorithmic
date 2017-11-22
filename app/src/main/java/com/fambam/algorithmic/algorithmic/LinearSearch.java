@@ -21,13 +21,17 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
         i_image = imageIds[0];
-        i_index = 0;
-        size = this.data.length;
-        is_found = false;
+    }
+
+    @Override
+    void reset(ConstraintSet set) {
+        super.reset(set);
         locating = 6;
-        updateSelectors(baseSet);
-        updateHighlights();
-        applyUpdates();
+        is_found = false;
+    }
+
+    void resetIndices() {
+        i_index = 0;
     }
 
     public void next(ConstraintSet set) {
@@ -78,7 +82,7 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
                 this.dataIds.clone(), flags);
     }
 
-    public boolean isSortingAlgorithm() {
+    public boolean isSearchingAlgorithm() {
         return true;
     }
 

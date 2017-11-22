@@ -11,6 +11,7 @@ import android.widget.TextView;
  */
 
 public abstract class ArrayAlgorithm extends Algorithm {
+    int size;
 
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
@@ -27,17 +28,44 @@ public abstract class ArrayAlgorithm extends Algorithm {
     public abstract void loadState(AlgorithmState state);
     public abstract AlgorithmState getState();
     abstract void updateHighlights();
-    public abstract boolean isSortingAlgorithm();
+    public abstract boolean isSearchingAlgorithm();
+    abstract void resetIndices();
+
+    void reset(ConstraintSet set) {
+        states.clear();
+        resetHighlights();
+        resetIndices();
+        size = data.length;
+        updateSelectors(set);
+        updateHighlights();
+        applyUpdates();
+    }
+
+    final void setAlgorithmInfo(int[] data, int[] dataIds) {
+        this.data = data.clone();
+        this.dataIds = dataIds.clone();
+    }
+
+    final void createUserArray(ConstraintSet baseSet) {
+        this.setSizeConstaints(baseSet, dataIds, 120, 120);
+        this.initializeDataViews();
+        this.buildStructure(baseSet);
+    }
 
     final void buildStructure(ConstraintSet currentSet) {
-        currentSet.createHorizontalChain(
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.LEFT,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.RIGHT,
-                this.dataIds,
-                null,
-                ConstraintSet.CHAIN_SPREAD);
+        if (dataIds.length < 2) {
+            currentSet.centerHorizontally(dataIds[0], ConstraintSet.PARENT_ID);
+        }
+        else {
+            currentSet.createHorizontalChain(
+                    ConstraintSet.PARENT_ID,
+                    ConstraintSet.LEFT,
+                    ConstraintSet.PARENT_ID,
+                    ConstraintSet.RIGHT,
+                    this.dataIds,
+                    null,
+                    ConstraintSet.CHAIN_SPREAD);
+        }
     }
 
     final void updateIndex(ConstraintSet currentSet, int indexId, int targetId) {

@@ -6,16 +6,15 @@ import android.support.constraint.ConstraintSet;
 import android.view.View;
 
 public class SelectionSort extends ArrayAlgorithm implements Parcelable {
-    private int size;
     private int i_index;
     private int j_index;
     private int i_image;
     private int j_image;
     private int min_index;
-    private boolean is_sorted = false;
-    private boolean is_swap_phase = false;
-    private boolean swapped = false;
-    private boolean has_min_changed = false;
+    private boolean is_sorted;
+    private boolean is_swap_phase;
+    private boolean swapped;
+    private boolean has_min_changed;
 
     public SelectionSort() {
         super();
@@ -27,13 +26,22 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
         i_image = imageIds[0];
         j_image = imageIds[1];
+        reset(baseSet);
+    }
+
+    @Override
+    void reset(ConstraintSet set) {
+        super.reset(set);
+        is_sorted = false;
+        is_swap_phase = false;
+        swapped = false;
+        has_min_changed = false;
+    }
+
+    void resetIndices() {
         i_index = 0;
         j_index = 1;
         min_index = 0;
-        size = this.data.length;
-        updateSelectors(baseSet);
-        updateHighlights();
-        applyUpdates();
     }
 
     public void next(ConstraintSet set) {
@@ -86,7 +94,7 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
         return !is_sorted;
     }
 
-    public boolean isSortingAlgorithm() {
+    public boolean isSearchingAlgorithm() {
         return false;
     }
 
