@@ -20,7 +20,7 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
-        i_image = imageIds[0];
+        reset(baseSet);
     }
 
     @Override
@@ -31,6 +31,7 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
     }
 
     void resetIndices() {
+        i_image = getImageIdAt(0);
         i_index = 0;
     }
 
@@ -44,6 +45,9 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
             }
             else {
                 i_index++;
+                if (i_index > size) {
+                    --i_index;
+                }
             }
         }
         else if (i_index == dataIds.length - 1) {

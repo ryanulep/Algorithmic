@@ -353,6 +353,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 startSimulation(algorithm, data, drawables);
                 break;
 
+            case R.id.lsSimulateB:
+                algorithm = new LinearSearch();
+                data = getRandomArray();
+                drawables = new int[] {'i'};
+                startSimulation(algorithm, data, drawables);
+                break;
+
             /* -------------------- Other button conditions -------------------- */
             default:
                 break;

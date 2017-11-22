@@ -27,9 +27,6 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
     public void initialize(View parent, ConstraintSet baseSet,
                            int[] imageIds, int[] dataIds, int[] data) {
         super.initialize(parent, baseSet, imageIds, dataIds, data);
-        i_image = getImageIdAt(0);
-        j_image = getImageIdAt(1);
-        k_image = getImageIdAt(2);
         reset(baseSet);
     }
 
@@ -42,6 +39,9 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
     }
 
     void resetIndices() {
+        i_image = getImageIdAt(0);
+        j_image = getImageIdAt(1);
+        k_image = getImageIdAt(2);
         i_index = 1;
         j_index = 1;
     }

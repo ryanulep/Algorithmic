@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.text.Layout;
 import android.transition.TransitionManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -21,8 +25,9 @@ public class AlgorithmFragment extends Fragment {
     private Algorithm algorithm;
     private TextView tv_searching;
     private int[] dataIds;
-    private int[] imageIds;
+    private int[] selectors;
     private View view;
+    private Random rand;
 
     public AlgorithmFragment() {
         // Required empty public constructor
@@ -33,7 +38,7 @@ public class AlgorithmFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onActivityCreated(savedInstanceState);
-
+        rand = new Random();
         // A default view must be instantiated on creation of a Fragment
         view = inflater.inflate(R.layout.fragment_algorithm, container, false);
 
@@ -61,34 +66,15 @@ public class AlgorithmFragment extends Fragment {
         // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
         ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
 
-        imageIds = new int[drawableIds.length];
+        selectors = new int[drawableIds.length];
         dataIds = new int[data.length];
 
-        for (int i = 0; i < data.length; ++i) {
-            dataIds[i] = 200+i;
-            DataView dView = new DataView(getActivity());
-            dView.setId(dataIds[i]);
-            dView.setText(Integer.toString(data[i]));
-            dView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
-            dView.setGravity(Gravity.CENTER);
-            baseLayout.addView(dView);
-        }
-
-        for (int i = 0; i < imageIds.length; i++) {
-            imageIds[i] = 100+i;
-            DataView pointer = new DataView(getActivity());
-            pointer.setId(imageIds[i]);
-            pointer.setText(Character.toString((char) drawableIds[i]));
-            pointer.setBackgroundColor(Color.WHITE);
-            pointer.setTextColor(Color.BLACK);
-            pointer.setGravity(Gravity.CENTER);
-            baseLayout.addView(pointer);
-        }
+        addDataViewsFromData(data, baseLayout);
+        addSelectorsFromData(drawableIds, baseLayout);
 
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
-        this.algorithm.initialize(view, set, imageIds, dataIds, data);
-        int x = this.algorithm.getID();
+        this.algorithm.initialize(view, set, selectors, dataIds, data);
         set.applyTo(baseLayout);
 
         return view;
@@ -126,16 +112,8 @@ public class AlgorithmFragment extends Fragment {
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
         int[] drawableIds = bundle.getIntArray(drawKey);
-        for (int i = 0; i < imageIds.length; i++) {
-            imageIds[i] = 100+i;
-            DataView pointer = new DataView(getActivity());
-            pointer.setId(imageIds[i]);
-            pointer.setText(Character.toString((char) drawableIds[i]));
-            pointer.setBackgroundColor(Color.WHITE);
-            pointer.setTextColor(Color.BLACK);
-            pointer.setGravity(Gravity.CENTER);
-            baseLayout.addView(pointer);
-        }
+        addSelectorsFromData(drawableIds, baseLayout);
+        algorithm.setSelectorIds(selectors);
         algorithm.reset(set);
         set.applyTo(baseLayout);
     }
@@ -163,38 +141,19 @@ public class AlgorithmFragment extends Fragment {
 
         // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
         ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
-
-        for (int i = 0; i < data.length; ++i) {
-            dataIds[i] = 200+i;
-            DataView dView = new DataView(getActivity());
-            dView.setId(dataIds[i]);
-            dView.setText(Integer.toString(data[i]));
-            dView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
-            dView.setGravity(Gravity.CENTER);
-            baseLayout.addView(dView);
-        }
-
-        for (int i = 0; i < imageIds.length; i++) {
-            imageIds[i] = 100+i;
-            DataView pointer = new DataView(getActivity());
-            pointer.setId(imageIds[i]);
-            pointer.setText(Character.toString((char) drawableIds[i]));
-            pointer.setBackgroundColor(Color.WHITE);
-            pointer.setTextColor(Color.BLACK);
-            pointer.setGravity(Gravity.CENTER);
-            baseLayout.addView(pointer);
-        }
+        addDataViewsFromData(data, baseLayout);
+        addSelectorsFromData(drawableIds, baseLayout);
 
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
-        this.algorithm.initialize(view, set, imageIds, dataIds, data);
+        this.algorithm.initialize(view, set, selectors, dataIds, data);
         set.applyTo(baseLayout);
 
         return view;
 
     }
 
-    public View addView() {
+    public View updateViews() {
         int[] data = null;
         String dataKey = getString(R.string.data);
         Bundle bundle = getArguments();
@@ -203,23 +162,13 @@ public class AlgorithmFragment extends Fragment {
         }
 
         clear();
-        dataIds = new int[data.length];
+        if (data.length == 0) return view;
 
-        // TODO start dynamically populating layout one element at a time
+        dataIds = new int[data.length];
 
         // Construct the ImageViews from passed in drawableIds and add them to the ConstraintView
         ConstraintLayout baseLayout = view.findViewById(R.id.algorithm_fragment_layout);
-
-        for (int i = 0; i < data.length; ++i) {
-            dataIds[i] = 200+i;
-            DataView dView = new DataView(getActivity());
-            dView.setId(dataIds[i]);
-            dView.setText(Integer.toString(data[i]));
-            dView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
-            dView.setGravity(Gravity.CENTER);
-            baseLayout.addView(dView);
-        }
-
+        addDataViewsFromData(data, baseLayout);
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
         this.algorithm.setAlgorithmInfo(data, dataIds);
@@ -227,5 +176,31 @@ public class AlgorithmFragment extends Fragment {
         set.applyTo(baseLayout);
 
         return view;
+    }
+
+    private void addDataViewsFromData(int[] data, ConstraintLayout layout) {
+        dataIds = new int[data.length];
+        for (int i = 0; i < data.length; ++i) {
+            dataIds[i] = View.generateViewId();
+            DataView dView = new DataView(getActivity());
+            dView.setId(dataIds[i]);
+            dView.setText(Integer.toString(data[i]));
+            dView.setLayoutParams(new ConstraintLayout.LayoutParams(120, 120));
+            dView.setGravity(Gravity.CENTER);
+            layout.addView(dView);
+        }
+    }
+
+    private void addSelectorsFromData(int[] icons, ConstraintLayout layout) {
+        for (int i = 0; i < selectors.length; i++) {
+            selectors[i] = View.generateViewId();
+            DataView selector = new DataView(getActivity());
+            selector.setId(selectors[i]);
+            selector.setText(Character.toString((char) icons[i]));
+            selector.setBackgroundColor(Color.WHITE);
+            selector.setTextColor(Color.BLACK);
+            selector.setGravity(Gravity.CENTER);
+            layout.addView(selector);
+        }
     }
 }

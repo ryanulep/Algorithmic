@@ -2,19 +2,17 @@ package com.fambam.algorithmic.algorithmic;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SimulateActivity extends AppCompatActivity {
@@ -50,6 +48,8 @@ public class SimulateActivity extends AppCompatActivity {
 
         // Set default text for next button
         nextButton.setText("Next");
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // Get the drawable identifiers from the intent
         String algoKey = getString(R.string.algo_key);
@@ -110,9 +110,9 @@ public class SimulateActivity extends AppCompatActivity {
                 editText.setHint("Enter value then press ADD to build custom array");
                 nextButton.setText("Done");
                 nextButton.setEnabled(false);
+                backButton.setEnabled(false);
                 resetButton.setEnabled(false);
                 addButton.setEnabled(true);
-                removeButton.setEnabled(true);
                 doneFlag = true;
                 resetData.clear();
             }
@@ -156,18 +156,32 @@ public class SimulateActivity extends AppCompatActivity {
                         data[i] = resetData.get(i);
 
                     algorithmBundle.putIntArray(dataKey, data);
-                    algoFragment.addView();
+                    algoFragment.updateViews();
                 }
                 else if (resetData.size()==8) {
                     editText.setText("");
                     editText.setHint("Max entries for array is 8");
                 }
-                else if (TextUtils.isEmpty(editText.getText().toString())) {
-                    // Do nothing
-                }
-                if (isReadyToSimulate()) {
-                    nextButton.setEnabled(true);
-                }
+
+                nextButton.setEnabled(isReadyToSimulate());
+                removeButton.setEnabled(resetData.size() > 0);
+
+            }
+        });
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dataKey = getString(R.string.data);
+                Bundle algorithmBundle = algoFragment.getArguments();
+                resetData.remove(resetData.size() - 1);
+                int[] data = new int[resetData.size()];
+                for (int i = 0; i < resetData.size(); i++)
+                    data[i] = resetData.get(i);
+                algorithmBundle.putIntArray(dataKey, data);
+                algoFragment.updateViews();
+                nextButton.setEnabled(isReadyToSimulate());
+                removeButton.setEnabled(resetData.size() > 0);
             }
         });
     }
