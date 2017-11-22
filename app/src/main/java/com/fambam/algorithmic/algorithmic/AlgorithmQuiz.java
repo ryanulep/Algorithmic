@@ -251,7 +251,7 @@ public class AlgorithmQuiz extends AppCompatActivity {
     }
     private void createExitButton(){
         correctText.setText("CORRECT!");
-        
+
         trys = trys + 1;
         dRef.child(UID).child("trys").setValue(trys);
         score = score + 1;

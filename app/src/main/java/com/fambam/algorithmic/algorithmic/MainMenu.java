@@ -147,9 +147,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                     }
                 }
 
-                String stringSpace = "                                 "+
-                                     "                                 ";
-                bubbleQuiz.setText("Quiz"+stringSpace+score+"/"+trys);
+                String spacing = new String();
+                for(int i = 0; i < bubbleQuiz.getWidth() - 1175; i++){
+                        spacing += " ";
+                }
+                bubbleQuiz.setText("Quiz"+spacing+score+"/"+trys);
             }
 
             @Override
