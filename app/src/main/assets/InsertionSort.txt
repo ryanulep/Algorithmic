@@ -1,1 +1,15 @@
-This is the InsertionSort file which will contain the explanations of BubbleSort on each iteration.
+Here we will show you Insertion Sort, one of the many algorithms used to sort an array of numbers.
+To begin, the leftmost number is considered fully sorted.
+Next, from the remaining numbers the leftmost number is taken out and compared to the already sorted number to its left.
+If the already sorted set is larger, the two numbers swap.
+This operation repeats until either a smaller number appears, or the number reaches the left edge.
+In this case, 5 is greater than 3, so the numbers swap.
+3 reached the left edge, so the number stops moving.
+The 3 is now considered fully sorted.
+As before, the leftmost number from the remaining numbers is taken out and compared to the number to its left.
+5 is greater than 4, so the numbers swap.
+3 is less than 4. A smaller number appeared, so the 4 stops moving.
+The 4 is now considered fully sorted.
+The same operation is repeated until all of the numbers are fully sorted.
+All of the numbers are fully sorted, so sorting is complete.
+This concludes the explanation of insertion sort.
