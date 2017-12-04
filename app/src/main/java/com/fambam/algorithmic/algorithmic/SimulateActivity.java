@@ -112,6 +112,7 @@ public class SimulateActivity extends AppCompatActivity {
                 nextButton.setEnabled(false);
                 backButton.setEnabled(false);
                 resetButton.setEnabled(false);
+                removeButton.setEnabled(false);
                 addButton.setEnabled(true);
                 doneFlag = true;
                 resetData.clear();

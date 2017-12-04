@@ -313,9 +313,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.insertionExplanationB:
                 drawables = new int[] {'i','j','k'};
-                data = new int[] {1,2,6,5,7,8,4,4};
+                data = new int[] {5,3,4,7,2,8,6,1};
                 algorithm = new InsertionSort();
-                ordering = new UpdateOrdering(new int[] {   0});
+                ordering = new UpdateOrdering(new int[] {   1,1,1,1,1,2,1,2,2,2,2,
+                                                            2,0,0,0,0,0,0,0,0,0,0,
+                                                            0,0,0,0,0,0,0,0,0,0,0,
+                                                            0,0,0,0,0,0,0,0,0,0,0,
+                                                            0,0,1,1});
                 algoAsset = new AlgorithmAssets("InsertionSort.txt",
                                                 "", "", "");
                 startAlgorithm(algorithm, data, drawables, ordering, algoAsset);
