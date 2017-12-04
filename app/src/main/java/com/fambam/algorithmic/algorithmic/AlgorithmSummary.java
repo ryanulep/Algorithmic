@@ -34,7 +34,7 @@ public class AlgorithmSummary extends AppCompatActivity {
 
 
         if (subject.equals("bubble")){
-            image.setImageResource(R.drawable.bubble_summary);
+            image.setImageResource(R.drawable.BubbleSortSummary);
         }
         else if (subject.equals("selection")){
             image.setImageResource(R.drawable.selection_summary);
