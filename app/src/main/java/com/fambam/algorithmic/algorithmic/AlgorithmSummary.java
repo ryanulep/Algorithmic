@@ -2,15 +2,8 @@ package com.fambam.algorithmic.algorithmic;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
+import android.webkit.WebView;
 import android.widget.ImageView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class AlgorithmSummary extends AppCompatActivity {
 
@@ -20,6 +13,9 @@ public class AlgorithmSummary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algorithm_summary);
+
+        WebView wv = (WebView) findViewById(R.id.summary_webview);
+        wv.getSettings().setBuiltInZoomControls(true);
 
         image = findViewById(R.id.summaryImageView);
 
@@ -34,7 +30,10 @@ public class AlgorithmSummary extends AppCompatActivity {
 
 
         if (subject.equals("bubble")){
-            image.setImageResource(R.drawable.BubbleSortSummary);
+            String imageUrl =  "file:///android_asset/bubble_sort_summary_pres_v2.png";
+            wv.setInitialScale(135);
+            wv.loadUrl(imageUrl);
+            //image.setImageResource(R.drawable.bubble_sort_summary_pres_v2);
         }
         else if (subject.equals("selection")){
             image.setImageResource(R.drawable.selection_summary);
