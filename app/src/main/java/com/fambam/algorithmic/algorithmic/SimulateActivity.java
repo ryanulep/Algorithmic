@@ -1,5 +1,6 @@
 package com.fambam.algorithmic.algorithmic;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -88,6 +89,11 @@ public class SimulateActivity extends AppCompatActivity {
                     }
                     backButton.setEnabled(true);
                 } else {
+                    View view = getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                     algoFragment.startNew();
                     nextButton.setText("Next");
                     addButton.setEnabled(false);
