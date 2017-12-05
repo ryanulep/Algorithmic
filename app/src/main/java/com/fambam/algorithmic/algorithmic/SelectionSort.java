@@ -73,6 +73,10 @@ public class SelectionSort extends ArrayAlgorithm implements Parcelable {
                 min_index = i_index;
             }
             swapped = false;
+            if (is_sorted) {
+                deselectAll();
+                return;
+            }
         }
 
         else {

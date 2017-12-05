@@ -80,7 +80,7 @@ public class AlgorithmFragment extends Fragment {
         return view;
     }
 
-    public void swap() {
+    public boolean swap() {
         ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment_layout);
         ConstraintSet set = new ConstraintSet();
         set.clone(baseLayout);
@@ -91,9 +91,10 @@ public class AlgorithmFragment extends Fragment {
         TransitionManager.beginDelayedTransition(baseLayout);
         set.applyTo(baseLayout);
         algorithm.applyUpdates();
+        return this.algorithm.hasNext();
     }
 
-    public void back() {
+    public boolean back() {
         if (algorithm.hasBack()) {
             ConstraintLayout baseLayout = getActivity().findViewById(R.id.algorithm_fragment_layout);
             ConstraintSet set = new ConstraintSet();
@@ -103,6 +104,7 @@ public class AlgorithmFragment extends Fragment {
             set.applyTo(baseLayout);
             algorithm.applyUpdates();
         }
+        return algorithm.hasBack();
     }
 
     public void startNew() {

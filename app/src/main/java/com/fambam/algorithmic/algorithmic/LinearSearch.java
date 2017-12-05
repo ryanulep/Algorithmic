@@ -6,7 +6,6 @@ import android.support.constraint.ConstraintSet;
 import android.view.View;
 
 public class LinearSearch extends ArrayAlgorithm implements Parcelable {
-    private int size;
     private int i_index;
     private int i_image;
     private int locating;
@@ -38,16 +37,18 @@ public class LinearSearch extends ArrayAlgorithm implements Parcelable {
     public void next(ConstraintSet set) {
         AlgorithmState state = this.getState();
         this.states.push(state);
-        if (hasNext()) {
-            if (getDataAt(i_index) == locating) {
+        if (getDataAt(i_index) == locating) {
+            is_found = true;
+            this.deselectAll();
+            return;
+        }
+        else {
+            i_index++;
+            if (i_index == size) {
                 is_found = true;
-                select(getDataIdAt(i_index));
-            }
-            else {
-                i_index++;
-                if (i_index == size) {
-                    --i_index;
-                }
+                --i_index;
+                this.deselectAll();
+                return;
             }
         }
         updateSelectors(set);

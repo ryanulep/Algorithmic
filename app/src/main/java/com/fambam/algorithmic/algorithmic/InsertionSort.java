@@ -65,6 +65,8 @@ public class InsertionSort extends ArrayAlgorithm implements Parcelable {
                 if (i_index == size) {
                     --i_index;
                     is_sorted = true;
+                    deselectAll();
+                    return;
                 } else {
                     is_swap_phase = true;
                 }

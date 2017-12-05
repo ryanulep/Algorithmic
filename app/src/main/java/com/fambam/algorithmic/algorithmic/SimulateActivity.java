@@ -45,6 +45,7 @@ public class SimulateActivity extends AppCompatActivity {
         // Disabling remove and add buttons on creation
         addButton.setEnabled(false);
         removeButton.setEnabled(false);
+        backButton.setEnabled(false);
 
         // Set default text for next button
         nextButton.setText("Next");
@@ -81,7 +82,11 @@ public class SimulateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!doneFlag) {
-                    algoFragment.swap();
+                    boolean hasNext = algoFragment.swap();
+                    if (!hasNext) {
+                        nextButton.setEnabled(false);
+                    }
+                    backButton.setEnabled(true);
                 } else {
                     algoFragment.startNew();
                     nextButton.setText("Next");
@@ -97,7 +102,11 @@ public class SimulateActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                algoFragment.back();
+                boolean hasBack = algoFragment.back();
+                nextButton.setEnabled(true);
+                if (!hasBack) {
+                    backButton.setEnabled(false);
+                }
             }
         });
 
@@ -138,6 +147,8 @@ public class SimulateActivity extends AppCompatActivity {
                 algorithmBundle.putIntArray(dataKey, data);
                 algorithmBundle.putIntArray(drawKey, drawableIds);
                 algoFragment.reset();
+                nextButton.setEnabled(true);
+                backButton.setEnabled(false);
             }
         });
 

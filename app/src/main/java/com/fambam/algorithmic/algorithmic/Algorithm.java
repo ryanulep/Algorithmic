@@ -112,6 +112,7 @@ public abstract class Algorithm {
 
     final void deselectAll() {
         applyHighlightDifference(this.highlights, new int[this.highlights.length]);
+        resetHighlights();
     }
 
     final void select(int dataIdLoc) {
