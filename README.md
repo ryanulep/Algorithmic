@@ -1,5 +1,3 @@
-#Algorithmic
-
 ![Screenshot](screenshots/Screenshot_1.png)
 ![Screenshot](screenshots/Screenshot_2.png)
 ![Screenshot](screenshots/Screenshot_3.png)
