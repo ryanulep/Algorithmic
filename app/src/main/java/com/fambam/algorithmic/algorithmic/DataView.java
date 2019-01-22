@@ -4,23 +4,19 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.AppCompatTextView;
 
-/**
- * Created by Guthrie on 11/13/2017.
- */
-
 public class DataView extends AppCompatTextView {
 
-    private int backGroundColor = Color.WHITE;
+  private int backGroundColor = Color.WHITE;
 
-    public DataView(Context context) {
-        super(context);
-    }
+  public DataView(Context context) {
+    super(context);
+  }
 
-    public void setBackColor(int resId) {
-        this.backGroundColor = resId;
-    }
+  public void setBackColor(int resId) {
+    this.backGroundColor = resId;
+  }
 
-    public int getBackgroundColor() {
-        return this.backGroundColor;
-    }
+  public int getBackgroundColor() {
+    return this.backGroundColor;
+  }
 }

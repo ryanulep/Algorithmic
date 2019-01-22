@@ -2,38 +2,34 @@ package com.fambam.algorithmic.algorithmic;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.graphics.drawable.GradientDrawable;
-import android.widget.TextView;
-
-/**
- * Created by Guthrie on 11/10/2017.
- */
 
 public class UpdateTextViewBackground implements UIUpdate {
-    int colorTo;
-    int colorFrom;
-    DataView dView;
 
-    UpdateTextViewBackground(int colorTo, DataView dView) {
-        super();
-        this.colorFrom = dView.getBackgroundColor();
-        this.colorTo = colorTo;
-        this.dView = dView;
-        this.dView.setBackColor(colorTo);
-    }
+  int colorTo;
+  int colorFrom;
+  DataView dView;
 
-    public void apply() {
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),
-                colorFrom, colorTo);
-        colorAnimation.setDuration(500); // milliseconds
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+  UpdateTextViewBackground(int colorTo, DataView dView) {
+    super();
+    this.colorFrom = dView.getBackgroundColor();
+    this.colorTo = colorTo;
+    this.dView = dView;
+    this.dView.setBackColor(colorTo);
+  }
 
-            @Override
-            public void onAnimationUpdate(ValueAnimator animator) {
-                GradientDrawable gd = (GradientDrawable) dView.getBackground();
-                gd.setColor((int) animator.getAnimatedValue());
-            }
+  public void apply() {
+    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+    colorAnimation.setDuration(500); // milliseconds
+    colorAnimation.addUpdateListener(
+        new AnimatorUpdateListener() {
+          @Override
+          public void onAnimationUpdate(ValueAnimator animator) {
+            GradientDrawable gd = (GradientDrawable) dView.getBackground();
+            gd.setColor((int) animator.getAnimatedValue());
+          }
         });
-        colorAnimation.start();
-    }
+    colorAnimation.start();
+  }
 }

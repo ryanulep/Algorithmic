@@ -3,76 +3,73 @@ package com.fambam.algorithmic.algorithmic;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Luis Lopez on 11/10/2017.
- */
-
 public class AlgorithmAssets implements Parcelable {
-    private String explanationFilename;
-    private String pythonCodeFilename;
-    private String cppCodeFilename;
-    private String javaCodeFilename;
 
-    public AlgorithmAssets() {
-        explanationFilename = "";
-        pythonCodeFilename = "";
-        cppCodeFilename = "";
-        javaCodeFilename = "";
-    }
+  private String explanationFilename;
+  private String pythonCodeFilename;
+  private String cppCodeFilename;
+  private String javaCodeFilename;
 
-    public AlgorithmAssets(String exp, String py, String cpp, String java) {
-        explanationFilename = exp;
-        pythonCodeFilename = py;
-        cppCodeFilename = cpp;
-        javaCodeFilename = java;
-    }
+  public AlgorithmAssets() {
+    explanationFilename = "";
+    pythonCodeFilename = "";
+    cppCodeFilename = "";
+    javaCodeFilename = "";
+  }
 
-    public String getExplanationFilename() {
-        return explanationFilename;
-    }
+  public AlgorithmAssets(String exp, String py, String cpp, String java) {
+    explanationFilename = exp;
+    pythonCodeFilename = py;
+    cppCodeFilename = cpp;
+    javaCodeFilename = java;
+  }
 
-    public void setExplanationFilename(String filename) {
-        explanationFilename = filename;
-    }
+  public String getExplanationFilename() {
+    return explanationFilename;
+  }
 
-    public void setPythonFilename(String filename) {
-        pythonCodeFilename = filename;
-    }
+  public void setExplanationFilename(String filename) {
+    explanationFilename = filename;
+  }
 
-    public void setCppFilename(String filename) {
-        cppCodeFilename = filename;
-    }
+  public void setPythonFilename(String filename) {
+    pythonCodeFilename = filename;
+  }
 
-    public void setJavaFilename(String filename) {
-        javaCodeFilename = filename;
-    }
+  public void setCppFilename(String filename) {
+    cppCodeFilename = filename;
+  }
 
-    public int describeContents() {
-        return 0;
-    }
+  public void setJavaFilename(String filename) {
+    javaCodeFilename = filename;
+  }
 
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(explanationFilename);
-        out.writeString(pythonCodeFilename);
-        out.writeString(cppCodeFilename);
-        out.writeString(javaCodeFilename);
-    }
+  public int describeContents() {
+    return 0;
+  }
 
-    public static final Parcelable.Creator<AlgorithmAssets> CREATOR =
-            new Parcelable.Creator<AlgorithmAssets>() {
-                public AlgorithmAssets createFromParcel(Parcel in) {
-                    return new AlgorithmAssets(in);
-                }
+  public void writeToParcel(Parcel out, int flags) {
+    out.writeString(explanationFilename);
+    out.writeString(pythonCodeFilename);
+    out.writeString(cppCodeFilename);
+    out.writeString(javaCodeFilename);
+  }
 
-                public AlgorithmAssets[] newArray(int size) {
-                    return new AlgorithmAssets[size];
-                }
-            };
+  public static final Parcelable.Creator<AlgorithmAssets> CREATOR =
+      new Parcelable.Creator<AlgorithmAssets>() {
+        public AlgorithmAssets createFromParcel(Parcel in) {
+          return new AlgorithmAssets(in);
+        }
 
-    private AlgorithmAssets(Parcel in) {
-        explanationFilename = in.readString();
-        pythonCodeFilename = in.readString();
-        cppCodeFilename = in.readString();
-        javaCodeFilename = in.readString();
-    }
+        public AlgorithmAssets[] newArray(int size) {
+          return new AlgorithmAssets[size];
+        }
+      };
+
+  private AlgorithmAssets(Parcel in) {
+    explanationFilename = in.readString();
+    pythonCodeFilename = in.readString();
+    cppCodeFilename = in.readString();
+    javaCodeFilename = in.readString();
+  }
 }
